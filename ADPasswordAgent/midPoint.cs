@@ -7,14 +7,21 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.IO;
+using System.IO.IsolatedStorage;
+using ADPasswordSecureCache;
+using ADPasswordSecureCache.Policies;
 
 namespace ADPasswordAgent
 {
     class midPoint
     {
+         
         private static HttpClient client = new HttpClient();
 
-        public midPoint(string wsbaseurl, string wsauthusr, string wsauthpwd)
+        private static DiskCache<string> DiscCacheInstance;
+
+        public midPoint(string wsbaseurl, string wsauthusr, string wsauthpwd, string ccachefld, double ccacheduration)
         {
             string cleanurl = wsbaseurl.EndsWith("/") ? wsbaseurl : wsbaseurl + '/'; // the url must end with '/'
             client.BaseAddress = new Uri(cleanurl);
@@ -22,11 +29,19 @@ namespace ADPasswordAgent
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authval);
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+
+            DiscCacheInstance = new DiskCache<string>(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ccachefld),
+            new FixedTimespanCachePolicy<string>(TimeSpan.FromMinutes((double)ccacheduration)),
+            2 * 1024 * 1024);
         }
 
         public string GetUserOIDByName(string name)
         {
             if (name == null) { return null; }
+
+            if (DiscCacheInstance.TryGetSecureString(name, out SecureString OIDData))
+                return OIDData.ConvertToString();
+
             // query for searching users by name
             string query = string.Format(
                 @"<query>
@@ -50,7 +65,12 @@ namespace ADPasswordAgent
                 // get oid from returned user object
                 XmlDocument xmldoc = new XmlDocument();
                 xmldoc.LoadXml(xmlobj);
-                return xmldoc.FirstChild.FirstChild.Attributes.GetNamedItem("oid").Value;
+                
+                string OID = xmldoc.FirstChild.FirstChild.Attributes.GetNamedItem("oid").Value;
+
+                DiscCacheInstance.TrySetSecureString(name, OID.ToSecureString());
+
+                return OID;
             }
             return null;
         }
@@ -65,6 +85,7 @@ namespace ADPasswordAgent
         {
             if (OID == null || password == null) { return false; }
             // query for password changing. ToDo: Send encrypted value instead of plaintext
+
             string query = string.Format(
                 @"<objectModification
                     xmlns='http://midpoint.evolveum.com/xml/ns/public/common/api-types-3'

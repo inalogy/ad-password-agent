@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ADPasswordAgent {
+namespace MidPointUpdatingService {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -62,13 +62,25 @@ namespace ADPasswordAgent {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Midpoint.ADPassword.Agent")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Midpoint.ADPassword.Cache")]
         public string CACHEFLD {
             get {
                 return ((string)(this["CACHEFLD"]));
             }
             set {
                 this["CACHEFLD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Midpoint.ADPassword.Queue")]
+        public string QUEUEFLD {
+            get {
+                return ((string)(this["QUEUEFLD"]));
+            }
+            set {
+                this["QUEUEFLD"] = value;
             }
         }
     }

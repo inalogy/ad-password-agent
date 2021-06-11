@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ADPasswordAgent" GeneratedClassName="Config">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MidPointUpdatingService" GeneratedClassName="Config">
   <Profiles />
   <Settings>
     <Setting Name="BASEURL" Type="(Web Service URL)" Scope="User">
@@ -12,7 +12,10 @@
       <Value Profile="(Default)">5ecr3t</Value>
     </Setting>
     <Setting Name="CACHEFLD" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Midpoint.ADPassword.Agent</Value>
+      <Value Profile="(Default)">Midpoint.ADPassword.Cache</Value>
+    </Setting>
+    <Setting Name="QUEUEFLD" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Midpoint.ADPassword.Queue</Value>
     </Setting>
   </Settings>
 </SettingsFile>
