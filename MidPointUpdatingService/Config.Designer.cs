@@ -26,7 +26,7 @@ namespace MidPointUpdatingService {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8080/midpoint")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://midpoint-dev.ibacz.cz:8080/midpoint")]
         public string BASEURL {
             get {
                 return ((string)(this["BASEURL"]));
@@ -81,6 +81,18 @@ namespace MidPointUpdatingService {
             }
             set {
                 this["QUEUEFLD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public double CACHEDRT {
+            get {
+                return ((double)(this["CACHEDRT"]));
+            }
+            set {
+                this["CACHEDRT"] = value;
             }
         }
     }

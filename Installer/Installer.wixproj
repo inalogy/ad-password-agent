@@ -50,14 +50,6 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADPasswordAgent\ADPasswordAgent.csproj">
-      <Name>ADPasswordAgent</Name>
-      <Project>{121ad7a7-924d-4210-8a3b-8867442ff0ee}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
     <ProjectReference Include="..\ADPasswordFilter\ADPasswordFilter.vcxproj">
       <Name>ADPasswordFilter</Name>
       <Project>{c45751f5-8a4f-4b65-b5e6-c01ecb2c9696}</Project>

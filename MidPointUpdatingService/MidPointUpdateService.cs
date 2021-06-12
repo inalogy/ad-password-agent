@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
+﻿using ADPasswordSecureCache;
+using ADPasswordSecureCache.Policies;
+using SecureDiskQueue;
+using System;
+using System.Configuration;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.ServiceProcess;
 using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
-using DiskQueue;
-using ADPasswordSecureCache;
-using ADPasswordSecureCache.Policies;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using MidPointUpdatingService.Models;
-using System.Net.Http.Headers;
-using System.Net.Http;
 
 namespace MidPointUpdatingService
 {
@@ -32,7 +24,7 @@ namespace MidPointUpdatingService
 
         private static HttpClient client = new HttpClient();
         private static DiskCache<string> diskCacheInstance;
-        private static PersistentQueue queue;
+        private static PersistentSecureQueue queue;
        
 
         public MidPointUpdateService()
@@ -74,7 +66,7 @@ namespace MidPointUpdatingService
 
         protected void SetupQueue()
         {
-            queue = new PersistentQueue(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), cqueuefld));
+            queue = new PersistentSecureQueue(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), cqueuefld));
         }
 
         protected void SetupCache()

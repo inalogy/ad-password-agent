@@ -5,22 +5,22 @@ using System.Runtime.InteropServices;
 // Obecné informace o sestavení se řídí přes následující 
 // sadu atributů. Změnou hodnot těchto atributů se upraví informace
 // přidružené k sestavení.
-[assembly: AssemblyTitle("ADPasswordAgent")]
+[assembly: AssemblyTitle("MidPointCommonTaskModels")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ADPasswordAgent")]
+[assembly: AssemblyProduct("MidPointCommonTaskModels")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Nastavení ComVisible na false způsobí neviditelnost typů v tomto sestavení
 // pro komponenty modelu COM. Pokud potřebujete přístup k typu v tomto sestavení
-// komponenty COM, nastavte atribut ComVisible daného typu na hodnotu true.
+// modelu COM, nastavte atribut ComVisible daného typu na hodnotu True.
 [assembly: ComVisible(false)]
 
 // Následující GUID se používá pro ID knihovny typů, pokud je tento projekt vystavený pro COM.
-[assembly: Guid("0894fe8f-f2e7-45b2-9dd2-3ea7ec9a1f25")]
+[assembly: Guid("945aa7cf-7b6e-4cf5-b241-96c14c27f6ff")]
 
 // Informace o verzi sestavení se skládá z těchto čtyř hodnot:
 //

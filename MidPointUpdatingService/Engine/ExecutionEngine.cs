@@ -1,16 +1,13 @@
-﻿using System;
+﻿using ADPasswordSecureCache;
+using MidPointUpdatingService.ClassExtensions;
+using MidPointUpdatingService.Models;
+using SecureDiskQueue;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net.Http;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
-using ADPasswordSecureCache;
-using SecureDiskQueue;
-using MidPointUpdatingService;
-using MidPointUpdatingService.Models;
-using MidPointUpdatingService.ClassExtensions;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MidPointUpdatingService.Engine
 {

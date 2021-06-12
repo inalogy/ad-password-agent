@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0894FE8F-F2E7-45B2-9DD2-3EA7EC9A1F25}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ADPasswordAgent</RootNamespace>
-    <AssemblyName>ADPasswordAgent</AssemblyName>
+    <ProjectGuid>{945AA7CF-7B6E-4CF5-B241-96C14C27F6FF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MidPointCommonTaskModels</RootNamespace>
+    <AssemblyName>MidPointCommonTaskModels</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,11 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SecureDiskQueue">
-      <HintPath>..\..\..\ORANGE\SecureDiskQueue\SecureDiskQueue\bin\Debug\netcoreapp3.1\SecureDiskQueue.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,18 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MidPointQueueSender.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Actions\GetOIDMidPointAction.cs" />
+    <Compile Include="Actions\GetOIDMidPointActionResult.cs" />
+    <Compile Include="Actions\UpdatePasswordMidPointAction.cs" />
+    <Compile Include="Actions\UpdatePasswordMidPointActionResult.cs" />
+    <Compile Include="ClassExtensions\ClassExtensions.cs" />
+    <Compile Include="ClassExtensions\ObjectSerialize.cs" />
+    <Compile Include="Models\IActionDefinition.cs" />
+    <Compile Include="Models\IActionResult.cs" />
+    <Compile Include="Models\MidPointError.cs" />
+    <Compile Include="Models\MidPointTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MidPointCommonTaskModels\MidPointCommonTaskModels.csproj">
-      <Project>{945aa7cf-7b6e-4cf5-b241-96c14c27f6ff}</Project>
-      <Name>MidPointCommonTaskModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

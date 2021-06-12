@@ -51,12 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\GetOIDMidPointAction.cs" />
-    <Compile Include="Actions\UpdatePasswordMidPointActionResult.cs" />
-    <Compile Include="Actions\GetOIDMidPointActionResult.cs" />
-    <Compile Include="Actions\UpdatePasswordMidPointAction.cs" />
-    <Compile Include="ClassExtensions\ClassExtensions.cs" />
-    <Compile Include="ClassExtensions\ObjectSerialize.cs" />
     <Compile Include="Config.Designer.cs">
       <DependentUpon>Config.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -69,10 +63,6 @@
     <Compile Include="MidPointUpdateService.Designer.cs">
       <DependentUpon>MidPointUpdateService.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\IActionDefinition.cs" />
-    <Compile Include="Models\IActionResult.cs" />
-    <Compile Include="Models\MidPointError.cs" />
-    <Compile Include="Models\MidPointTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -99,6 +89,10 @@
     <ProjectReference Include="..\ADPasswordSecureCache\ADPasswordSecureCache.csproj">
       <Project>{2e973e74-0ff8-418a-a2ce-dbd9a4456d06}</Project>
       <Name>ADPasswordSecureCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MidPointCommonTaskModels\MidPointCommonTaskModels.csproj">
+      <Project>{945aa7cf-7b6e-4cf5-b241-96c14c27f6ff}</Project>
+      <Name>MidPointCommonTaskModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
