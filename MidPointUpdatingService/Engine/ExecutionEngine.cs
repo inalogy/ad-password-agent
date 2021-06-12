@@ -50,16 +50,19 @@ namespace MidPointUpdatingService.Engine
                 if (diskCache.ContainsKey(key))
                 {
                     Stream outStream = diskCache.GetValueAsync(key).Result;
-                    output = (Dictionary<string,object>)binaryFormatter.Deserialize(outStream);
+                    output = (Dictionary<string, object>)binaryFormatter.Deserialize(outStream);
                 }
+                else
                 {
                     output = ExecutionEngine.ExecuteMidpointTask(task, client, out MidPointError error);
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        binaryFormatter.Serialize(ms, output);
-                        await diskCache.SetValueAsync(key, ms);
+                    if (error.ErrorCode == 0)
+                    { 
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            binaryFormatter.Serialize(ms, output);
+                            await diskCache.SetValueAsync(key, ms);
+                        }
                     }
-
                 }
             }
             return output;                            

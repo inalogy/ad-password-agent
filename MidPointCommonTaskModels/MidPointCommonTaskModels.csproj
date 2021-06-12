@@ -47,6 +47,7 @@
     <Compile Include="Actions\UpdatePasswordMidPointActionResult.cs" />
     <Compile Include="ClassExtensions\ClassExtensions.cs" />
     <Compile Include="ClassExtensions\ObjectSerialize.cs" />
+    <Compile Include="Models\ActionCall.cs" />
     <Compile Include="Models\IActionDefinition.cs" />
     <Compile Include="Models\IActionResult.cs" />
     <Compile Include="Models\MidPointError.cs" />

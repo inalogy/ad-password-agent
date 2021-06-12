@@ -31,7 +31,7 @@ namespace ADPasswordAgent
 
             try
             {
-                MidPointQueueSender mp = new MidPointQueueSender(queuebasepath,50);
+                MidPointQueueSender mp = new MidPointQueueSender(queuebasepath);
                 mp.UpdateUserPasswordByName(argvs[1], argvs[2]);
                 Console.WriteLine("Password changed");
             }

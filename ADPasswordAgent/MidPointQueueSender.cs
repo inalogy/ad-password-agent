@@ -1,6 +1,6 @@
-﻿using MidPointUpdatingService.ClassExtensions;
+﻿using MidPointCommonTaskModels.Models;
 using MidPointUpdatingService.Actions;
-using MidPointUpdatingService.Models;
+using MidPointUpdatingService.ClassExtensions;
 using SecureDiskQueue;
 using System.Collections.Generic;
 
@@ -9,10 +9,10 @@ namespace ADPasswordAgent
     public class MidPointQueueSender
     {
        
-        private int TTL = 50;
-        private string queuePath;
+        private readonly string queuePath;
 
-        private static void EnqueueMidTask(MidPointTask task, PersistentSecureQueue queue)
+
+        private static void EnqueueMidTask(ActionCall task, PersistentSecureQueue queue)
         {
             using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
             {
@@ -21,10 +21,9 @@ namespace ADPasswordAgent
             }
         }
 
-        public MidPointQueueSender(string qbasepath, int ttl)
+        public MidPointQueueSender(string cqueuefld)
         {
-            queuePath = qbasepath;
-            TTL = ttl;        
+            queuePath = cqueuefld;
         }
 
 
@@ -32,10 +31,10 @@ namespace ADPasswordAgent
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>() { { "userName", name }, { "password", password } };
             UpdatePasswordMidPointAction updatePasswordAction = new UpdatePasswordMidPointAction();
-            MidPointTask updatePasswordTask = new MidPointTask(updatePasswordAction, TTL, parameters);
-            using (var queue = new PersistentSecureQueue(queuePath))
+            ActionCall updatePasswordCall = new ActionCall("UpdatePassword", parameters);
+            using (var queue = new PersistentSecureQueue(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), queuePath)))
             {
-                EnqueueMidTask(updatePasswordTask, queue);
+                EnqueueMidTask(updatePasswordCall, queue);
             }
         }
 

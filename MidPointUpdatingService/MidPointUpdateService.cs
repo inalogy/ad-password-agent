@@ -22,7 +22,7 @@ namespace MidPointUpdatingService
         private string cqueuefld = @"Midpoint.ADPassword.Queue";
         private double ccacheduration = cacheDurationMins; // default cache duration in minutes
 
-        private static HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new HttpClient();
         private static DiskCache<string> diskCacheInstance;
         private static PersistentSecureQueue queue;
        
@@ -39,6 +39,7 @@ namespace MidPointUpdatingService
             SetupQueue();
             SetupCache();
             SetupClient();
+
         }
 
         protected override void OnStop()
