@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\GetOIDMidPointAction.cs" />
+    <Compile Include="Actions\GetOIDMidPointActionResult.cs" />
+    <Compile Include="Actions\IActionDefinition.cs" />
+    <Compile Include="Actions\IActionResult.cs" />
+    <Compile Include="Actions\UpdatePasswordMidPointAction.cs" />
+    <Compile Include="Actions\UpdatePasswordMidPointActionResult.cs" />
     <Compile Include="Config.Designer.cs">
       <DependentUpon>Config.settings</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -63,6 +69,8 @@
     <Compile Include="MidPointUpdateService.Designer.cs">
       <DependentUpon>MidPointUpdateService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Operations\MidPointError.cs" />
+    <Compile Include="Operations\MidPointTask.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
