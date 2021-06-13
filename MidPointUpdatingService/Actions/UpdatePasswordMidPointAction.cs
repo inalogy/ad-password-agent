@@ -27,7 +27,7 @@ namespace MidPointUpdatingService.Actions
 
         public IActionResult GetResult(XmlDocument xmldoc, MidPointError error)
         {
-            return new UpdatePasswordMidPointActionResult(error.ErrorCode);
+            return new UpdatePasswordMidPointActionResult(error);
         }
 
         public bool ValidateParamaters(Dictionary<string, object> parameters)

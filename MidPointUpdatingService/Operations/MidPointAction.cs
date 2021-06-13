@@ -7,36 +7,32 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using MidPointUpdatingService.Actions;
 
 namespace MidPointUpdatingService.Models
 {
     [Serializable]
-    public class MidPointTask
+    public class MidPointAction
     {
-        #region Private variables TTL and Parameters
+        #region Private Parameters
         
-        private int ttl = 0;
-
         private readonly Dictionary<string, object> paramaters = new Dictionary<string, object>();
 
         #endregion
 
-        #region Public properties ActionDefinition, TTL and Parameters
+        #region Public properties ActionDefinition and Parameters
 
         public Dictionary<string, object> Parameters { get { return paramaters; } }
 
         public IActionDefinition ActionDefinition { get; set; }
 
-        public int TTL { get { return ttl; } }
-
         #endregion
 
         #region Default MidPoint task constructor
 
-        public MidPointTask(IActionDefinition action,int ttl,Dictionary<string, object> par)
+        public MidPointAction(IActionDefinition action, Dictionary<string, object> par)
         {
             ActionDefinition = action;
-            this.ttl = ttl;
             if (par != null)
             {
                 foreach (string k in par.Keys)
@@ -61,7 +57,6 @@ namespace MidPointUpdatingService.Models
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/xml");
 
                 HttpResponseMessage response = client.PostAsync(relativeapiUrl, content).Result;
-                ttl--;
                 if (ActionDefinition.ActionReturnsResult && response.IsSuccessStatusCode)
                 {
                     try
@@ -73,7 +68,7 @@ namespace MidPointUpdatingService.Models
                         xmldoc.LoadXml(xmlobj);
                         MidPointError error = new MidPointError() { ErrorCode = 0, Recoverable = false, ErrorMessage = "OK" };
                         result = ActionDefinition.GetResult(xmldoc, error);
-                        return (result.ErrorCode == 0);
+                        return (result.Error.ErrorCode==0);
                     }
                     catch 
                     {
@@ -87,8 +82,7 @@ namespace MidPointUpdatingService.Models
             else 
             {
                 //Inavalid paramaters
-                ttl = 0;
-                result = null;
+                result = new InvalidParametersResult();
                 return false;
             }                 
         }

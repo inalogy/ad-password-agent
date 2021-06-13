@@ -7,12 +7,12 @@ namespace MidPointUpdatingService.Actions
     {
         private readonly Dictionary<string, object> _resultDictionary = new Dictionary<string, object>();
 
-        public UpdatePasswordMidPointActionResult(int error)
+        public UpdatePasswordMidPointActionResult(MidPointError error)
         {
-            ErrorCode = error;
+            Error = error;
         }
 
-        public Dictionary<string, object> resultDictionary 
+        public Dictionary<string, object> ResultDictionary 
         {
             get
             {                
@@ -20,6 +20,6 @@ namespace MidPointUpdatingService.Actions
             }
         }
 
-        public int ErrorCode { get; } = 0;
+        public MidPointError Error { get; }
     }
 }

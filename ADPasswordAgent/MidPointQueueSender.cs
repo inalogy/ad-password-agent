@@ -15,7 +15,8 @@ namespace ADPasswordAgent
         {
             using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
             {
-                queueSession.Enqueue(Helpers.ObjectToByteArray(task));
+                var queueItem = Helpers.ObjectToByteArray(task);
+                queueSession.Enqueue(queueItem);
                 queueSession.Flush();
             }
         }

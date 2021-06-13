@@ -3,20 +3,19 @@ using System.Collections.Generic;
 
 namespace MidPointUpdatingService.Actions
 {
-    public class GetOIDMidPointActionResult : IActionResult
+    public class InvalidParametersResult : IActionResult
     {
         private readonly Dictionary<string, object> _resultDictionary = new Dictionary<string, object>();
 
-        public GetOIDMidPointActionResult(string oid, MidPointError error)
+        public InvalidParametersResult()
         {
-            _resultDictionary.Add("OID", oid);
-            Error = error;
+            Error = new MidPointError() { ErrorCode=MidPointErrorEnum.ParametersError, Recoverable=false, ErrorMessage="Invaled parameters" } ;
         }
 
-        public Dictionary<string, object> ResultDictionary 
+        public Dictionary<string, object> ResultDictionary
         {
             get
-            {                
+            {
                 return _resultDictionary;
             }
         }

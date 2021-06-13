@@ -4,7 +4,7 @@ namespace MidPointUpdatingService.Models
 {
     public interface IActionResult
     {
-        int ErrorCode { get; }
-        Dictionary<string, object> resultDictionary { get; }
+        MidPointError Error { get; }
+        Dictionary<string, object> ResultDictionary { get; }
     }
 }

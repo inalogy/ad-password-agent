@@ -1,6 +1,9 @@
 ﻿using ADPasswordSecureCache;
+using MidPointCommonTaskModels.Models;
+using MidPointUpdatingService.Actions;
 using MidPointUpdatingService.ClassExtensions;
 using MidPointUpdatingService.Models;
+using MidPointUpdatingService.Operations;
 using SecureDiskQueue;
 using System.Collections.Generic;
 using System.IO;
@@ -13,100 +16,94 @@ namespace MidPointUpdatingService.Engine
 {
     public static class ExecutionEngine
     {
-        public static Dictionary<string, object> ExecuteMidpointTask(MidPointTask task, HttpClient client, out MidPointError error)
+        public static Dictionary<string, object> ExecuteMidpointAction(MidPointAction actionStep, HttpClient client, out MidPointError error)
         {
             var results = new Dictionary<string, object>();
-            if (task.TTL > 0)
-            {
-                task.Execute(client, out IActionResult result);
-                if (result != null)
-                {                    
-                    error = new MidPointError() { ErrorCode = 0, Recoverable = false, ErrorMessage = "OK" };
-                    results = result.resultDictionary;
-                }
-                else
-                {
-
-                    error = new MidPointError() { ErrorCode = 0, Recoverable = false, ErrorMessage = "OK" };
-                }
-
+            actionStep.Execute(client, out IActionResult result);
+            if (result != null)
+            {                    
+                results = result.ResultDictionary;
+                error = result.Error;
             }
             else
             {
-                error = new MidPointError() { ErrorCode = 100, Recoverable = false, ErrorMessage = "TTL Expired" };
-            }
 
+                error = new MidPointError() { ErrorCode = MidPointErrorEnum.NoActionResult, Recoverable = false, ErrorMessage = "Action returned no answer" };
+            }            
             return results;
         }
 
-        public static async Task<Dictionary<string, object>> ProcessItem(HttpClient client, DiskCache<string> diskCache, PersistentSecureQueue queue)
+        public static void ProcessItem(HttpClient client, PersistentSecureQueue queue)
         {
-            Dictionary<string, object> output = null;
-            MidPointTask task = ExecutionEngine.PeekMidTask(queue);
-            if (task!=null)
+            ActionCall call = ExecutionEngine.PeekMidTask(queue);
+            if (call!=null)
             {
-                var binaryFormatter = new BinaryFormatter();
-                string key = ExecutionEngine.CombineCacheKey(task.ActionDefinition.ActionName, task.Parameters);
-                if (diskCache.ContainsKey(key))
+                if (!string.IsNullOrEmpty(call.ActionName))
                 {
-                    Stream outStream = diskCache.GetValueAsync(key).Result;
-                    output = (Dictionary<string, object>)binaryFormatter.Deserialize(outStream);
+                    switch (call.ActionName)
+                    {
+                        case "UpdatePassword":
+                            IMidPointOperation updatePasswordOperation = new UpdatePasswordOperation();
+                            updatePasswordOperation.ExecuteOperation(call.Parameters, client);
+                            if (updatePasswordOperation.TTL == 0)
+                            {
+                                ExecutionEngine.DequeueMidTask(queue);
+                            }
+                            break;
+        
+                        default:
+                            // Unknown Action name
+                            ExecutionEngine.DequeueMidTask(queue);
+                            break;
+                    }
                 }
                 else
                 {
-                    output = ExecutionEngine.ExecuteMidpointTask(task, client, out MidPointError error);
-                    if (error.ErrorCode == 0)
-                    { 
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            binaryFormatter.Serialize(ms, output);
-                            await diskCache.SetValueAsync(key, ms);
-                        }
-                    }
+                    // Empty Action name
+                    ExecutionEngine.DequeueMidTask(queue);
                 }
             }
-            return output;                            
         }
 
-        private static string CombineCacheKey(string actionName, Dictionary<string, object> parameters)
-        {
-            StringBuilder cacheKeyBuilder = new StringBuilder();
-            cacheKeyBuilder.Append(actionName);
-            foreach (KeyValuePair<string,object> kvp in parameters)
-            {
-                cacheKeyBuilder.AppendFormat(";{0};{1}", kvp.Key, kvp.Value.ToString());
-            }
-            return cacheKeyBuilder.ToString();
-        }
-
-        private static void EnqueueMidTask(MidPointTask task, PersistentSecureQueue queue)
+        /* For example only - service using only Peek and dequeue */
+        /*
+        private static void EnqueueMidTask(ActionCall call, PersistentSecureQueue queue)
         {
             using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
             {
-                queueSession.Enqueue(Helpers.ObjectToByteArray(task));
+                queueSession.Enqueue(Helpers.ObjectToByteArray(call));
                 queueSession.Flush();
             }
         }
+        */
 
-        private static MidPointTask PeekMidTask(PersistentSecureQueue queue)
+        private static ActionCall PeekMidTask(PersistentSecureQueue queue)
         {
-            MidPointTask task = null;
+            ActionCall call = null;
             using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
             {
-                task = (MidPointTask)Helpers.ByteArrayToObject(queueSession.Peek());
+                var queueItem = queueSession.Peek();
+                if (queueItem != null)
+                {
+                    call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem);
+                }
             }
-            return task;
+            return call;
         }
 
-        private static MidPointTask DequeueMidTask(PersistentSecureQueue queue)
+        private static ActionCall DequeueMidTask(PersistentSecureQueue queue)
         {
-            MidPointTask task = null;
+            ActionCall call = null;
             using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
             {
-                task = (MidPointTask)Helpers.ByteArrayToObject(queueSession.Dequeue());
-                queueSession.Flush();
+                var queueItem = queueSession.Dequeue();
+                if (queueItem != null)
+                {
+                    call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem);
+                    queueSession.Flush();
+                }
             }
-            return task;
+            return call;
         }
 
 

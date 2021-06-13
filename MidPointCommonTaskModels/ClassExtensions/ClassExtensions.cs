@@ -28,6 +28,19 @@ namespace MidPointUpdatingService.ClassExtensions
                         : values[key].ToString());
                 });
         }
+
+
+        // extension method for combining Dictionaries
+        public static Dictionary<string, object> Combine(this Dictionary<string, object> p, Dictionary<string, object> q)
+        {
+            foreach (var i in q)
+            {
+                p.Add(i.Key.ToString(), i.Value.ToString());
+            }
+            return p;
+        }
+
+
     }
     public static class Helpers
     { 

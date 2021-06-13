@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MidPointUpdatingService</RootNamespace>
     <AssemblyName>MidPointUpdatingService</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,6 +56,7 @@
     <Compile Include="Actions\GetOIDMidPointActionResult.cs" />
     <Compile Include="Actions\IActionDefinition.cs" />
     <Compile Include="Actions\IActionResult.cs" />
+    <Compile Include="Actions\InvalidParametersResult.cs" />
     <Compile Include="Actions\UpdatePasswordMidPointAction.cs" />
     <Compile Include="Actions\UpdatePasswordMidPointActionResult.cs" />
     <Compile Include="Config.Designer.cs">
@@ -69,8 +71,11 @@
     <Compile Include="MidPointUpdateService.Designer.cs">
       <DependentUpon>MidPointUpdateService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Operations\IMidPointOperation.cs" />
     <Compile Include="Operations\MidPointError.cs" />
-    <Compile Include="Operations\MidPointTask.cs" />
+    <Compile Include="Operations\MidPointAction.cs" />
+    <Compile Include="Operations\MidPointErrorEnum.cs" />
+    <Compile Include="Operations\UpdatePasswordOperation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
