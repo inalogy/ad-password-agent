@@ -150,7 +150,7 @@ namespace MidPointUpdatingService
             SetupClient();
             cancellationToken = new CancellationTokenSource();
             var token = cancellationToken.Token;
-            processingTask = Task.Run(() => ProcessQueue(), token);
+            processingTask = Task.Run(() => ProcessQueue(token), token);
             base.OnStart(args); 
         }
         protected override void OnStop()
@@ -164,14 +164,14 @@ namespace MidPointUpdatingService
             base.OnStop();
         }
 
-        protected void ProcessQueue()
+        protected void ProcessQueue(CancellationToken token)
         {
             while (!stopping)
             {
                 try
                 {
-                    ExecutionEngine.ProcessItem(client, log, retrycnt, cqueuefld, queuewait);
-                 
+                    token.ThrowIfCancellationRequested();
+                    ExecutionEngine.ProcessItem(client, log, retrycnt, cqueuefld, queuewait, token);                 
                     Thread.Sleep(250);
                 }
                 catch (Exception ex)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MidPointUpdatingService.Operations
@@ -14,7 +15,7 @@ namespace MidPointUpdatingService.Operations
 
         string OperationName { get; }
 
-        void ExecuteOperation(Dictionary<string, object> parameters, HttpClient client, ILog log);
+        void ExecuteOperation(Dictionary<string, object> parameters, HttpClient client, ILog log, CancellationToken token);
 
     }
 }

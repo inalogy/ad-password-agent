@@ -3,6 +3,7 @@ using MidPointUpdatingService.Actions;
 using MidPointUpdatingService.ClassExtensions;
 using MidPointUpdatingService.Engine;
 using MidPointUpdatingService.Models;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
@@ -25,11 +26,10 @@ namespace MidPointUpdatingService.Operations
             originalTTL = ttl;
         }
 
-        public void ExecuteOperation(Dictionary<string, object> parameters, HttpClient client, ILog log)
+        public void ExecuteOperation(Dictionary<string, object> parameters, HttpClient client, ILog log, CancellationToken token)
         {
-            while (TTL > 0)
+            while (TTL > 0 && !token.IsCancellationRequested)
             {
-
                 GetOIDMidPointAction getOIDMidPointAction = new GetOIDMidPointAction();
                 MidPointAction getOIDAction = new MidPointAction(getOIDMidPointAction, parameters);
                 output = ExecutionEngine.ExecuteMidpointAction(getOIDAction, client, log, out MidPointError error);
@@ -69,15 +69,21 @@ namespace MidPointUpdatingService.Operations
                     }
                     // Propagate MidPointError
                 }
-                if (TTL>0) ExponentialDelay();
+                if (TTL>0) ExponentialDelay(token);
             }
         }
 
-        private void ExponentialDelay()
+        private void ExponentialDelay(CancellationToken token)
         {
+            if (token.IsCancellationRequested)
+            {
+                token.ThrowIfCancellationRequested();
+                return;
+            }
+
             // Delay by ttl max 6 hrs for step ( cummulative max 12 hrs )
             int delaytimems = (1<<((originalTTL - TTL)/(originalTTL/24)));
-            Thread.Sleep(delaytimems);
+            token.WaitHandle.WaitOne(TimeSpan.FromMilliseconds(delaytimems));
         }
     }
 }

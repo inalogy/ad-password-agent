@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Threading;
 
 namespace MidPointUpdatingService.Engine
 {
@@ -29,7 +30,7 @@ namespace MidPointUpdatingService.Engine
             return results;
         }
 
-        public static void ProcessItem(HttpClient client, ILog log, int retryCount, string queueName, int queueWait)
+        public static void ProcessItem(HttpClient client, ILog log, int retryCount, string queueName, int queueWait, CancellationToken token)
         {
             ActionCall call = ExecutionEngine.PeekMidTask(queueName, queueWait, log);
             if (call!=null)
@@ -40,7 +41,7 @@ namespace MidPointUpdatingService.Engine
                     {
                         case "UpdatePassword":
                             IMidPointOperation updatePasswordOperation = new UpdatePasswordOperation(retryCount);
-                            updatePasswordOperation.ExecuteOperation(call.Parameters, client, log);
+                            updatePasswordOperation.ExecuteOperation(call.Parameters, client, log, token);
                             if (updatePasswordOperation.TTL == 0) { 
                                 //Operation finished or non-recoverable error occured
                                 ExecutionEngine.DequeueMidTask(queueName, queueWait, log);
