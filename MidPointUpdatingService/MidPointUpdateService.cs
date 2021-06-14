@@ -34,6 +34,7 @@ namespace MidPointUpdatingService
         private ILog log;
         private bool stopping = false;
         private Task processingTask;
+        private CancellationTokenSource cancellationToken;
 
         protected void SetupLogging()
         {
@@ -147,13 +148,16 @@ namespace MidPointUpdatingService
             ConfigureService();
             SetupLogging();
             SetupClient();
-            processingTask = Task.Run(() => ProcessQueue());
+            cancellationToken = new CancellationTokenSource();
+            var token = cancellationToken.Token;
+            processingTask = Task.Run(() => ProcessQueue(), token);
             base.OnStart(args); 
         }
         protected override void OnStop()
         {
             if (!stopping)
                 stopping = true;
+            cancellationToken.Cancel();
             processingTask.Wait();
             LogManager.Flush(1000);
             LogManager.Shutdown();
@@ -166,10 +170,8 @@ namespace MidPointUpdatingService
             {
                 try
                 {
-                    using (queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), cqueuefld), TimeSpan.FromSeconds(30)))
-                    {
-                        ExecutionEngine.ProcessItem(client, log, retrycnt, queue);
-                    }
+                    ExecutionEngine.ProcessItem(client, log, retrycnt, cqueuefld, queuewait);
+                 
                     Thread.Sleep(250);
                 }
                 catch (Exception ex)
@@ -178,19 +180,5 @@ namespace MidPointUpdatingService
                 }
             }
         }
-
-        protected override void OnCustomCommand(int command)
-        {
-            base.OnCustomCommand(command);
-            if (command == (int)CustomCommnds.HeartBeat)
-            {
-                //TODO: Add the handler for heartbeating
-            }
-        }
-    }
-
-    public enum CustomCommnds
-    {
-        HeartBeat = 128
     }
 }

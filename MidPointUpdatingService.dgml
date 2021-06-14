@@ -1,121 +1,215 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DirectedGraph DataVirtualized="True" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
   <Nodes>
-    <Node Id="(@1 @3 Type=Config)" Category="CodeSchema_Class" Bounds="165.917360380977,-622.356898949447,95.98,25" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsGeneratedCode="True" CodeSchemaProperty_IsInternal="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Config" />
-    <Node Id="(@1 @3 Type=CustomCommnds)" Category="CodeSchema_Enum" Bounds="-49.0126396190233,-457.356898949447,151.83,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="CustomCommnds" />
-    <Node Id="(@1 @3 Type=ProjectInstaller)" Category="CodeSchema_Class" Bounds="-49.0126396190233,-512.356998949447,139.23,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="ProjectInstaller" />
-    <Node Id="@10" Category="CodeSchema_Namespace" Bounds="-534.581625822538,-468.78558366577,252.56,140.0003" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="2" Group="Expanded" Label="MidPointUpdatingService‎.Operations" UseManualLocation="True" />
-    <Node Id="@11" Category="CodeSchema_Class" Bounds="-321.608174344999,-600.410189001614,147.88,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="ExecutionEngine" />
-    <Node Id="@12" Category="CodeSchema_Class" Bounds="-504.535081615699,-231.860334329813,182.126666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="GetOIDMidPointAction" />
-    <Node Id="@13" Category="CodeSchema_Class" Bounds="-520.493476655699,-176.934665141493,214.086666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="GetOIDMidPointActionResult" />
-    <Node Id="@14" Category="CodeSchema_Interface" Bounds="-5.9644363785626,-177.646018355479,150.113333333333,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IActionDefinition" />
-    <Node Id="@15" Category="CodeSchema_Interface" Bounds="110.048222700262,-122.63452080045,130.23,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IActionResult" />
-    <Node Id="@16" Category="CodeSchema_Interface" Bounds="-491.033292489204,-373.720256733436,165.463333333333,25.0000000000001" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IMidPointOperation" />
-    <Node Id="@17" Category="CodeSchema_Class" Bounds="-520.532350450347,-11.953071914991,186.596666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="InvalidParametersResult" />
-    <Node Id="@18" Category="CodeSchema_Class" Bounds="-2.35751559953701,-232.646118355479,142.896666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointAction" />
-    <Node Id="@19" Category="CodeSchema_Class" Bounds="1.8691624680786,-67.6344208004501,134.44,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointError" />
-    <Node Id="@2" Category="CodeSchema_Assembly" Bounds="-560.532350450347,-702.357398949447,862.429710831324,755.488361686283" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="NotFetched" FetchedChildrenCount="5" FilePath="$(b9c747bb-d14f-4e70-a524-eedbe72c84c1.OutputPath)" Group="Expanded" Label="MidPointUpdatingService.exe" UseManualLocation="True" />
-    <Node Id="@20" Category="CodeSchema_Enum" Bounds="-11.1190843648469,-12.6343208004502,160.426666666667,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointErrorEnum" />
-    <Node Id="@21" Category="CodeSchema_Class" Bounds="-49.0126396190232,-567.357098949447,184.93,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointUpdateService" />
-    <Node Id="@22" Category="CodeSchema_Class" Bounds="-9.85097295235663,-622.357198949447,106.606666666667,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsInternal="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Program" />
-    <Node Id="@23" Category="CodeSchema_Class" Bounds="-504.535081615699,-122.008995953173,231.256666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="UpdatePasswordMidPointAction" />
-    <Node Id="@24" Category="CodeSchema_Class" Bounds="-520.532350450347,-66.953071954191,263.216666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="UpdatePasswordMidPointActionResult" />
-    <Node Id="@25" Category="CodeSchema_Class" Bounds="-509.706625822538,-428.720256772636,202.81,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="UpdatePasswordOperation" />
-    <Node Id="@4" Category="CodeSchema_Namespace" Bounds="-69.0126396190233,-662.357298949447,350.91,250.0005" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService" UseManualLocation="True" />
-    <Node Id="@6" Category="CodeSchema_Namespace" Bounds="-540.532350450347,-271.92554876701,303.216666666667,305.056423998982" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService‎.Actions" UseManualLocation="True" />
-    <Node Id="@7" Category="CodeSchema_Namespace" Bounds="-362.626507678332,-640.410289001614,229.916666666667,85.0002" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="1" Group="Expanded" Label="MidPointUpdatingService‎.Engine" UseManualLocation="True" />
-    <Node Id="@9" Category="CodeSchema_Namespace" Bounds="-31.1190843648469,-272.646218355479,291.397307065109,305.011997555029" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService‎.Models" UseManualLocation="True" />
+    <Node Id="(@1 @3 Type=Config)" Category="CodeSchema_Class" Bounds="746.008333333333,192.4,95.98,25" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsGeneratedCode="True" CodeSchemaProperty_IsInternal="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Config" />
+    <Node Id="(@1 @3 Type=CustomCommnds)" Category="CodeSchema_Enum" Bounds="700.308333333333,363.36,151.83,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="CustomCommnds" />
+    <Node Id="(@1 @3 Type=ProjectInstaller)" Category="CodeSchema_Class" Bounds="531.078333333333,363.36,139.23,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="ProjectInstaller" />
+    <Node Id="(Name=&lt;&gt;c__DisplayClass67_0.AnonymousMethod @29 Type=void OverloadingParameters=[(Type=System.IO.Stream Name=stream)] IsUnresolved=True)" Category="CodeSchema_CallStackUnresolvedMethod" Bounds="375.3625,1467.975,141.413333333333,25.96" Label="AnonymousMethod" SourceLocation="(Assembly=&quot;file:///E:/ORANGE/SecureDiskQueue/SecureDiskQueueNET/Implementation/PersistentSecureQueueImpl .cs&quot; StartLineNumber=440 StartCharacterOffset=5 EndLineNumber=440 EndCharacterOffset=5)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="@11" Category="CodeSchema_Namespace" Bounds="228.328333333333,151.92,252.56,256.92" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="2" Group="Expanded" Label="MidPointUpdatingService‎.Operations" />
+    <Node Id="@12" Category="CodeSchema_Class" Bounds="426.668333333333,560.0475,147.88,85.96" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="ExecutionEngine" />
+    <Node Id="@13" Category="CodeSchema_Class" Bounds="55.9800000000001,480.5275,182.126666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="GetOIDMidPointAction" />
+    <Node Id="@14" Category="CodeSchema_Class" Bounds="40,535.5275,214.086666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="GetOIDMidPointActionResult" />
+    <Node Id="@15" Category="CodeSchema_Interface" Bounds="142.494166666667,872.215,150.113333333333,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IActionDefinition" />
+    <Node Id="@16" Category="CodeSchema_Interface" Bounds="258.435833333333,927.215,130.23,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IActionResult" />
+    <Node Id="@17" Category="CodeSchema_Interface" Bounds="271.876666666667,363.84,165.463333333333,25.0000000000001" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IMidPointOperation" />
+    <Node Id="@18" Category="CodeSchema_Class" Bounds="40,700.5275,186.596666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="InvalidParametersResult" />
+    <Node Id="@19" Category="CodeSchema_Class" Bounds="146.1025,817.215,142.896666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointAction" />
+    <Node Id="@2" Category="CodeSchema_Assembly" Bounds="0,111.92,892.138333333333,990.295" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="NotFetched" FetchedChildrenCount="5" FilePath="$(b9c747bb-d14f-4e70-a524-eedbe72c84c1.OutputPath)" Group="Expanded" Label="MidPointUpdatingService.exe" />
+    <Node Id="@20" Category="CodeSchema_Class" Bounds="150.330833333333,982.215,134.44,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointError" />
+    <Node Id="@21" Category="CodeSchema_Enum" Bounds="137.3375,1037.215,160.426666666667,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointErrorEnum" />
+    <Node Id="@22" Category="CodeSchema_Class" Bounds="531.078333333333,247.4,184.93,85.96" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="MidPointUpdateService" />
+    <Node Id="@23" Category="CodeSchema_Class" Bounds="570.24,192.4,106.606666666667,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsInternal="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Program" />
+    <Node Id="@24" Category="CodeSchema_Class" Bounds="55.98,590.5275,231.256666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="UpdatePasswordMidPointAction" />
+    <Node Id="@25" Category="CodeSchema_Class" Bounds="40,645.5275,263.216666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="UpdatePasswordMidPointActionResult" />
+    <Node Id="@26" Category="CodeSchema_Class" Bounds="253.203333333333,191.92,202.81,141.92" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Expanded" Label="UpdatePasswordOperation" />
+    <Node Id="@28" Category="CodeSchema_CallStackUnresolvedMethod" Bounds="375.3625,55.96,141.413333333333,25.96" Label="AnonymousMethod" SourceLocation="(Assembly=file:///E:/Repos/midPointADPasswordAgent/MidPointUpdatingService/MidPointUpdateService.cs StartLineNumber=149 StartCharacterOffset=44 EndLineNumber=149 EndCharacterOffset=44)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="@30" Category="CodeSchema_CallStackUnresolvedMethod" Bounds="375.1325,1356.055,141.873333333333,25.96" Label="ReadTransactionLog" SourceLocation="(Assembly=&quot;file:///E:/ORANGE/SecureDiskQueue/SecureDiskQueueNET/Implementation/PersistentSecureQueueImpl .cs&quot; StartLineNumber=399 StartCharacterOffset=3 EndLineNumber=399 EndCharacterOffset=3)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+    </Node>
+    <Node Id="@35" Category="CodeSchema_Method" Bounds="367.2525,1188.175,157.633333333333,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" CommonLabel="PersistentSecureQueue" Icon="CodeSchema_Method" Label="PersistentSecureQueue" SourceLocation="(Assembly=file:///E:/ORANGE/SecureDiskQueue/SecureDiskQueueNET/PersistentSecureQueue.cs StartLineNumber=67 StartCharacterOffset=3 EndLineNumber=67 EndCharacterOffset=3)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="ExternalCallStackEntry" />
+    </Node>
+    <Node Id="@36" Category="CodeSchema_Method" Bounds="355.5075,1244.135,181.123333333333,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" CommonLabel="PersistentSecureQueueImpl" Icon="CodeSchema_Method" Label="PersistentSecureQueueImpl" SourceLocation="(Assembly=&quot;file:///E:/ORANGE/SecureDiskQueue/SecureDiskQueueNET/Implementation/PersistentSecureQueueImpl .cs&quot; StartLineNumber=111 StartCharacterOffset=50 EndLineNumber=111 EndCharacterOffset=50)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="ExternalCallStackEntry" />
+    </Node>
+    <Node Id="@37" Category="CodeSchema_Method" Bounds="414.930833333333,1412.015,62.2766666666666,25.96" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="Read" Icon="CodeSchema_Method" Label="Read" SourceLocation="(Assembly=file:///E:/ORANGE/SecureDiskQueue/SecureDiskQueueNET/Implementation/Atomic.cs StartLineNumber=56 StartCharacterOffset=5 EndLineNumber=56 EndCharacterOffset=5)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="ExternalCallStackEntry" />
+    </Node>
+    <Node Id="@38" Category="CodeSchema_Method" Bounds="407.6275,1132.215,76.8833333333333,25.96" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="WaitFor" Icon="CodeSchema_Method" Label="WaitFor" SourceLocation="(Assembly=file:///E:/ORANGE/SecureDiskQueue/SecureDiskQueueNET/PersistentSecureQueue.cs StartLineNumber=36 StartCharacterOffset=6 EndLineNumber=36 EndCharacterOffset=6)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="ExternalCallStackEntry" />
+    </Node>
+    <Node Id="@39" Category="CodeSchema_Method" Bounds="355.5075,1300.095,181.123333333333,25.96" CodeSchemaProperty_IsConstructor="True" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" CommonLabel="PersistentSecureQueueImpl" Icon="CodeSchema_Method" Label="PersistentSecureQueueImpl" SourceLocation="(Assembly=&quot;file:///E:/ORANGE/SecureDiskQueue/SecureDiskQueueNET/Implementation/PersistentSecureQueueImpl .cs&quot; StartLineNumber=66 StartCharacterOffset=5 EndLineNumber=66 EndCharacterOffset=5)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="ExternalCallStackEntry" />
+    </Node>
+    <Node Id="@4" Category="CodeSchema_Namespace" Bounds="511.078333333333,152.4,361.06,255.96" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService" />
+    <Node Id="@42" Category="CodeSchema_Method" Bounds="289.618333333333,231.92,129.98,25.96" CodeSchemaProperty_IsPublic="True" CommonLabel="ExecuteOperation" Icon="CodeSchema_Method" Label="ExecuteOperation" SourceLocation="(Assembly=file:///E:/Repos/midPointADPasswordAgent/MidPointUpdatingService/Operations/UpdatePasswordOperation.cs StartLineNumber=71 StartCharacterOffset=0 EndLineNumber=71 EndCharacterOffset=0)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="CurrentCallStackEntry" />
+    </Node>
+    <Node Id="@43" Category="CodeSchema_Method" Bounds="450.706666666667,600.0475,99.8033333333333,25.96" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsStatic="True" CommonLabel="ProcessItem" Icon="CodeSchema_Method" Label="ProcessItem" SourceLocation="(Assembly=file:///E:/Repos/midPointADPasswordAgent/MidPointUpdatingService/Engine/ExecutionEngine.cs StartLineNumber=41 StartCharacterOffset=0 EndLineNumber=41 EndCharacterOffset=0)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="CurrentCallStackEntry" />
+    </Node>
+    <Node Id="@44" Category="CodeSchema_Method" Bounds="169.1875,55.96,175.763333333333,25.96" CodeSchemaProperty_IsAnonymous="True" Label="AnonymousMethod__17_0" SourceLocation="(Assembly=file:///E:/Repos/midPointADPasswordAgent/MidPointUpdatingService/MidPointUpdateService.cs StartLineNumber=149 StartCharacterOffset=0 EndLineNumber=149 EndCharacterOffset=0)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="CurrentCallStackEntry" />
+    </Node>
+    <Node Id="@45" Category="CodeSchema_Method" Bounds="291.101666666667,287.88,127.013333333333,25.96" CodeSchemaProperty_IsPrivate="True" CommonLabel="ExponentialDelay" Icon="CodeSchema_Method" Label="ExponentialDelay" SourceLocation="(Assembly=file:///E:/Repos/midPointADPasswordAgent/MidPointUpdatingService/Operations/UpdatePasswordOperation.cs StartLineNumber=77 StartCharacterOffset=0 EndLineNumber=77 EndCharacterOffset=0)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="CurrentCallStackEntry" />
+    </Node>
+    <Node Id="@46" Category="CodeSchema_Method" Bounds="567.988333333333,287.4,111.11,25.96" CodeSchemaProperty_IsProtected="True" CommonLabel="ProcessQueue" Icon="CodeSchema_Method" Label="ProcessQueue" SourceLocation="(Assembly=file:///E:/Repos/midPointADPasswordAgent/MidPointUpdatingService/MidPointUpdateService.cs StartLineNumber=170 StartCharacterOffset=0 EndLineNumber=170 EndCharacterOffset=0)">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CodeSchema_SourceLocation" />
+      <Category Ref="CurrentCallStackEntry" />
+    </Node>
+    <Node Id="@6" Category="CodeSchema_Namespace" Bounds="20,440.5275,303.216666666667,305" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService‎.Actions" />
+    <Node Id="@7" Category="CodeSchema_Namespace" Bounds="385.65,520.0475,229.916666666667,145.96" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="1" Group="Expanded" Label="MidPointUpdatingService‎.Engine" />
+    <Node Id="@9" Category="CodeSchema_Namespace" Bounds="117.3375,777.214847811262,291.328333333333,305.0006" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService‎.Models" />
+    <Node Id="ExternalCodeRootNode" Category="ExternalCallStackEntry" Bounds="406.500833333333,0,79.1366666666667,25.96" Label="Externí kód">
+      <Category Ref="CallStackEntry" />
+      <Category Ref="CurrentCallStackEntry" />
+    </Node>
   </Nodes>
   <Links>
-    <Link Source="@10" Target="@16" Category="Contains" FetchingParent="@10" />
-    <Link Source="@10" Target="@25" Category="Contains" FetchingParent="@10" />
-    <Link Source="@11" Target="@15" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
-    <Link Source="@11" Target="@16" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
-    <Link Source="@11" Target="@18" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2">
+    <Link Source="@11" Target="@17" Category="Contains" FetchingParent="@11" />
+    <Link Source="@11" Target="@26" Category="Contains" FetchingParent="@11" />
+    <Link Source="@12" Target="@16" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
+    <Link Source="@12" Target="@17" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
+    <Link Source="@12" Target="@19" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2">
       <Category Ref="CodeSchema_Calls" />
     </Link>
-    <Link Source="@11" Target="@19" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5">
+    <Link Source="@12" Target="@20" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5">
       <Category Ref="CodeSchema_Calls" />
     </Link>
-    <Link Source="@11" Target="@25" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
-    <Link Source="@12" Target="@13" Category="CodeSchema_Calls" Bounds="-413.466838073111,-206.925461262147,0.00824919110135625,21.0001006943724" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="3" />
-    <Link Source="@12" Target="@14" Category="Implements" Weight="1" />
-    <Link Source="@12" Target="@15" Category="CodeSchema_ReturnTypeLink" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@12" Target="@19" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="10">
-      <Category Ref="CodeSchema_Calls" />
-    </Link>
+    <Link Source="@12" Target="@26" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@12" Target="@43" Category="Contains" />
+    <Link Source="@13" Target="@14" Category="CodeSchema_Calls" Bounds="147.043334960938,505.527496337891,0,21.0000305175781" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="3" />
     <Link Source="@13" Target="@15" Category="Implements" Weight="1" />
-    <Link Source="@13" Target="@19" Category="References" IsSourceVirtualized="True" Weight="4">
+    <Link Source="@13" Target="@16" Category="CodeSchema_ReturnTypeLink" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@13" Target="@20" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="10">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@14" Target="@16" Category="Implements" Weight="1" />
+    <Link Source="@14" Target="@20" Category="References" IsSourceVirtualized="True" Weight="4">
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@14" Target="@15" Category="CodeSchema_ReturnTypeLink" Bounds="93.1942355793738,-152.646018355479,49.8775519332404,25.8679471533991" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@14" Target="@19" Category="References" Bounds="69.0897620242346,-152.646018355479,0.00211968470911472,76.0115975585287" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@15" Target="@19" Category="CodeSchema_ReturnTypeLink" Bounds="101.186689304632,-97.63452080045,49.8688362659469,25.8573205881538" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@17" Target="@15" Category="Implements" Weight="1" />
-    <Link Source="@17" Target="@19" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="7">
+    <Link Source="@15" Target="@16" Category="CodeSchema_ReturnTypeLink" Bounds="241.641698622669,897.215047811262,49.829622675813,25.8550399069055" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@15" Target="@20" Category="References" Bounds="217.550833333333,897.215047811262,5.6843418860808E-14,76.0002000000001" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@16" Target="@20" Category="CodeSchema_ReturnTypeLink" Bounds="249.630345368185,952.215147811262,49.8296226758128,25.8550399069055" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@18" Target="@16" Category="Implements" Weight="1" />
+    <Link Source="@18" Target="@20" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="7">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@18" Target="@14" Category="References" Bounds="69.0911387682827,-207.646118355479,0.000539340505241626,21.0001000029682" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="10">
+    <Link Source="@19" Target="@15" Category="References" Bounds="217.550833333333,842.214947811262,0,21.0001" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="10">
       <Category Ref="CodeSchema_Calls" />
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@18" Target="@15" Category="References" Bounds="101.992858886719,-207.646118164063,67.4717254638672,76.3203735351563" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2">
+    <Link Source="@19" Target="@16" Category="References" Bounds="250.452331542969,842.214965820313,67.4178771972656,76.3070678710938" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2">
       <Category Ref="CodeSchema_Calls" />
     </Link>
-    <Link Source="@18" Target="@17" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
-    <Link Source="@18" Target="@19" Category="CodeSchema_Calls" Bounds="-16.0986518859863,-207.646118164063,69.9981346130371,132.895736694336" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5" />
-    <Link Source="@19" Target="@20" Category="References" Bounds="69.0903184887968,-42.63442080045,0.00194212405811811,21.0001000384879" IsSourceVirtualized="True" Weight="4">
-      <Category Ref="CodeSchema_ReturnTypeLink" />
-    </Link>
-    <Link Source="@2" Target="@10" Category="Contains" FetchingParent="@2" />
+    <Link Source="@19" Target="@18" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@19" Target="@20" Category="CodeSchema_Calls" Bounds="132.359954833984,842.214965820313,69.9993591308594,132.884704589844" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5" />
+    <Link Source="@2" Target="@11" Category="Contains" FetchingParent="@2" />
     <Link Source="@2" Target="@4" Category="Contains" FetchingParent="@2" />
     <Link Source="@2" Target="@6" Category="Contains" FetchingParent="@2" />
     <Link Source="@2" Target="@7" Category="Contains" FetchingParent="@2" />
     <Link Source="@2" Target="@9" Category="Contains" FetchingParent="@2" />
-    <Link Source="@21" Target="@11" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
-    <Link Source="@22" Target="@21" Category="CodeSchema_Calls" Bounds="43.4523603809768,-597.357198949447,2.1316282072803E-14,21.0001000000002" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
-    <Link Source="@23" Target="@14" Category="Implements" Weight="1" />
-    <Link Source="@23" Target="@15" Category="CodeSchema_ReturnTypeLink" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@23" Target="@19" Category="References" IsSourceVirtualized="True" Weight="1" />
-    <Link Source="@23" Target="@24" Category="CodeSchema_Calls" Bounds="-388.917273429681,-96.9252612621467,0.00660439878470243,21.0559244417038" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
-    <Link Source="@24" Target="@15" Category="Implements" Weight="1" />
-    <Link Source="@24" Target="@19" Category="References" IsSourceVirtualized="True" Weight="4">
+    <Link Source="@20" Target="@21" Category="References" Bounds="217.550833333333,1007.21524781126,5.6843418860808E-14,21.0001000000002" IsSourceVirtualized="True" Weight="4">
       <Category Ref="CodeSchema_ReturnTypeLink" />
     </Link>
-    <Link Source="@25" Target="@11" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
-    <Link Source="@25" Target="@12" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
-    <Link Source="@25" Target="@16" Category="Implements" Bounds="-408.301625822538,-403.78548366577,5.6843418860808E-14,20.5001" Weight="1" />
-    <Link Source="@25" Target="@18" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
-    <Link Source="@25" Target="@19" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="4" />
-    <Link Source="@25" Target="@23" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@22" Target="@12" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@22" Target="@46" Category="Contains" />
+    <Link Source="@23" Target="@22" Category="CodeSchema_Calls" Bounds="623.543334960938,217.399993896484,0,21" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@24" Target="@15" Category="Implements" Weight="1" />
+    <Link Source="@24" Target="@16" Category="CodeSchema_ReturnTypeLink" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@24" Target="@20" Category="References" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@24" Target="@25" Category="CodeSchema_Calls" Bounds="171.608337402344,615.527526855469,0,21" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@25" Target="@16" Category="Implements" Weight="1" />
+    <Link Source="@25" Target="@20" Category="References" IsSourceVirtualized="True" Weight="4">
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@26" Target="@12" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
+    <Link Source="@26" Target="@13" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@26" Target="@17" Category="Implements" Bounds="354.608337402344,333.839996337891,0,20.5" Weight="1" />
+    <Link Source="@26" Target="@19" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
+    <Link Source="@26" Target="@20" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="4" />
+    <Link Source="@26" Target="@24" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@26" Target="@42" Category="Contains" />
+    <Link Source="@26" Target="@45" Category="Contains" />
+    <Link Source="@28" Target="@46" Category="CallStackDirectCall" />
+    <Link Source="@30" Target="@37" Category="CallStackDirectCall" Bounds="446.069152832031,1382.01501464844,0,21" />
+    <Link Source="@35" Target="@36" Category="CallStackDirectCall" Bounds="446.069152832031,1214.13500976563,0,21" />
+    <Link Source="@36" Target="@39" Category="CallStackDirectCall" Bounds="446.069152832031,1270.09497070313,0,21" />
+    <Link Source="@37" Target="(Name=&lt;&gt;c__DisplayClass67_0.AnonymousMethod @29 Type=void OverloadingParameters=[(Type=System.IO.Stream Name=stream)] IsUnresolved=True)" Category="CallStackDirectCall" Bounds="446.069152832031,1437.97497558594,0,21" />
+    <Link Source="@38" Target="@35" Category="CallStackDirectCall" Bounds="446.069152832031,1158.17504882813,0,21" />
+    <Link Source="@39" Target="@30" Category="CallStackDirectCall" Bounds="446.069152832031,1326.05505371094,0,21" />
     <Link Source="@4" Target="(@1 @3 Type=Config)" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="(@1 @3 Type=CustomCommnds)" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="(@1 @3 Type=ProjectInstaller)" Category="Contains" FetchingParent="@4" />
-    <Link Source="@4" Target="@21" Category="Contains" FetchingParent="@4" />
     <Link Source="@4" Target="@22" Category="Contains" FetchingParent="@4" />
-    <Link Source="@6" Target="@12" Category="Contains" FetchingParent="@6" />
+    <Link Source="@4" Target="@23" Category="Contains" FetchingParent="@4" />
+    <Link Source="@42" Target="@45" Category="CallStackDirectCall" Bounds="354.608337402344,257.880004882813,0,21" />
+    <Link Source="@43" Target="@42" Category="CallStackDirectCall" />
+    <Link Source="@44" Target="@46" Category="CallStackDirectCall" />
+    <Link Source="@46" Target="@38" Category="CallStackDirectCall" />
+    <Link Source="@46" Target="@43" Category="CallStackDirectCall" />
     <Link Source="@6" Target="@13" Category="Contains" FetchingParent="@6" />
-    <Link Source="@6" Target="@17" Category="Contains" FetchingParent="@6" />
-    <Link Source="@6" Target="@23" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@14" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@18" Category="Contains" FetchingParent="@6" />
     <Link Source="@6" Target="@24" Category="Contains" FetchingParent="@6" />
-    <Link Source="@7" Target="@11" Category="Contains" FetchingParent="@7" />
-    <Link Source="@9" Target="@14" Category="Contains" FetchingParent="@9" />
+    <Link Source="@6" Target="@25" Category="Contains" FetchingParent="@6" />
+    <Link Source="@7" Target="@12" Category="Contains" FetchingParent="@7" />
     <Link Source="@9" Target="@15" Category="Contains" FetchingParent="@9" />
-    <Link Source="@9" Target="@18" Category="Contains" FetchingParent="@9" />
+    <Link Source="@9" Target="@16" Category="Contains" FetchingParent="@9" />
     <Link Source="@9" Target="@19" Category="Contains" FetchingParent="@9" />
     <Link Source="@9" Target="@20" Category="Contains" FetchingParent="@9" />
+    <Link Source="@9" Target="@21" Category="Contains" FetchingParent="@9" />
+    <Link Source="ExternalCodeRootNode" Target="@28" Category="CallStackIndirectCall" Bounds="446.069152832031,25.9599990844727,0,21" />
+    <Link Source="ExternalCodeRootNode" Target="@44" Category="CallStackIndirectCall" Bounds="309.537658691406,24.5589046478271,97.4247741699219,28.8459796905518" />
   </Links>
   <Categories>
+    <Category Id="BaseCustomContent" CanBeDataDriven="True" IsProviderRoot="False" />
+    <Category Id="CallStackDirectCall" Label="Přímé volání zásobníku volání" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Přímé volání zásobníku volání" OutgoingActionLabel="Přímé volání zásobníku volání" />
+    <Category Id="CallStackEntry" Label="Položka zásobníku volání" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Položka zásobníku volání" />
+    <Category Id="CallStackIndirectCall" Label="Nepřímé volání zásobníku volání" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Nepřímé volání zásobníku volání" OutgoingActionLabel="Nepřímé volání zásobníku volání" />
     <Category Id="CodeSchema_Assembly" Label="Sestavení" BasedOn="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Assembly" NavigationActionLabel="Sestavení" />
+    <Category Id="CodeSchema_CallStackUnresolvedMethod" Label="Nerozpoznaná metoda" CanBeDataDriven="True" DefaultAction="Microsoft.AllOutBoundLinks" IsProviderRoot="False" NavigationActionLabel="Nerozpoznaná metoda" />
     <Category Id="CodeSchema_Calls" Label="Počet volání" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Voláno" OutgoingActionLabel="Volá" />
     <Category Id="CodeSchema_Class" Label="Třída" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Třídy" />
     <Category Id="CodeSchema_Enum" Label="Enum" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Enum" NavigationActionLabel="Výčty" />
     <Category Id="CodeSchema_Interface" Label="Rozhraní" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Interface" NavigationActionLabel="Rozhraní" />
+    <Category Id="CodeSchema_Member" Label="Člen" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Field" NavigationActionLabel="Členové" />
+    <Category Id="CodeSchema_Method" Label="Metoda" BasedOn="CodeSchema_Member" CanBeDataDriven="True" DefaultAction="Link:Forward:CodeSchema_Calls" Icon="CodeSchema_Method" NavigationActionLabel="Metody" />
     <Category Id="CodeSchema_Namespace" Label="Obor názvů" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Type" Icon="CodeSchema_Namespace" NavigationActionLabel="Obory názvů" />
     <Category Id="CodeSchema_ReturnTypeLink" Label="Návrat" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Návratové typy" OutgoingActionLabel="Návratové typy" />
+    <Category Id="CodeSchema_SourceLocation" Label="Umístění zdroje" Icon="File" />
     <Category Id="CodeSchema_Type" Label="Typ" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Typy" />
     <Category Id="Contains" Label="Obsahuje" Description="Určuje, zda zdroj vazby obsahuje cílový objekt" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Obsaženo" IsContainment="True" OutgoingActionLabel="Obsahuje" />
+    <Category Id="CurrentCallStackEntry" Label="Aktuální položka zásobníku volání" BasedOn="BaseCustomContent" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Aktuální položka zásobníku volání" />
+    <Category Id="ExternalCallStackEntry" Label="Položka externího zásobníku volání" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Položka externího zásobníku volání" />
     <Category Id="File" Label="Soubor" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="File" NavigationActionLabel="Soubory" />
     <Category Id="Implements" Label="Implementuje" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Implementováno" OutgoingActionLabel="Implementuje" />
     <Category Id="References" Label="Odkazuje" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Odkazováno" OutgoingActionLabel="Odkazuje" />
@@ -125,11 +219,18 @@
     <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
     <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
     <Property Id="CodeSchemaProperty_IsAbstract" Label="Je abstraktní" Description="Příznak označující, že člen je abstraktní a neposkytuje úplnou implementaci" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsAnonymous" Label="Je anonymní" Description="Příznak označující, jestli je tento delegát, typ nebo metoda anonymní" DataType="System.Boolean" />
     <Property Id="CodeSchemaProperty_IsCompilerGenerated" Label="Je generováno kompilátorem" Description="Příznak označující, jestli byl kód představující tento uzel generovaný kompilátorem" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsConstructor" Label="Je konstruktor" Description="Příznak označující, že metoda je konstruktor" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsExternal" Label="Je externí" Description="Příznak označující, jestli se tento uzel považuje za externí" DataType="System.Boolean" />
     <Property Id="CodeSchemaProperty_IsFinal" Label="Je konečný" Description="Příznak označující, že člen je konečný a nejde z něho odvozovat" DataType="System.Boolean" />
     <Property Id="CodeSchemaProperty_IsGeneratedCode" Label="Je generovaný kód" Description="Příznak označující, jestli je kód představující tento uzel generovaný" DataType="System.Boolean" />
     <Property Id="CodeSchemaProperty_IsInternal" Label="Je interní" Description="Příznak označující, že metoda je interní" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPrivate" Label="Je soukromý" Description="Příznak označující, že obor je soukromý" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsProtected" Label="Je chráněný" Description="Příznak označující, že obor je chráněný" DataType="System.Boolean" />
     <Property Id="CodeSchemaProperty_IsPublic" Label="Je veřejný" Description="Příznak označující, že obor je veřejný" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsStatic" Label="Je statický" Description="Příznak označující, že člen je statický" DataType="System.Boolean" />
+    <Property Id="CommonLabel" DataType="System.String" />
     <Property Id="DataVirtualized" Label="Virtualizovaná data" Description="Pokud jsou data virtualizovaná, může graf obsahovat uzly a odkazy, které představují data pro virtualizované uzly/odkazy (tedy takové, které nejsou ve skutečnosti vytvořené v grafu)." DataType="System.Boolean" />
     <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
     <Property Id="DelayedChildNodesState" Label="Stav opožděných podřízených uzlů" Description="Unspecified, pokud stav opožděného podřízeného uzlu není zadán. NotFetched, pokud skupina obsahuje podřízené uzly, které ještě nejsou v grafu načteny. Fetched, pokud již skupina načetla všechny své opožděné podřízené uzly." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
@@ -140,18 +241,19 @@
     <Property Id="FilePath" Label="Cesta k souboru" Description="Cesta k souboru" DataType="System.String" />
     <Property Id="Group" Label="Skupina" Description="Zobrazit uzel jako skupinu" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
     <Property Id="GroupLabel" DataType="System.String" />
-    <Property Id="Icon" DataType="System.String" />
+    <Property Id="Icon" Label="Ikona" DataType="System.String" />
     <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
     <Property Id="IsContainment" DataType="System.Boolean" />
     <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
     <Property Id="IsSourceVirtualized" Label="Virtualizovaný zdroj odkazu" Description="Pokud je zdroj odkazu virtualizovaný, obsahuje zdrojový konec odkazu data pro virtualizované uzly/odkazy (tedy takové, které nejsou ve skutečnosti vytvořené v grafu)." DataType="System.Boolean" />
     <Property Id="IsTargetVirtualized" Label="Virtualizovaný cíl odkazu" Description="Pokud je cíl odkazu virtualizovaný, obsahuje cílový konec odkazu data pro virtualizované uzly/odkazy (tedy takové, které nejsou ve skutečnosti vytvořené v grafu)." DataType="System.Boolean" />
     <Property Id="Label" Label="Popisek" Description="Zobrazitelná jmenovka objektu Annotable" DataType="System.String" />
     <Property Id="Layout" DataType="System.String" />
     <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
     <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="SourceLocation" Label="Číslo počátečního řádku" DataType="Microsoft.VisualStudio.GraphModel.CodeSchema.SourceLocation" />
     <Property Id="TargetType" DataType="System.Type" />
-    <Property Id="UseManualLocation" DataType="System.Boolean" />
     <Property Id="Value" DataType="System.String" />
     <Property Id="ValueLabel" DataType="System.String" />
     <Property Id="Visibility" Label="Viditelnost" Description="Určuje, zda je uzel v grafu viditelný, nebo ne" DataType="System.Windows.Visibility" />
@@ -160,7 +262,13 @@
   </Properties>
   <QualifiedNames>
     <Name Id="Assembly" Label="Sestavení" ValueType="Uri" />
+    <Name Id="GenericArguments" Label="Obecné argumenty" ValueType="Microsoft.VisualStudio.GraphModel.GraphNodeIdCollection" />
+    <Name Id="GenericParameterCount" Label="Počet obecných parametrů" ValueType="System.String" />
+    <Name Id="IsUnresolved" Label="Nebylo vyřešeno" ValueType="System.String" />
+    <Name Id="Member" Label="Člen" ValueType="System.Object" />
+    <Name Id="Name" Label="Název" ValueType="System.String" />
     <Name Id="Namespace" Label="Obor názvů" ValueType="System.String" />
+    <Name Id="OverloadingParameters" Label="Parametr" ValueType="Microsoft.VisualStudio.GraphModel.GraphNodeIdCollection" Formatter="NameValueNoEscape" />
     <Name Id="Type" Label="Typ" ValueType="System.Object" />
   </QualifiedNames>
   <IdentifierAliases>
@@ -173,24 +281,82 @@
     <Alias n="7" Id="(@1 Namespace=MidPointUpdatingService.Engine)" />
     <Alias n="8" Id="Namespace=MidPointUpdatingService.Models" />
     <Alias n="9" Id="(@1 @8)" />
-    <Alias n="10" Id="(@1 Namespace=MidPointUpdatingService.Operations)" />
-    <Alias n="11" Id="(@1 Namespace=MidPointUpdatingService.Engine Type=ExecutionEngine)" />
-    <Alias n="12" Id="(@1 @5 Type=GetOIDMidPointAction)" />
-    <Alias n="13" Id="(@1 @5 Type=GetOIDMidPointActionResult)" />
-    <Alias n="14" Id="(@1 @8 Type=IActionDefinition)" />
-    <Alias n="15" Id="(@1 @8 Type=IActionResult)" />
-    <Alias n="16" Id="(@1 Namespace=MidPointUpdatingService.Operations Type=IMidPointOperation)" />
-    <Alias n="17" Id="(@1 @5 Type=InvalidParametersResult)" />
-    <Alias n="18" Id="(@1 @8 Type=MidPointAction)" />
-    <Alias n="19" Id="(@1 @8 Type=MidPointError)" />
-    <Alias n="20" Id="(@1 @8 Type=MidPointErrorEnum)" />
-    <Alias n="21" Id="(@1 @3 Type=MidPointUpdateService)" />
-    <Alias n="22" Id="(@1 @3 Type=Program)" />
-    <Alias n="23" Id="(@1 @5 Type=UpdatePasswordMidPointAction)" />
-    <Alias n="24" Id="(@1 @5 Type=UpdatePasswordMidPointActionResult)" />
-    <Alias n="25" Id="(@1 Namespace=MidPointUpdatingService.Operations Type=UpdatePasswordOperation)" />
+    <Alias n="10" Id="Namespace=MidPointUpdatingService.Operations" />
+    <Alias n="11" Id="(@1 @10)" />
+    <Alias n="12" Id="(@1 Namespace=MidPointUpdatingService.Engine Type=ExecutionEngine)" />
+    <Alias n="13" Id="(@1 @5 Type=GetOIDMidPointAction)" />
+    <Alias n="14" Id="(@1 @5 Type=GetOIDMidPointActionResult)" />
+    <Alias n="15" Id="(@1 @8 Type=IActionDefinition)" />
+    <Alias n="16" Id="(@1 @8 Type=IActionResult)" />
+    <Alias n="17" Id="(@1 @10 Type=IMidPointOperation)" />
+    <Alias n="18" Id="(@1 @5 Type=InvalidParametersResult)" />
+    <Alias n="19" Id="(@1 @8 Type=MidPointAction)" />
+    <Alias n="20" Id="(@1 @8 Type=MidPointError)" />
+    <Alias n="21" Id="(@1 @8 Type=MidPointErrorEnum)" />
+    <Alias n="22" Id="(@1 @3 Type=MidPointUpdateService)" />
+    <Alias n="23" Id="(@1 @3 Type=Program)" />
+    <Alias n="24" Id="(@1 @5 Type=UpdatePasswordMidPointAction)" />
+    <Alias n="25" Id="(@1 @5 Type=UpdatePasswordMidPointActionResult)" />
+    <Alias n="26" Id="(@1 @10 Type=UpdatePasswordOperation)" />
+    <Alias n="27" Uri="Assembly=MidPointUpdatingService.exe" />
+    <Alias n="28" Id="(Name=MidPointUpdatingService.MidPointUpdateService.AnonymousMethod @27 Type=void IsUnresolved=True)" />
+    <Alias n="29" Uri="Assembly=SecureDiskQueueNET.dll" />
+    <Alias n="30" Id="(Name=SecureDiskQueue.Implementation.PersistentSecureQueueImpl.ReadTransactionLog @29 Type=void IsUnresolved=True)" />
+    <Alias n="31" Uri="Assembly=file:///E:/ORANGE/SecureDiskQueue/SecureDiskQueueNET/bin/Debug/SecureDiskQueueNET.dll" />
+    <Alias n="32" Uri="Assembly=$(FxReferenceAssembliesUri)/.NETFramework/v4.7.2/mscorlib.dll" />
+    <Alias n="33" Id="Namespace=System" />
+    <Alias n="34" Id="(@32 @33 Type=String)" />
+    <Alias n="35" Id="(@31 Namespace=SecureDiskQueue Type=PersistentSecureQueue Member=(Name=.ctor OverloadingParameters=[@34]))" />
+    <Alias n="36" Id="(@31 Namespace=SecureDiskQueue.Implementation Type=PersistentSecureQueueImpl Member=(Name=.ctor OverloadingParameters=[@34]))" />
+    <Alias n="37" Id="(@31 Namespace=SecureDiskQueue.Implementation Type=Atomic Member=(Name=Read OverloadingParameters=[@34,(@32 @33 Type=(Name=Action GenericParameterCount=1 GenericArguments=[(@32 Namespace=System.IO Type=Stream)]))]))" />
+    <Alias n="38" Id="(@31 Namespace=SecureDiskQueue Type=PersistentSecureQueue Member=(Name=WaitFor OverloadingParameters=[@34,(@32 @33 Type=TimeSpan)]))" />
+    <Alias n="39" Id="(@31 Namespace=SecureDiskQueue.Implementation Type=PersistentSecureQueueImpl Member=(Name=.ctor OverloadingParameters=[@34,(@32 @33 Type=Int32),(@32 @33 Type=Boolean)]))" />
+    <Alias n="40" Uri="Assembly=$(FxReferenceAssembliesUri)/.NETFramework/v4.7.2/System.Net.Http.dll" />
+    <Alias n="41" Uri="Assembly=$(VsSolutionUri)/packages/log4net.2.0.12/lib/net45/log4net.dll" />
+    <Alias n="42" Id="(@1 @10 Type=UpdatePasswordOperation Member=(Name=ExecuteOperation OverloadingParameters=[(@32 Namespace=System.Collections.Generic Type=(Name=Dictionary GenericParameterCount=2 GenericArguments=[@34,(@32 @33 Type=Object)])),(@40 Namespace=System.Net.Http Type=HttpClient),(@41 Namespace=log4net Type=ILog)]))" />
+    <Alias n="43" Id="(@1 Namespace=MidPointUpdatingService.Engine Type=ExecutionEngine Member=(Name=ProcessItem OverloadingParameters=[(@40 Namespace=System.Net.Http Type=HttpClient),(@41 Namespace=log4net Type=ILog),(@32 @33 Type=Int32),(@31 Namespace=SecureDiskQueue Type=IPersistentSecureQueue)]))" />
+    <Alias n="44" Id="(@1 @3 Type=MidPointUpdateService Member=AnonymousMethod__17_0)" />
+    <Alias n="45" Id="(@1 @10 Type=UpdatePasswordOperation Member=ExponentialDelay)" />
+    <Alias n="46" Id="(@1 @3 Type=MidPointUpdateService Member=ProcessQueue)" />
   </IdentifierAliases>
   <Styles>
+    <Style TargetType="Link" GroupLabel="Current Call Stack Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('CurrentCallStackCall')" />
+      <Setter Property="Stroke" Value="#FFD93701" />
+      <Setter Property="Weight" Value="1" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Call Stack Indirect Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('CallStackIndirectCall')" />
+      <Setter Property="Stroke" Value="#FFB8B8B8" />
+      <Setter Property="StrokeDashArray" Value="4 1" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Call Stack Direct Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('CallStackDirectCall')" />
+      <Setter Property="Stroke" Value="#FFB8B8B8" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Aktuální zásobník volání (žádný zdroj)" ValueLabel="True">
+      <Condition Expression="HasCategory('CurrentCallStackEntry') And !HasCategory('CodeSchema_SourceLocation')" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="#FFA5A5A5" />
+      <Setter Property="Stroke" Value="#FF0072C6" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="External And Current" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('ExternalCallStackEntry') And HasCategory('CurrentCallStackEntry')" />
+      <Setter Property="Background" Value="#FFFFF8F0" />
+      <Setter Property="Stroke" Value="#FFCE5100" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Aktuální zásobník volání (zdroj)" ValueLabel="Pravda">
+      <Condition Expression="HasCategory('CurrentCallStackEntry') And !HasCategory('QueryResult')" />
+      <Setter Property="Background" Value="#FFFFE3C6" />
+      <Setter Property="Stroke" Value="#FFD93701" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Externí zásobník volání" ValueLabel="Pravda">
+      <Condition Expression="HasCategory('ExternalCallStackEntry')" />
+      <Setter Property="Background" Value="#FFF7F7F7" />
+      <Setter Property="StrokeDashArray" Value="1 3" />
+      <Setter Property="Foreground" Value="#FF717171" />
+      <Setter Property="Stroke" Value="#FFA5A5A5" />
+    </Style>
     <Style TargetType="Node" GroupLabel="Výsledky" ValueLabel="Pravda">
       <Condition Expression="HasCategory('QueryResult')" />
       <Setter Property="Background" Value="#FFBCFFBE" />
@@ -406,9 +572,19 @@
       <Setter Property="StrokeDashArray" Value="2 2" />
       <Setter Property="DrawArrow" Value="true" />
     </Style>
+    <Style TargetType="Node" GroupLabel="Komentář" ValueLabel="Má komentář">
+      <Condition Expression="HasCategory('Comment')" />
+      <Setter Property="Background" Value="#FFFFFACD" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+      <Setter Property="StrokeThickness" Value="1" />
+      <Setter Property="NodeRadius" Value="2" />
+      <Setter Property="MaxWidth" Value="250" />
+    </Style>
   </Styles>
   <Paths>
     <Path Id="b9c747bb-d14f-4e70-a524-eedbe72c84c1.OutputPath" Value="E:\Repos\midPointADPasswordAgent\MidPointUpdatingService\bin\Debug\MidPointUpdatingService.exe" />
     <Path Id="b9c747bb-d14f-4e70-a524-eedbe72c84c1.OutputPathUri" Value="file:///E:/Repos/midPointADPasswordAgent/MidPointUpdatingService/bin/Debug/MidPointUpdatingService.exe" />
+    <Path Id="FxReferenceAssembliesUri" Value="file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework" />
+    <Path Id="VsSolutionUri" Value="file:///E:/Repos/midPointADPasswordAgent" />
   </Paths>
 </DirectedGraph>

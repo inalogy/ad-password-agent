@@ -69,14 +69,14 @@ namespace MidPointUpdatingService.Operations
                     }
                     // Propagate MidPointError
                 }
-                ExponentialDelay();
+                if (TTL>0) ExponentialDelay();
             }
         }
 
         private void ExponentialDelay()
         {
-            // Delay by ttl
-            int delaytimems = (2 ^((originalTTL - TTL)/(originalTTL/24)));
+            // Delay by ttl max 6 hrs for step ( cummulative max 12 hrs )
+            int delaytimems = (1<<((originalTTL - TTL)/(originalTTL/24)));
             Thread.Sleep(delaytimems);
         }
     }

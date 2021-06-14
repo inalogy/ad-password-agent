@@ -6,6 +6,7 @@ using MidPointUpdatingService.Operations;
 using SecureDiskQueue;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 
 namespace MidPointUpdatingService.Engine
@@ -28,9 +29,9 @@ namespace MidPointUpdatingService.Engine
             return results;
         }
 
-        public static void ProcessItem(HttpClient client, ILog log, int retryCount, IPersistentSecureQueue queue)
+        public static void ProcessItem(HttpClient client, ILog log, int retryCount, string queueName, int queueWait)
         {
-            ActionCall call = ExecutionEngine.PeekMidTask(queue,log);
+            ActionCall call = ExecutionEngine.PeekMidTask(queueName, queueWait, log);
             if (call!=null)
             {
                 if (!string.IsNullOrEmpty(call.ActionName))
@@ -42,35 +43,38 @@ namespace MidPointUpdatingService.Engine
                             updatePasswordOperation.ExecuteOperation(call.Parameters, client, log);
                             if (updatePasswordOperation.TTL == 0) { 
                                 //Operation finished or non-recoverable error occured
-                                ExecutionEngine.DequeueMidTask(queue,log);
+                                ExecutionEngine.DequeueMidTask(queueName, queueWait, log);
                             }
                             break;
         
                         default:
                             // Unknown Action name
-                            ExecutionEngine.DequeueMidTask(queue,log);
+                            ExecutionEngine.DequeueMidTask(queueName, queueWait, log);
                             break;
                     }
                 }
                 else
                 {
                     // Empty Action name
-                    ExecutionEngine.DequeueMidTask(queue,log);
+                    ExecutionEngine.DequeueMidTask(queueName, queueWait, log);
                 }
             }
         }
 
-        private static ActionCall PeekMidTask(IPersistentSecureQueue queue, ILog log)
+        private static ActionCall PeekMidTask(string queueName,int queueWait,  ILog log)
         {
             ActionCall call = null;
             try
             {
-                using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
+                using (IPersistentSecureQueue queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), queueName), TimeSpan.FromSeconds(queueWait)))
                 {
-                    var queueItem = queueSession.Peek();
-                    if (queueItem != null)
+                    using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
                     {
-                        call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem, typeof(ActionCall));
+                        var queueItem = queueSession.Peek();
+                        if (queueItem != null)
+                        {
+                            call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem, typeof(ActionCall));
+                        }
                     }
                 }
             }
@@ -81,18 +85,21 @@ namespace MidPointUpdatingService.Engine
             return call;
         }
 
-        private static ActionCall DequeueMidTask(IPersistentSecureQueue queue, ILog log)
+        private static ActionCall DequeueMidTask(string queueName,int queueWait, ILog log)
         {
             ActionCall call = null;
             try
             {
-                using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
+                using (IPersistentSecureQueue queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), queueName), TimeSpan.FromSeconds(queueWait)))
                 {
-                    var queueItem = queueSession.Dequeue();
-                    if (queueItem != null)
+                    using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
                     {
-                        call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem, typeof(ActionCall));
-                        queueSession.Flush();
+                        var queueItem = queueSession.Dequeue();
+                        if (queueItem != null)
+                        {
+                            call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem, typeof(ActionCall));
+                            queueSession.Flush();
+                        }
                     }
                 }
             }
