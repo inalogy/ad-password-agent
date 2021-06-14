@@ -87,7 +87,10 @@
     <Compile Include="Actions\GetOIDMidPointActionResult.cs" />
     <Compile Include="Actions\IActionDefinition.cs" />
     <Compile Include="Actions\IActionResult.cs" />
+    <Compile Include="Actions\InvalidBaseAddressResult.cs" />
     <Compile Include="Actions\InvalidParametersResult.cs" />
+    <Compile Include="Actions\NetworkCommunicationErrorResult.cs" />
+    <Compile Include="Actions\SuccessResult.cs" />
     <Compile Include="Actions\UpdatePasswordMidPointAction.cs" />
     <Compile Include="Actions\UpdatePasswordMidPointActionResult.cs" />
     <Compile Include="Engine\ExecutionEngine.cs" />

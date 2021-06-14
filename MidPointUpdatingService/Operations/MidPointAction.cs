@@ -55,29 +55,57 @@ namespace MidPointUpdatingService.Models
 
                 HttpContent content = new StringContent(query, Encoding.UTF8);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/xml");
-
-                HttpResponseMessage response = client.PostAsync(relativeapiUrl, content).Result;
-                if (ActionDefinition.ActionReturnsResult && response.IsSuccessStatusCode)
+                try
                 {
-                    try
-                    {
-                        string xmlobj = response.Content.ReadAsStringAsync().Result;
+                    HttpResponseMessage response = client.PostAsync(relativeapiUrl, content).Result;
 
-                        // get oid from returned user object
-                        XmlDocument xmldoc = new XmlDocument();
-                        xmldoc.LoadXml(xmlobj);
-                        MidPointError error = new MidPointError() { ErrorCode = 0, Recoverable = false, ErrorMessage = "OK" };
-                        result = ActionDefinition.GetResult(xmldoc, error);
-                        return (result.Error.ErrorCode==0);
-                    }
-                    catch 
+                    if (ActionDefinition.ActionReturnsResult && response.IsSuccessStatusCode)
                     {
-                        result = null;
-                        return false;
+                        try
+                        {
+                            string xmlobj = response.Content.ReadAsStringAsync().Result;
+
+                            // get oid from returned user object
+                            XmlDocument xmldoc = new XmlDocument();
+                            xmldoc.LoadXml(xmlobj);
+                            MidPointError error = new MidPointError() { ErrorCode =  MidPointErrorEnum.OK, Recoverable = false, ErrorMessage = "OK" };
+                            result = ActionDefinition.GetResult(xmldoc, error);
+                            return (result.Error.ErrorCode == 0);
+                        }
+                        catch (Exception ex)
+                        {
+                            result = new NetworkCommunicationErrorResult(ex.Message);
+                            return false;
+                        }
                     }
+                    if (!ActionDefinition.ActionReturnsResult)
+                    {
+                        result = response.IsSuccessStatusCode ? new SuccessResult() : null;
+                    }
+                    else result = null;
+
+                    return response.IsSuccessStatusCode;
                 }
-                result = null;
-                return response.IsSuccessStatusCode;
+                catch (InvalidOperationException)
+                {
+                    result = new InvalidBaseAddressResult();
+                    return false;
+                }
+                catch (HttpRequestException hrex)
+                {
+                    result = new NetworkCommunicationErrorResult(hrex.Message);
+                    return false;
+                }
+                catch (TaskCanceledException tcex)
+                {
+                    result = new NetworkCommunicationErrorResult(tcex.Message);
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    result = new NetworkCommunicationErrorResult(ex.Message);
+                    return false;
+                }
             }
             else 
             {
