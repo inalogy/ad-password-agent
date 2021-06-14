@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using AnySerializer.Extensions;
 
 namespace MidPointUpdatingService.ClassExtensions
 {
@@ -43,29 +44,17 @@ namespace MidPointUpdatingService.ClassExtensions
 
     }
     public static class Helpers
-    { 
+    {
         // Convert an object to a byte array
         public static byte[] ObjectToByteArray(Object obj)
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
+            return obj.Serialize(AnySerializer.SerializerOptions.EmbedTypes);
         }
 
         // Convert a byte array to an Object
-        public static Object ByteArrayToObject(byte[] arrBytes)
+        public static Object ByteArrayToObject(byte[] arrBytes, Type dataType)
         {
-            using (var memStream = new MemoryStream())
-            {
-                var binForm = new BinaryFormatter();
-                memStream.Write(arrBytes, 0, arrBytes.Length);
-                memStream.Seek(0, SeekOrigin.Begin);
-                var obj = binForm.Deserialize(memStream);
-                return obj;
-            }
+            return arrBytes.Deserialize(dataType, AnySerializer.SerializerOptions.EmbedTypes);
         }
     }
 }

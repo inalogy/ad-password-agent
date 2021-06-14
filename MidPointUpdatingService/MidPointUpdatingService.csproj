@@ -13,6 +13,22 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,9 +49,21 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>857D8B998BD3BF529DE0AA745EA9161D59AFD87B</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>MidPointUpdatingService_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SecureDiskQueue">
-      <HintPath>..\..\..\ORANGE\SecureDiskQueue\SecureDiskQueue\bin\Debug\netcoreapp3.1\SecureDiskQueue.dll</HintPath>
+    <Reference Include="SecureDiskQueueNET">
+      <HintPath>..\..\..\ORANGE\SecureDiskQueue\SecureDiskQueueNET\bin\Debug\SecureDiskQueueNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -43,6 +71,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Security.Cryptography.ProtectedData">
+      <HintPath>..\..\..\ORANGE\SecureDiskQueue\SecureDiskQueueNET\bin\Debug\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,11 +90,6 @@
     <Compile Include="Actions\InvalidParametersResult.cs" />
     <Compile Include="Actions\UpdatePasswordMidPointAction.cs" />
     <Compile Include="Actions\UpdatePasswordMidPointActionResult.cs" />
-    <Compile Include="Config.Designer.cs">
-      <DependentUpon>Config.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Compile Include="Engine\ExecutionEngine.cs" />
     <Compile Include="MidPointUpdateService.cs">
       <SubType>Component</SubType>
@@ -87,10 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Config.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Config.Designer.cs</LastGenOutput>
-    </None>
+    <None Include="MidPointUpdatingService_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -99,14 +122,22 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ADPasswordSecureCache\ADPasswordSecureCache.csproj">
-      <Project>{2e973e74-0ff8-418a-a2ce-dbd9a4456d06}</Project>
-      <Name>ADPasswordSecureCache</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MidPointCommonTaskModels\MidPointCommonTaskModels.csproj">
       <Project>{945aa7cf-7b6e-4cf5-b241-96c14c27f6ff}</Project>
       <Name>MidPointCommonTaskModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 a x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

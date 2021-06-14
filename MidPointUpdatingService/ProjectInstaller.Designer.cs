@@ -39,10 +39,9 @@ namespace MidPointUpdatingService
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.Description = "Service providing the continuous hearbeating check for midPoint REST API connecti" +
-    "vity, queuing the REST API requests and caching its parameters";
-            this.serviceInstaller1.DisplayName = "MidPoint.UpdateService";
-            this.serviceInstaller1.ServiceName = "MidPoint Update Service";
+            this.serviceInstaller1.Description = "Service providing the queue for midPoint REST API requests ";
+            this.serviceInstaller1.DisplayName = "MidPoint Update Service";
+            this.serviceInstaller1.ServiceName = "MidPoint.UpdateService";
             // 
             // ProjectInstaller
             // 

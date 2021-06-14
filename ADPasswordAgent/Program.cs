@@ -21,7 +21,7 @@ namespace ADPasswordAgent
 
             try
             {
-                queuebasepath = ConfigurationManager.AppSettings["QBASEPATH"];
+                queuebasepath = ConfigurationManager.AppSettings["QUEUEFLD"];
             }
             catch
             {

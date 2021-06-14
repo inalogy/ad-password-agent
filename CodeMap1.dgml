@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph DataVirtualized="True" Layout="Sugiyama" ZoomLevel="-1" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@1 @3 Type=Config)" Category="CodeSchema_Class" Bounds="366.158637040506,-316.352045405328,95.98,25" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsGeneratedCode="True" CodeSchemaProperty_IsInternal="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Config" />
+    <Node Id="(@1 @3 Type=CustomCommnds)" Category="CodeSchema_Enum" Bounds="151.219685969505,-151.377467571475,151.83,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="CustomCommnds" />
+    <Node Id="(@1 @3 Type=ProjectInstaller)" Category="CodeSchema_Class" Bounds="151.228637040506,-206.352045405328,139.23,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="ProjectInstaller" />
+    <Node Id="@10" Category="CodeSchema_Namespace" Bounds="-151.294173799295,-131.399344303243,252.56,140.040733508245" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="2" Group="Expanded" Label="MidPointUpdatingService‎.Operations" UseManualLocation="True" />
+    <Node Id="@11" Category="CodeSchema_Class" Bounds="172.281669559849,-36.3902975717786,147.88,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="ExecutionEngine" />
+    <Node Id="@12" Category="CodeSchema_Class" Bounds="-322.482976607911,78.5972115852444,182.126666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="GetOIDMidPointAction" />
+    <Node Id="@13" Category="CodeSchema_Class" Bounds="-338.461828708005,133.593260971964,214.086666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="GetOIDMidPointActionResult" />
+    <Node Id="@14" Category="CodeSchema_Interface" Bounds="146.150938546198,133.578054396743,150.113333333333,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IActionDefinition" />
+    <Node Id="@15" Category="CodeSchema_Interface" Bounds="50.0926052128649,188.578054906445,130.23,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IActionResult" />
+    <Node Id="@16" Category="CodeSchema_Interface" Bounds="-107.726901566696,-36.3854428931148,165.463333333333,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="IMidPointOperation" />
+    <Node Id="@17" Category="CodeSchema_Class" Bounds="-338.461828708005,298.581409132124,186.596666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="InvalidParametersResult" />
+    <Node Id="@18" Category="CodeSchema_Class" Bounds="149.759271879531,78.5780538870409,142.896666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointAction" />
+    <Node Id="@19" Category="CodeSchema_Class" Bounds="153.987605212865,243.578055416146,134.44,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointError" />
+    <Node Id="@2" Category="CodeSchema_Assembly" Bounds="-378.505961065795,-396.352045405328,880.6445981063,760.0008" CodeSchemaProperty_StrongName="MidPointUpdatingService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="NotFetched" FetchedChildrenCount="5" FilePath="$(b9c747bb-d14f-4e70-a524-eedbe72c84c1.OutputPath)" Group="Expanded" Label="MidPointUpdatingService.exe" UseManualLocation="True" />
+    <Node Id="@20" Category="CodeSchema_Enum" Bounds="140.994271879532,298.578055925848,160.426666666667,25" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointErrorEnum" />
+    <Node Id="@21" Category="CodeSchema_Class" Bounds="151.228637040506,-261.352045405328,184.93,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="MidPointUpdateService" />
+    <Node Id="@22" Category="CodeSchema_Class" Bounds="190.390303707173,-316.352045405328,106.606666666667,25" CodeSchemaProperty_IsAbstract="True" CodeSchemaProperty_IsFinal="True" CodeSchemaProperty_IsInternal="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="Program" />
+    <Node Id="@23" Category="CodeSchema_Class" Bounds="-322.482976607911,188.589310358684,231.256666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="UpdatePasswordMidPointAction" />
+    <Node Id="@24" Category="CodeSchema_Class" Bounds="-338.461828708005,243.585359745404,263.216666666667,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="UpdatePasswordMidPointActionResult" />
+    <Node Id="@25" Category="CodeSchema_Class" Bounds="-126.452597864725,-91.4259734968776,202.81,25" CodeSchemaProperty_IsPublic="True" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" Group="Collapsed" Label="UpdatePasswordOperation" />
+    <Node Id="@4" Category="CodeSchema_Namespace" Bounds="131.228637040506,-356.352045405328,350.91,250" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService" UseManualLocation="True" />
+    <Node Id="@6" Category="CodeSchema_Namespace" Bounds="-358.4698683909,38.6010494102287,303.216666666667,305.0006" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService‎.Actions" UseManualLocation="True" />
+    <Node Id="@7" Category="CodeSchema_Namespace" Bounds="131.265935799904,-76.3991508209716,229.916666666667,85.0002" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="1" Group="Expanded" Label="MidPointUpdatingService‎.Engine" UseManualLocation="True" />
+    <Node Id="@9" Category="CodeSchema_Namespace" Bounds="30.0562083771706,38.6539914614968,291.328333333333,305.0006" DelayedChildNodesState="Fetched" DelayedCrossGroupLinksState="Fetched" FetchedChildrenCount="5" Group="Expanded" Label="MidPointUpdatingService‎.Models" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="@10" Target="@16" Category="Contains" FetchingParent="@10" />
+    <Link Source="@10" Target="@25" Category="Contains" FetchingParent="@10" />
+    <Link Source="@11" Target="@15" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
+    <Link Source="@11" Target="@16" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
+    <Link Source="@11" Target="@18" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@11" Target="@19" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@11" Target="@25" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@12" Target="@13" Category="CodeSchema_Calls" Bounds="-231.455458469007,103.644307644339,0.000439253513263793,20.9960400019695" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="3" />
+    <Link Source="@12" Target="@14" Category="Implements" Weight="1" />
+    <Link Source="@12" Target="@15" Category="CodeSchema_ReturnTypeLink" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@12" Target="@19" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="10">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@13" Target="@15" Category="Implements" Weight="1" />
+    <Link Source="@13" Target="@19" Category="References" IsSourceVirtualized="True" Weight="4">
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@14" Target="@15" Category="CodeSchema_ReturnTypeLink" Bounds="147.250720412022,158.654191461497,49.8296226758129,25.8550399069054" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@14" Target="@19" Category="References" Bounds="221.171208377171,158.654191461497,0,76.0002" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@15" Target="@19" Category="CodeSchema_ReturnTypeLink" Bounds="139.262073666506,213.654291461497,49.829622675813,25.8550399069055" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@17" Target="@15" Category="Implements" Weight="1" />
+    <Link Source="@17" Target="@19" Category="References" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="7">
+      <Category Ref="CodeSchema_Calls" />
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@18" Target="@14" Category="References" Bounds="221.171208377171,103.654091461497,1.13686837721616E-13,21.0001" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="10">
+      <Category Ref="CodeSchema_Calls" />
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@18" Target="@15" Category="References" Bounds="120.851821899414,103.654090881348,67.4178924560547,76.3070602416992" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@18" Target="@17" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@18" Target="@19" Category="CodeSchema_Calls" Bounds="236.362716674805,103.654090881348,69.9993743896484,132.884712219238" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="5" />
+    <Link Source="@19" Target="@20" Category="References" Bounds="221.171208377171,268.654391461497,0,21.0001000000001" IsSourceVirtualized="True" Weight="4">
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@2" Target="@10" Category="Contains" FetchingParent="@2" />
+    <Link Source="@2" Target="@4" Category="Contains" FetchingParent="@2" />
+    <Link Source="@2" Target="@6" Category="Contains" FetchingParent="@2" />
+    <Link Source="@2" Target="@7" Category="Contains" FetchingParent="@2" />
+    <Link Source="@2" Target="@9" Category="Contains" FetchingParent="@2" />
+    <Link Source="@21" Target="@11" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@22" Target="@21" Category="CodeSchema_Calls" Bounds="243.693637040506,-291.352045405328,0,21" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@23" Target="@14" Category="Implements" Weight="1" />
+    <Link Source="@23" Target="@15" Category="CodeSchema_ReturnTypeLink" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@23" Target="@19" Category="References" IsSourceVirtualized="True" Weight="1" />
+    <Link Source="@23" Target="@24" Category="CodeSchema_Calls" Bounds="-206.890458469007,213.636387644339,0.000439253513263793,20.9960400019696" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@24" Target="@15" Category="Implements" Weight="1" />
+    <Link Source="@24" Target="@19" Category="References" IsSourceVirtualized="True" Weight="4">
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@25" Target="@11" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
+    <Link Source="@25" Target="@12" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@25" Target="@16" Category="Implements" Bounds="-25.0414978941556,-66.3867391355352,0.0195412928050978,20.5405348961206" Weight="1" />
+    <Link Source="@25" Target="@18" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2" />
+    <Link Source="@25" Target="@19" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="4" />
+    <Link Source="@25" Target="@23" Category="CodeSchema_Calls" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@4" Target="(@1 @3 Type=Config)" Category="Contains" FetchingParent="@4" />
+    <Link Source="@4" Target="(@1 @3 Type=CustomCommnds)" Category="Contains" FetchingParent="@4" />
+    <Link Source="@4" Target="(@1 @3 Type=ProjectInstaller)" Category="Contains" FetchingParent="@4" />
+    <Link Source="@4" Target="@21" Category="Contains" FetchingParent="@4" />
+    <Link Source="@4" Target="@22" Category="Contains" FetchingParent="@4" />
+    <Link Source="@6" Target="@12" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@13" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@17" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@23" Category="Contains" FetchingParent="@6" />
+    <Link Source="@6" Target="@24" Category="Contains" FetchingParent="@6" />
+    <Link Source="@7" Target="@11" Category="Contains" FetchingParent="@7" />
+    <Link Source="@9" Target="@14" Category="Contains" FetchingParent="@9" />
+    <Link Source="@9" Target="@15" Category="Contains" FetchingParent="@9" />
+    <Link Source="@9" Target="@18" Category="Contains" FetchingParent="@9" />
+    <Link Source="@9" Target="@19" Category="Contains" FetchingParent="@9" />
+    <Link Source="@9" Target="@20" Category="Contains" FetchingParent="@9" />
+  </Links>
+  <Categories>
+    <Category Id="CodeSchema_Assembly" Label="Sestavení" BasedOn="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Assembly" NavigationActionLabel="Sestavení" />
+    <Category Id="CodeSchema_Calls" Label="Počet volání" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Voláno" OutgoingActionLabel="Volá" />
+    <Category Id="CodeSchema_Class" Label="Třída" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Třídy" />
+    <Category Id="CodeSchema_Enum" Label="Enum" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Enum" NavigationActionLabel="Výčty" />
+    <Category Id="CodeSchema_Interface" Label="Rozhraní" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Interface" NavigationActionLabel="Rozhraní" />
+    <Category Id="CodeSchema_Namespace" Label="Obor názvů" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Type" Icon="CodeSchema_Namespace" NavigationActionLabel="Obory názvů" />
+    <Category Id="CodeSchema_ReturnTypeLink" Label="Návrat" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Návratové typy" OutgoingActionLabel="Návratové typy" />
+    <Category Id="CodeSchema_Type" Label="Typ" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" NavigationActionLabel="Typy" />
+    <Category Id="Contains" Label="Obsahuje" Description="Určuje, zda zdroj vazby obsahuje cílový objekt" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Obsaženo" IsContainment="True" OutgoingActionLabel="Obsahuje" />
+    <Category Id="File" Label="Soubor" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="File" NavigationActionLabel="Soubory" />
+    <Category Id="Implements" Label="Implementuje" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Implementováno" OutgoingActionLabel="Implementuje" />
+    <Category Id="References" Label="Odkazuje" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Odkazováno" OutgoingActionLabel="Odkazuje" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsAbstract" Label="Je abstraktní" Description="Příznak označující, že člen je abstraktní a neposkytuje úplnou implementaci" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsCompilerGenerated" Label="Je generováno kompilátorem" Description="Příznak označující, jestli byl kód představující tento uzel generovaný kompilátorem" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsFinal" Label="Je konečný" Description="Příznak označující, že člen je konečný a nejde z něho odvozovat" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsGeneratedCode" Label="Je generovaný kód" Description="Příznak označující, jestli je kód představující tento uzel generovaný" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsInternal" Label="Je interní" Description="Příznak označující, že metoda je interní" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_IsPublic" Label="Je veřejný" Description="Příznak označující, že obor je veřejný" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_StrongName" Label="StrongName" Description="StrongName" DataType="System.String" />
+    <Property Id="DataVirtualized" Label="Virtualizovaná data" Description="Pokud jsou data virtualizovaná, může graf obsahovat uzly a odkazy, které představují data pro virtualizované uzly/odkazy (tedy takové, které nejsou ve skutečnosti vytvořené v grafu)." DataType="System.Boolean" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="DelayedChildNodesState" Label="Stav opožděných podřízených uzlů" Description="Unspecified, pokud stav opožděného podřízeného uzlu není zadán. NotFetched, pokud skupina obsahuje podřízené uzly, které ještě nejsou v grafu načteny. Fetched, pokud již skupina načetla všechny své opožděné podřízené uzly." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
+    <Property Id="DelayedCrossGroupLinksState" Label="Stav opožděných mezi-skupinových vazeb" Description="Unspecified, pokud není stav opožděných mezi-skupinových vazeb zadán. NotFetched, pokud opožděné mezi-skupinové vazby tohoto uzlu, nejsou ještě v grafu načteny. Fetched, pokud již jsou všechny mezi-skupinové vazby načteny." DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="FetchedChildrenCount" DataType="System.Int32" />
+    <Property Id="FetchingParent" DataType="Microsoft.VisualStudio.GraphModel.GraphNodeId" />
+    <Property Id="FilePath" Label="Cesta k souboru" Description="Cesta k souboru" DataType="System.String" />
+    <Property Id="Group" Label="Skupina" Description="Zobrazit uzel jako skupinu" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="Icon" Label="Ikona" Description="Ikona" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsSourceVirtualized" Label="Virtualizovaný zdroj odkazu" Description="Pokud je zdroj odkazu virtualizovaný, obsahuje zdrojový konec odkazu data pro virtualizované uzly/odkazy (tedy takové, které nejsou ve skutečnosti vytvořené v grafu)." DataType="System.Boolean" />
+    <Property Id="IsTargetVirtualized" Label="Virtualizovaný cíl odkazu" Description="Pokud je cíl odkazu virtualizovaný, obsahuje cílový konec odkazu data pro virtualizované uzly/odkazy (tedy takové, které nejsou ve skutečnosti vytvořené v grafu)." DataType="System.Boolean" />
+    <Property Id="Label" Label="Popisek" Description="Zobrazitelná jmenovka objektu Annotable" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="Visibility" Label="Viditelnost" Description="Určuje, zda je uzel v grafu viditelný, nebo ne" DataType="System.Windows.Visibility" />
+    <Property Id="Weight" Label="Váha" Description="Váha" DataType="System.Double" />
+    <Property Id="ZoomLevel" DataType="System.String" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="Assembly" Label="Sestavení" ValueType="Uri" />
+    <Name Id="Namespace" Label="Obor názvů" ValueType="System.String" />
+    <Name Id="Type" Label="Typ" ValueType="System.Object" />
+  </QualifiedNames>
+  <IdentifierAliases>
+    <Alias n="1" Uri="Assembly=$(b9c747bb-d14f-4e70-a524-eedbe72c84c1.OutputPathUri)" />
+    <Alias n="2" Id="(@1)" />
+    <Alias n="3" Id="Namespace=MidPointUpdatingService" />
+    <Alias n="4" Id="(@1 @3)" />
+    <Alias n="5" Id="Namespace=MidPointUpdatingService.Actions" />
+    <Alias n="6" Id="(@1 @5)" />
+    <Alias n="7" Id="(@1 Namespace=MidPointUpdatingService.Engine)" />
+    <Alias n="8" Id="Namespace=MidPointUpdatingService.Models" />
+    <Alias n="9" Id="(@1 @8)" />
+    <Alias n="10" Id="(@1 Namespace=MidPointUpdatingService.Operations)" />
+    <Alias n="11" Id="(@1 Namespace=MidPointUpdatingService.Engine Type=ExecutionEngine)" />
+    <Alias n="12" Id="(@1 @5 Type=GetOIDMidPointAction)" />
+    <Alias n="13" Id="(@1 @5 Type=GetOIDMidPointActionResult)" />
+    <Alias n="14" Id="(@1 @8 Type=IActionDefinition)" />
+    <Alias n="15" Id="(@1 @8 Type=IActionResult)" />
+    <Alias n="16" Id="(@1 Namespace=MidPointUpdatingService.Operations Type=IMidPointOperation)" />
+    <Alias n="17" Id="(@1 @5 Type=InvalidParametersResult)" />
+    <Alias n="18" Id="(@1 @8 Type=MidPointAction)" />
+    <Alias n="19" Id="(@1 @8 Type=MidPointError)" />
+    <Alias n="20" Id="(@1 @8 Type=MidPointErrorEnum)" />
+    <Alias n="21" Id="(@1 @3 Type=MidPointUpdateService)" />
+    <Alias n="22" Id="(@1 @3 Type=Program)" />
+    <Alias n="23" Id="(@1 @5 Type=UpdatePasswordMidPointAction)" />
+    <Alias n="24" Id="(@1 @5 Type=UpdatePasswordMidPointActionResult)" />
+    <Alias n="25" Id="(@1 Namespace=MidPointUpdatingService.Operations Type=UpdatePasswordOperation)" />
+  </IdentifierAliases>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Výsledky" ValueLabel="Pravda">
+      <Condition Expression="HasCategory('QueryResult')" />
+      <Setter Property="Background" Value="#FFBCFFBE" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Projekt testů" ValueLabel="Projekt testů">
+      <Condition Expression="HasCategory('CodeMap_TestProject')" />
+      <Setter Property="Icon" Value="CodeMap_TestProject" />
+      <Setter Property="Background" Value="#FF307A69" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Webový projekt" ValueLabel="Webový projekt">
+      <Condition Expression="HasCategory('CodeMap_WebProject')" />
+      <Setter Property="Icon" Value="CodeMap_WebProject" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Projekt pro Windows Store" ValueLabel="Projekt pro Windows Store">
+      <Condition Expression="HasCategory('CodeMap_WindowsStoreProject')" />
+      <Setter Property="Icon" Value="CodeMap_WindowsStoreProject" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Projekt pro telefon" ValueLabel="Projekt pro telefon">
+      <Condition Expression="HasCategory('CodeMap_PhoneProject')" />
+      <Setter Property="Icon" Value="CodeMap_PhoneProject" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Přenosná knihovna" ValueLabel="Přenosná knihovna">
+      <Condition Expression="HasCategory('CodeMap_PortableLibraryProject')" />
+      <Setter Property="Icon" Value="CodeMap_PortableLibraryProject" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Projekt WPF" ValueLabel="Projekt WPF">
+      <Condition Expression="HasCategory('CodeMap_WpfProject')" />
+      <Setter Property="Icon" Value="CodeMap_WpfProject" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Projekt VSIX" ValueLabel="Projekt VSIX">
+      <Condition Expression="HasCategory('CodeMap_VsixProject')" />
+      <Setter Property="Icon" Value="CodeMap_VsixProject" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Projekt modelování" ValueLabel="Projekt modelování">
+      <Condition Expression="HasCategory('CodeMap_ModelingProject')" />
+      <Setter Property="Icon" Value="CodeMap_ModelingProject" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Sestavení" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Assembly')" />
+      <Setter Property="Background" Value="#FF094167" />
+      <Setter Property="Stroke" Value="#FF094167" />
+      <Setter Property="Icon" Value="CodeSchema_Assembly" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Obor názvů" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Namespace')" />
+      <Setter Property="Background" Value="#FF0E619A" />
+      <Setter Property="Stroke" Value="#FF0E619A" />
+      <Setter Property="Icon" Value="CodeSchema_Namespace" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Rozhraní" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Interface')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Interface" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Struktura" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Struct')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Struct" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Výčet" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Enum')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Enum" />
+      <Setter Property="LayoutSettings" Value="List" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Delegát" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Delegate')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Delegate" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Třída" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Type')" />
+      <Setter Property="Background" Value="#FF0E70C0" />
+      <Setter Property="Stroke" Value="#FF0E70C0" />
+      <Setter Property="Icon" Value="CodeSchema_Class" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Vlastnost" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Property')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Property" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Metoda" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Method') Or HasCategory('CodeSchema_CallStackUnresolvedMethod')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Method" />
+      <Setter Property="LayoutSettings" Value="List" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Událost" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Event')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Event" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Pole" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Field')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Field" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Výstupní parametr" ValueLabel="Má kategorii">
+      <Condition Expression="CodeSchemaProperty_IsOut = 'True'" />
+      <Setter Property="Icon" Value="CodeSchema_OutParameter" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Parametr" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_Parameter')" />
+      <Setter Property="Icon" Value="CodeSchema_Parameter" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Lokální proměnná" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('CodeSchema_LocalExpression')" />
+      <Setter Property="Icon" Value="CodeSchema_LocalExpression" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Externí typy" ValueLabel="Má kategorii">
+      <Condition Expression="HasCategory('Externals')" />
+      <Setter Property="Background" Value="#FF424242" />
+      <Setter Property="Stroke" Value="#FF424242" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Dědí z" ValueLabel="True">
+      <Condition Expression="HasCategory('InheritsFrom')" />
+      <Setter Property="Stroke" Value="#FF00A600" />
+      <Setter Property="StrokeDashArray" Value="2 0" />
+      <Setter Property="DrawArrow" Value="true" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Implementuje" ValueLabel="True">
+      <Condition Expression="HasCategory('Implements')" />
+      <Setter Property="Stroke" Value="#8000A600" />
+      <Setter Property="StrokeDashArray" Value="2 2" />
+      <Setter Property="DrawArrow" Value="true" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Počet volání" ValueLabel="True">
+      <Condition Expression="HasCategory('CodeSchema_Calls')" />
+      <Setter Property="Stroke" Value="#FFFF00FF" />
+      <Setter Property="StrokeDashArray" Value="2 0" />
+      <Setter Property="DrawArrow" Value="true" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Ukazatel na funkci" ValueLabel="True">
+      <Condition Expression="HasCategory('CodeSchema_FunctionPointer')" />
+      <Setter Property="Stroke" Value="#FFFF00FF" />
+      <Setter Property="StrokeDashArray" Value="2 2" />
+      <Setter Property="DrawArrow" Value="true" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Čtení pole" ValueLabel="True">
+      <Condition Expression="HasCategory('CodeSchema_FieldRead')" />
+      <Setter Property="Stroke" Value="#FF00AEEF" />
+      <Setter Property="StrokeDashArray" Value="2 2" />
+      <Setter Property="DrawArrow" Value="true" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Zápis pole" ValueLabel="True">
+      <Condition Expression="HasCategory('CodeSchema_FieldWrite')" />
+      <Setter Property="Stroke" Value="#FF00AEEF" />
+      <Setter Property="DrawArrow" Value="true" />
+      <Setter Property="IsHidden" Value="false" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Inherits From" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('InheritsFrom') And Target.HasCategory('CodeSchema_Class')" />
+      <Setter Property="TargetDecorator" Value="OpenArrow" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Implements" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('Implements') And Target.HasCategory('CodeSchema_Interface')" />
+      <Setter Property="TargetDecorator" Value="OpenArrow" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Comment Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="Source.HasCategory('Comment')" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Cursor Location Changed" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="IsCursorLocation" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Disabled Breakpoint Location Changed" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="DisabledBreakpointCount" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Enabled Breakpoint Location Changed" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="EnabledBreakpointCount" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Instruction Pointer Location Changed" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="IsInstructionPointerLocation" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Current Callstack Changed" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="IsCurrentCallstackFrame" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Návrat" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="HasCategory('CodeSchema_ReturnTypeLink')" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Odkazy" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="HasCategory('References')" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Používá atribut" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="HasCategory('CodeSchema_AttributeUse')" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Složka řešení" ValueLabel="Pravda" Visibility="Hidden">
+      <Condition Expression="HasCategory('CodeMap_SolutionFolder')" />
+      <Setter Property="Background" Value="#FFDEBA83" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Odkaz na projekt" ValueLabel="Odkaz na projekt">
+      <Condition Expression="HasCategory('CodeMap_ProjectReference')" />
+      <Setter Property="Stroke" Value="#9A9A9A" />
+      <Setter Property="StrokeDashArray" Value="2 2" />
+      <Setter Property="DrawArrow" Value="true" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Externí odkaz" ValueLabel="Externí odkaz">
+      <Condition Expression="HasCategory('CodeMap_ExternalReference')" />
+      <Setter Property="Stroke" Value="#9A9A9A" />
+      <Setter Property="StrokeDashArray" Value="2 2" />
+      <Setter Property="DrawArrow" Value="true" />
+    </Style>
+  </Styles>
+  <Paths>
+    <Path Id="b9c747bb-d14f-4e70-a524-eedbe72c84c1.OutputPath" Value="E:\Repos\midPointADPasswordAgent\MidPointUpdatingService\bin\Debug\MidPointUpdatingService.exe" />
+    <Path Id="b9c747bb-d14f-4e70-a524-eedbe72c84c1.OutputPathUri" Value="file:///E:/Repos/midPointADPasswordAgent/MidPointUpdatingService/bin/Debug/MidPointUpdatingService.exe" />
+  </Paths>
+</DirectedGraph>

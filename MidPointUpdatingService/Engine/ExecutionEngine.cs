@@ -1,16 +1,10 @@
-﻿using ADPasswordSecureCache;
-using MidPointCommonTaskModels.Models;
-using MidPointUpdatingService.Actions;
+﻿using MidPointCommonTaskModels.Models;
 using MidPointUpdatingService.ClassExtensions;
 using MidPointUpdatingService.Models;
 using MidPointUpdatingService.Operations;
 using SecureDiskQueue;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MidPointUpdatingService.Engine
 {
@@ -33,20 +27,21 @@ namespace MidPointUpdatingService.Engine
             return results;
         }
 
-        public static void ProcessItem(HttpClient client, PersistentSecureQueue queue)
+        public static void ProcessItem(HttpClient client, IPersistentSecureQueue queue)
         {
             ActionCall call = ExecutionEngine.PeekMidTask(queue);
             if (call!=null)
             {
+                System.Diagnostics.Debugger.Launch();
                 if (!string.IsNullOrEmpty(call.ActionName))
                 {
                     switch (call.ActionName)
                     {
                         case "UpdatePassword":
-                            IMidPointOperation updatePasswordOperation = new UpdatePasswordOperation();
+                            IMidPointOperation updatePasswordOperation = new UpdatePasswordOperation() { TTL=50 };
                             updatePasswordOperation.ExecuteOperation(call.Parameters, client);
-                            if (updatePasswordOperation.TTL == 0)
-                            {
+                            if (updatePasswordOperation.TTL == 0) { 
+                                //Operation finished or non-recoverable error occured
                                 ExecutionEngine.DequeueMidTask(queue);
                             }
                             break;
@@ -77,7 +72,7 @@ namespace MidPointUpdatingService.Engine
         }
         */
 
-        private static ActionCall PeekMidTask(PersistentSecureQueue queue)
+        private static ActionCall PeekMidTask(IPersistentSecureQueue queue)
         {
             ActionCall call = null;
             using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
@@ -85,13 +80,13 @@ namespace MidPointUpdatingService.Engine
                 var queueItem = queueSession.Peek();
                 if (queueItem != null)
                 {
-                    call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem);
+                    call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem, typeof(ActionCall));
                 }
             }
             return call;
         }
 
-        private static ActionCall DequeueMidTask(PersistentSecureQueue queue)
+        private static ActionCall DequeueMidTask(IPersistentSecureQueue queue)
         {
             ActionCall call = null;
             using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
@@ -99,7 +94,7 @@ namespace MidPointUpdatingService.Engine
                 var queueItem = queueSession.Dequeue();
                 if (queueItem != null)
                 {
-                    call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem);
+                    call = (ActionCall)Helpers.ByteArrayToObject((byte[])queueItem, typeof(ActionCall));
                     queueSession.Flush();
                 }
             }

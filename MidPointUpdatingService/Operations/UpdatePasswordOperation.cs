@@ -17,29 +17,39 @@ namespace MidPointUpdatingService.Operations
 
         public void ExecuteOperation(Dictionary<string, object> parameters, HttpClient client)
         {
-            GetOIDMidPointAction getOIDMidPointAction = new GetOIDMidPointAction();
-            MidPointAction getOIDAction = new MidPointAction(getOIDMidPointAction, parameters);
-            output = ExecutionEngine.ExecuteMidpointAction(getOIDAction, client, out MidPointError error);
-            if (error.ErrorCode == MidPointErrorEnum.OK)
+            while (TTL > 0)
             {
-                parameters.Combine(output);
-                UpdatePasswordMidPointAction updatePasswordMidPointAction = new UpdatePasswordMidPointAction();
-                MidPointAction updatePasswordAction = new MidPointAction(updatePasswordMidPointAction, parameters);
-                output = ExecutionEngine.ExecuteMidpointAction(updatePasswordAction, client, out error);
-                if (error.ErrorCode != MidPointErrorEnum.OK)
+
+                GetOIDMidPointAction getOIDMidPointAction = new GetOIDMidPointAction();
+                MidPointAction getOIDAction = new MidPointAction(getOIDMidPointAction, parameters);
+                output = ExecutionEngine.ExecuteMidpointAction(getOIDAction, client, out MidPointError error);
+                if (error.ErrorCode == MidPointErrorEnum.OK)
+                {
+                    parameters.Combine(output);
+                    UpdatePasswordMidPointAction updatePasswordMidPointAction = new UpdatePasswordMidPointAction();
+                    MidPointAction updatePasswordAction = new MidPointAction(updatePasswordMidPointAction, parameters);
+                    output = ExecutionEngine.ExecuteMidpointAction(updatePasswordAction, client, out error);
+                    if (error.ErrorCode != MidPointErrorEnum.OK)
+                    {
+                        if (error.Recoverable) TTL--;
+                        else TTL = 0;
+                        // Propagate MidPointError
+                    }
+                    else TTL = 0;
+                }
+                else
                 {
                     if (error.Recoverable) TTL--;
                     else TTL = 0;
                     // Propagate MidPointError
                 }
-                else TTL = 0;
+                ExponentialDelay(TTL);
             }
-            else
-            {
-                if (error.Recoverable) TTL--;
-                else TTL = 0;
-                // Propagate MidPointError
-            }
+        }
+
+        private void ExponentialDelay(int ttl)
+        {
+            // Delay by ttl
         }
     }
 }

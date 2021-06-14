@@ -30,7 +30,7 @@ namespace MidPointUpdatingService
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.ServiceName = "MidPoint Update Service";
+            this.ServiceName = "MidPoint.UpdateService";
         }
 
         #endregion

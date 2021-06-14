@@ -1,5 +1,4 @@
-﻿using ADPasswordSecureCache;
-using ADPasswordSecureCache.Policies;
+﻿using MidPointUpdatingService.Engine;
 using SecureDiskQueue;
 using System;
 using System.Configuration;
@@ -8,23 +7,22 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MidPointUpdatingService
 {
     public partial class MidPointUpdateService : ServiceBase
     {
-        private const double cacheDurationMins = 30;
-
         private string wsbaseurl = null;
         private string wsauthusr = null;
         private string wsauthpwd = null;
-        private string ccachefld = @"Midpoint.ADPassword.Cache";
         private string cqueuefld = @"Midpoint.ADPassword.Queue";
-        private double ccacheduration = cacheDurationMins; // default cache duration in minutes
 
         private static readonly HttpClient client = new HttpClient();
-        private static DiskCache<string> diskCacheInstance;
-        private static PersistentSecureQueue queue;
+        private static IPersistentSecureQueue queue;
+
+        private bool stopping = false;
        
 
         public MidPointUpdateService()
@@ -36,14 +34,31 @@ namespace MidPointUpdatingService
         protected override void OnStart(string[] args)
         {
             ConfigureService();
-            SetupQueue();
-            SetupCache();
             SetupClient();
+            Task.Run(() => ProcessQueue());
+        }
 
+        protected void ProcessQueue()
+        {
+            while (!stopping)
+            {
+                try
+                {
+                    using (queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), cqueuefld), TimeSpan.FromSeconds(30)))
+                    {
+                        ExecutionEngine.ProcessItem(client, queue);
+                    }
+                    Thread.Sleep(150);
+                }
+                catch
+                { }
+            }
         }
 
         protected override void OnStop()
         {
+            if (!stopping)
+                stopping = true;
         }
 
         protected override void OnCustomCommand(int command)
@@ -65,18 +80,6 @@ namespace MidPointUpdatingService
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
         }
 
-        protected void SetupQueue()
-        {
-            queue = new PersistentSecureQueue(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), cqueuefld));
-        }
-
-        protected void SetupCache()
-        {
-            diskCacheInstance = new DiskCache<string>(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ccachefld),
-                                new FixedTimespanCachePolicy<string>(TimeSpan.FromMinutes((double)ccacheduration)),
-                                2 * 1024 * 1024);
-        }
-
         protected void ConfigureService()
         {
             try
@@ -84,9 +87,7 @@ namespace MidPointUpdatingService
                 wsbaseurl = ConfigurationManager.AppSettings["BASEURL"];
                 wsauthusr = ConfigurationManager.AppSettings["AUTHUSR"];
                 wsauthpwd = ConfigurationManager.AppSettings["AUTHPWD"];
-                ccachefld = ConfigurationManager.AppSettings["CACHEFLD"];
-                cqueuefld = ConfigurationManager.AppSettings["QUEUEFLD"];
-                if (!Double.TryParse(ConfigurationManager.AppSettings["CACHEDRT"], out ccacheduration)) ccacheduration = cacheDurationMins; // default cache duration in minutes
+                cqueuefld = ConfigurationManager.AppSettings["QUEUEFLD"];               
             }
             catch
             {
