@@ -112,7 +112,8 @@ namespace MidPointUpdatingService.Models
                 //Inavalid paramaters
                 result = new InvalidParametersResult();
                 return false;
-            }                 
+            }      
+            
         }
 
         #endregion

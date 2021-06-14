@@ -29,12 +29,13 @@ namespace MidPointUpdatingService.Actions
                 try
                 {
                     string OID = xmldoc.FirstChild.FirstChild.Attributes.GetNamedItem("oid").Value;
+
                     return new GetOIDMidPointActionResult(OID, new MidPointError() { ErrorCode = MidPointErrorEnum.OK, ErrorMessage = "OK", Recoverable = true });
 
                 }
                 catch (Exception ex)
                 {
-                    return new GetOIDMidPointActionResult(string.Empty, new MidPointError() { ErrorCode= MidPointErrorEnum.ErrorDecodingResultFromXml, ErrorMessage = ex.Message, Recoverable = true });
+                    return new GetOIDMidPointActionResult(string.Empty, new MidPointError() { ErrorCode= MidPointErrorEnum.ErrorDecodingResultFromXml, ErrorMessage = ex.Message, Recoverable = false });
                 }
             }
             else

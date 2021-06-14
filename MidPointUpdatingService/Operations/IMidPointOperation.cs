@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -13,7 +14,7 @@ namespace MidPointUpdatingService.Operations
 
         string OperationName { get; }
 
-        void ExecuteOperation(Dictionary<string, object> parameters, HttpClient client);
+        void ExecuteOperation(Dictionary<string, object> parameters, HttpClient client, ILog log);
 
     }
 }
