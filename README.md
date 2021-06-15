@@ -18,7 +18,7 @@ Compile code of all projects, in the Release mode
 
 a/ Create service target folder on the target domain controller drive
 b/ Copy all files form /bin/Release folder to the created target folder
-c/ Edit the file MidPointUpdatingService.exe.config, and set uo the settings parameters 
+c/ Edit the file MidPointUpdatingService.exe.config, and set up the settings parameters 
 d/ Open VisualStudio Command Windows
 e/ Issue in VS CMD : 
     CD {target folder}  
