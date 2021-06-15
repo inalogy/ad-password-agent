@@ -53,7 +53,11 @@ b/ Create Windows Registry entry in folder HKLM\SYSTEM\CurrentControlSet\Control
 ## Technical description
 
 ADPasswordFilter.dll runs in the context of an AD Domain Controller and listens for AD password change requests.
+
 ADPasswordAgent.exe encrypting the passwords and sending them as ActionCalls to the Secure Persistent Queue located in the Isolated Storage of the domain controller.
+
+![alt text](https://ibacz.visualstudio.com/ORANGE%20-%20IDM%20Bridgehead%20Service/_git/ORANGE%20-%20IDM%20Bridgehead%20Service?path=%2FServiceCodeMap.png)
+
 MidPointUpdatingService.exe is installed and registered as a service of Windows OS, running permanently checking for presence of an ActionCall in the queue. 
 If any ActionCall is present, is executed against the configured MidPoint instance, and if not successfull, by the means of the recoverable error (eg. Network Connection error),
 a couple of attempts is made to retry in a rising time delay. When non-recoverable error occures, the ActionCall is dequeued and released and the information is written to the log.
