@@ -16,39 +16,39 @@ Compile code of all projects, in the Release mode
 
 ###1/ Instalation of MidPointUpdatingService.exe
 
-a/ Create service target folder on the target domain controller drive
-b/ Copy all files form /bin/Release folder to the created target folder
-c/ Edit the file MidPointUpdatingService.exe.config, and set up the settings parameters 
-d/ Open VisualStudio Command Windows
-e/ Issue in VS CMD : 
+1. Create service target folder on the target domain controller drive
+2. Copy all files form /bin/Release folder to the created target folder
+3. Edit the file MidPointUpdatingService.exe.config, and set up the settings parameters 
+4. Open VisualStudio Command Windows
+5. Issue in VS CMD : 
     CD {target folder}  
     installutil MidPointUpdatingService.exe
-f/ An interactive dialog appears requesting the user account and the password for service account. Fill it in.
-g/ Run Services.msc
-h/ Find the service named MidPoint Updating Service and start it.
+6. An interactive dialog appears requesting the user account and the password for service account. Fill it in.
+7. Run Services.msc
+8. Find the service named MidPoint Updating Service and start it.
 
 ####Settings:
 
--MidPoint Base URL -  BASEURL
--MidPoint Account Username - AUTHUSR
--MidPoint Account Password - AUTHPWD
--MidPoint Queue Identifier - QUEUEFLD  (do not change the default setting m if there is not more then ome MIdpoint sznchronized from the same DC)
--Number of attempts on MidPoint call - RETRYCNT  (max 500 for performance reasons)
--Time in seconds to wait for queue availability - QUEUEWAIT  ( used for interprocess locking, change only to higher value if there are timeout exceptions of the agent in case of extreme load - 60 requests per second and above )
--Logging level 0-verbose to 4-error only - LOGLEVEL
--Log storage path - LOGPATH
+* MidPoint Base URL -  BASEURL
+* MidPoint Account Username - AUTHUSR
+* MidPoint Account Password - AUTHPWD
+* MidPoint Queue Identifier - QUEUEFLD  (do not change the default setting m if there is not more then ome MIdpoint sznchronized from the same DC)
+* Number of attempts on MidPoint call - RETRYCNT  (max 500 for performance reasons)
+* Time in seconds to wait for queue availability - QUEUEWAIT  ( used for interprocess locking, change only to higher value if there are timeout exceptions of the agent in case of extreme load - 60 requests per second and above )
+* Logging level 0-verbose to 4-error only - LOGLEVEL
+* Log storage path - LOGPATH
 
 
 ###2/ Instalation of the Agent
 
-a/ Create agent target folder on the target domain controller drive
-b/ Copy all files form /bin/Release folder to the created target folder
-c/ Create Windows Registry entry in folder HKLM\SOFTWARE\ADPasswordFilter, named Agent of type STRING, and the value {agent target folder}/ADPasswordAgent.exe
+1. Create agent target folder on the target domain controller drive
+2. Copy all files form /bin/Release folder to the created target folder
+3. Create Windows Registry entry in folder HKLM\SOFTWARE\ADPasswordFilter, named Agent of type STRING, and the value {agent target folder}/ADPasswordAgent.exe
 
 ###3/ Instalation of the Filter
 
-a/ Copy ADPAsswordFilter.dll form /bin/Release folder to the C:\Windows\SysWOW64 folder on domain controller
-b/ Create Windows Registry entry in folder HKLM\SYSTEM\CurrentControlSet\Control\Lsa, named Notification Packages of type MULTISTRING, and the value ADPasswordFilter.dll
+1. Copy ADPAsswordFilter.dll form /bin/Release folder to the C:\Windows\SysWOW64 folder on domain controller
+2. Create Windows Registry entry in folder HKLM\SYSTEM\CurrentControlSet\Control\Lsa, named Notification Packages of type MULTISTRING, and the value ADPasswordFilter.dll
 
 ## Technical description
 
