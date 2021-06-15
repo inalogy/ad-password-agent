@@ -23,7 +23,7 @@ namespace ADPasswordSecureCache.Encryption
 
         private static readonly byte[] s_additionalEntropy = { 167, 45, 26, 44, 179, 247, 215, 41, 79, 136, 41, 58, 234, 59, 71, 194, 132, 116, 117, 156, 227, 9, 225, 85, 197, 14, 171, 123, 226, 211, 200, 58, 186, 27, 174, 118, 141, 206, 247, 37, 37, 214, 185, 136, 0, 64, 122, 138, 233, 27, 65, 247, 106, 183, 170, 196, 176, 62, 9, 105, 243, 35, 234, 192, 118, 50, 187, 98, 92, 144, 72, 72, 126, 138, 215, 8, 53, 173, 86, 132, 226, 245, 177, 73, 69, 253, 207, 220, 246, 24, 193, 169, 121, 112, 123, 225, 187, 74, 121, 55, 0, 53, 4, 26, 251, 93, 217, 125, 79, 157, 85, 142, 45, 251, 68, 203, 245, 246, 0, 226, 140, 214, 239, 85, 155, 27, 196, 29 };
 
-        private static IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.Assembly | IsolatedStorageScope.User, null, null);
+        private static readonly IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.Assembly | IsolatedStorageScope.User, null, null);
 
 
         private static IsolatedStorageFileStream GetStorageStreamForWriting(string dtaFile)

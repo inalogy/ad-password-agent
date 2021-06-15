@@ -16,7 +16,7 @@ namespace MidPointUpdatingService.Operations
 
         public int TTL { get; set; }
 
-        private int originalTTL; 
+        private readonly int originalTTL; 
 
         public string OperationName { get { return "UpdatePassword"; } }
 
@@ -32,13 +32,13 @@ namespace MidPointUpdatingService.Operations
             {
                 GetOIDMidPointAction getOIDMidPointAction = new GetOIDMidPointAction();
                 MidPointAction getOIDAction = new MidPointAction(getOIDMidPointAction, parameters);
-                output = ExecutionEngine.ExecuteMidpointAction(getOIDAction, client, log, out MidPointError error);
+                output = ExecutionEngine.ExecuteMidpointAction(getOIDAction, client, out MidPointError error);
                 if (error.ErrorCode == MidPointErrorEnum.OK)
                 {
                     parameters.Combine(output);
                     UpdatePasswordMidPointAction updatePasswordMidPointAction = new UpdatePasswordMidPointAction();
                     MidPointAction updatePasswordAction = new MidPointAction(updatePasswordMidPointAction, parameters);
-                    output = ExecutionEngine.ExecuteMidpointAction(updatePasswordAction, client, log, out error);
+                    output = ExecutionEngine.ExecuteMidpointAction(updatePasswordAction, client, out error);
                     if (error.ErrorCode != MidPointErrorEnum.OK)
                     {
                         if (error.Recoverable)

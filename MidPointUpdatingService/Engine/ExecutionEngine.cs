@@ -14,7 +14,7 @@ namespace MidPointUpdatingService.Engine
 {
     public static class ExecutionEngine
     {
-        public static Dictionary<string, object> ExecuteMidpointAction(MidPointAction actionStep, HttpClient client, ILog log, out MidPointError error)
+        public static Dictionary<string, object> ExecuteMidpointAction(MidPointAction actionStep, HttpClient client, out MidPointError error)
         {
             var results = new Dictionary<string, object>();
             actionStep.Execute(client, out IActionResult result);

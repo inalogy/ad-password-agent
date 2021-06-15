@@ -30,7 +30,6 @@ namespace MidPointUpdatingService
 
 
         private static readonly HttpClient client = new HttpClient();
-        private static IPersistentSecureQueue queue;
         private ILog log;
         private bool stopping = false;
         private Task processingTask;
@@ -44,18 +43,22 @@ namespace MidPointUpdatingService
 
                 Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
 
-                PatternLayout patternLayout = new PatternLayout();
-                patternLayout.ConversionPattern = "%date [%thread] %-5level %logger - %message%newline";
+                PatternLayout patternLayout = new PatternLayout
+                {
+                    ConversionPattern = "%date [%thread] %-5level %logger - %message%newline"
+                };
                 patternLayout.ActivateOptions();
 
-                RollingFileAppender roller = new RollingFileAppender();
-                roller.AppendToFile = false;
-                roller.File = logpath + @"EventLog.txt";
-                roller.Layout = patternLayout;
-                roller.MaxSizeRollBackups = 5;
-                roller.MaximumFileSize = "1GB";
-                roller.RollingStyle = RollingFileAppender.RollingMode.Size;
-                roller.StaticLogFileName = true;
+                RollingFileAppender roller = new RollingFileAppender
+                {
+                    AppendToFile = false,
+                    File = logpath + @"EventLog.txt",
+                    Layout = patternLayout,
+                    MaxSizeRollBackups = 5,
+                    MaximumFileSize = "1GB",
+                    RollingStyle = RollingFileAppender.RollingMode.Size,
+                    StaticLogFileName = true
+                };
                 roller.ActivateOptions();
                 hierarchy.Root.AddAppender(roller);
 
@@ -63,9 +66,11 @@ namespace MidPointUpdatingService
                 memory.ActivateOptions();
                 hierarchy.Root.AddAppender(memory);
 
-                EventLogAppender evtLog = new EventLogAppender();
-                evtLog.ApplicationName = "MidPoint Updating Service";
-                evtLog.LogName = this.EventLog.Log;
+                EventLogAppender evtLog = new EventLogAppender
+                {
+                    ApplicationName = "MidPoint Updating Service",
+                    LogName = this.EventLog.Log                   
+                };
                 evtLog.ActivateOptions();
 
                 switch (loglevel)
