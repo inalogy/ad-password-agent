@@ -29,14 +29,14 @@ h/ Find the service named MidPoint Updating Service and start it.
 
 Settings:
 
-MidPoint Base URL -  BASEURL
-MidPoint Account Username - AUTHUSR
-MidPoint Account Password - AUTHPWD
-MidPoint Queue Identifier - QUEUEFLD  (do not change the default setting m if there is not more then ome MIdpoint sznchronized from the same DC)
-Number of attempts on MidPoint call - RETRYCNT  (max 500 for performance reasons)
-Time in seconds to wait for queue availability - QUEUEWAIT  ( used for interprocess locking, change only to higher value if there are timeout exceptions of the agent in case of extreme load - 60 requests per second and above )
-Logging level 0-verbose to 4-error only - LOGLEVEL
-Log storage path - LOGPATH
+-MidPoint Base URL -  BASEURL
+-MidPoint Account Username - AUTHUSR
+-MidPoint Account Password - AUTHPWD
+-MidPoint Queue Identifier - QUEUEFLD  (do not change the default setting m if there is not more then ome MIdpoint sznchronized from the same DC)
+-Number of attempts on MidPoint call - RETRYCNT  (max 500 for performance reasons)
+-Time in seconds to wait for queue availability - QUEUEWAIT  ( used for interprocess locking, change only to higher value if there are timeout exceptions of the agent in case of extreme load - 60 requests per second and above )
+-Logging level 0-verbose to 4-error only - LOGLEVEL
+-Log storage path - LOGPATH
 
 
 #2/ Instalation of the Agent#
