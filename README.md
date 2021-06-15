@@ -14,7 +14,7 @@ This ~~application~~ is built on top of the PoC from listens to AD password chan
 
 Compile code of all projects, in the Release mode
 
-###1/ Instalation of MidPointUpdatingService.exe###
+###1/ Instalation of MidPointUpdatingService.exe
 
 a/ Create service target folder on the target domain controller drive
 b/ Copy all files form /bin/Release folder to the created target folder
@@ -27,7 +27,7 @@ f/ An interactive dialog appears requesting the user account and the password fo
 g/ Run Services.msc
 h/ Find the service named MidPoint Updating Service and start it.
 
-####Settings:####
+####Settings:
 
 -MidPoint Base URL -  BASEURL
 -MidPoint Account Username - AUTHUSR
@@ -39,13 +39,13 @@ h/ Find the service named MidPoint Updating Service and start it.
 -Log storage path - LOGPATH
 
 
-###2/ Instalation of the Agent###
+###2/ Instalation of the Agent
 
 a/ Create agent target folder on the target domain controller drive
 b/ Copy all files form /bin/Release folder to the created target folder
 c/ Create Windows Registry entry in folder HKLM\SOFTWARE\ADPasswordFilter, named Agent of type STRING, and the value {agent target folder}/ADPasswordAgent.exe
 
-###3/ Instalation of the Filter###
+###3/ Instalation of the Filter
 
 a/ Copy ADPAsswordFilter.dll form /bin/Release folder to the C:\Windows\SysWOW64 folder on domain controller
 b/ Create Windows Registry entry in folder HKLM\SYSTEM\CurrentControlSet\Control\Lsa, named Notification Packages of type MULTISTRING, and the value ADPasswordFilter.dll
