@@ -56,7 +56,7 @@ ADPasswordFilter.dll runs in the context of an AD Domain Controller and listens 
 
 ADPasswordAgent.exe encrypting the passwords and sending them as ActionCalls to the Secure Persistent Queue located in the Isolated Storage of the domain controller.
 
-![alt text](https://ibacz.visualstudio.com/ORANGE%20-%20IDM%20Bridgehead%20Service/_git/ORANGE%20-%20IDM%20Bridgehead%20Service?path=%2FServiceCodeMap.png)
+![alt text](ServiceCodeMap.png)
 
 MidPointUpdatingService.exe is installed and registered as a service of Windows OS, running permanently checking for presence of an ActionCall in the queue. 
 If any ActionCall is present, is executed against the configured MidPoint instance, and if not successfull, by the means of the recoverable error (eg. Network Connection error),
