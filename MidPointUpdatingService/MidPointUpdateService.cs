@@ -70,9 +70,11 @@ namespace MidPointUpdatingService
                 EventLogAppender evtLog = new EventLogAppender
                 {
                     ApplicationName = "MidPoint Updating Service",
-                    LogName = this.EventLog.Log                   
+                    LogName = this.EventLog.Log,
+                    Threshold = Level.Warn
                 };
                 evtLog.ActivateOptions();
+                hierarchy.Root.AddAppender(evtLog);
 
                 switch (loglevel)
                 {

@@ -53,7 +53,11 @@ namespace MidPointUpdatingService.Operations
                         }
                         // Propagate MidPointError
                     }
-                    else TTL = 0;
+                    else
+                    {
+                        log.Info(string.Format("{0}:{1}:{2} finished sucesfully", this.OperationName, updatePasswordAction.ActionDefinition.ActionName, parameters["userName"].ToString()));
+                        TTL = 0;
+                    }
                 }
                 else
                 {
