@@ -14,6 +14,7 @@ using log4net.Repository.Hierarchy;
 using log4net.Layout;
 using log4net.Appender;
 using log4net.Core;
+using Common;
 
 namespace MidPointUpdatingService
 {
@@ -108,19 +109,18 @@ namespace MidPointUpdatingService
         {
             try
             {
-                wsbaseurl = ConfigurationManager.AppSettings["BASEURL"];
-                wsauthusr = ConfigurationManager.AppSettings["AUTHUSR"];
-                wsauthpwd = ConfigurationManager.AppSettings["AUTHPWD"];
-                cqueuefld = ConfigurationManager.AppSettings["QUEUEFLD"] ?? cqueuefld;
-                int.TryParse(ConfigurationManager.AppSettings["QUEUEWAIT"], out queuewait);
-                int.TryParse(ConfigurationManager.AppSettings["RETRYCNT"], out retrycnt);
-                int.TryParse(ConfigurationManager.AppSettings["LOGLEVEL"], out loglevel);
-                logpath = ConfigurationManager.AppSettings["LOGPATH"] ?? logpath;
-                
+                wsbaseurl = EnvironmentHelper.GetMidpointBaseUrl() ?? wsbaseurl;
+                wsauthusr = EnvironmentHelper.GetMidpointAuthUser() ?? wsauthusr;
+                wsauthpwd = EnvironmentHelper.GetMidpointAuthPwd() ?? wsauthpwd;
+                cqueuefld = EnvironmentHelper.GetQueueFolder() ?? cqueuefld;
+                queuewait = Convert.ToInt32(EnvironmentHelper.GetQueueWaitSeconds());
+                retrycnt =  Convert.ToInt32(EnvironmentHelper.GetRetryCount());
+                loglevel =  Convert.ToInt32(EnvironmentHelper.GetMidpointServiceLogLevel());
+                logpath = EnvironmentHelper.GetMidpointServiceLogPath() ?? logpath;                
             }
             catch (Exception ex)
             {                
-                throw new Exception("MidPoint Updating Service: Missing parameters - invalid config file", ex);
+                throw new Exception(String.Format("MidPoint Updating Service: Missing parameters - invalid configuration in Windows Registry {0}", EnvironmentHelper.loggingHive), ex);
             }
         }
 

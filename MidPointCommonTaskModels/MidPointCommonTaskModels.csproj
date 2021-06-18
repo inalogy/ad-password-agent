@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MidPointCommonTaskModels</RootNamespace>
     <AssemblyName>MidPointCommonTaskModels</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassExtensions\ClassExtensions.cs" />
+    <Compile Include="ClassExtensions\EnvironmentHelper.cs" />
     <Compile Include="ClassExtensions\ObjectSerialize.cs" />
     <Compile Include="Models\ActionCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

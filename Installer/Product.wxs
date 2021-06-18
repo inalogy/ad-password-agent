@@ -2,39 +2,55 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="*" Name="Active Directory Password Filter" Language="1033" Version="1.0.0.0" Manufacturer="IBA CZ, s.r.o." UpgradeCode="948a073b-8f8e-4de4-8f8a-917f8af522f6">
+	<Product Id="*" Name="Active Directory Password Updater" Language="1033" Version="1.0.0.0" Manufacturer="IBA CZ, s.r.o." UpgradeCode="948a073b-8f8e-4de4-8f8a-917f8af522f6">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" Platform="x64" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes"/>
 
     <!-- Checks for .NET Framework 4.5 -->
-    <PropertyRef Id="NETFRAMEWORK45"/>
-    <Condition Message="This application requires .NET Framework 4.5">Installed OR NETFRAMEWORK45</Condition>
+    <PropertyRef Id="NETFRAMEWORK45" />
+    <Condition Message="This application requires .NET Framework 4.7.2. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK45>=#461808]]>
+    </Condition>
     
     <Property Id="BASEURL" Value="http://localhost:8080/midpoint"/>
     <Property Id="AUTHUSR" Value="administrator"/>
     <Property Id="AUTHPWD" Value="5ecr3t"/>
-      
+    <Property Id="QUEUEFLD" Value="Midpoint.ADPassword.Queue"/>
+    <Property Id="RETRYCNT" Value="50"/>
+    <Property Id="QUEUEWAIT" Value="30"/>
+    <Property Id="LOGLEVEL" Value="0"/>
+    <Property Id="LOGPATH" Value="Logs\"/>
+          
     <UI>
       <UIRef Id="WixUI_Minimal"/>
       <!-- Disable repair and delete -->
       <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
       <Property Id="ARPNOREMOVE" Value="yes" Secure="yes" />
-      <Dialog Id="ConfigurationDlg" Title="Configuration" Width="400" Height="300">        
+      <Dialog Id="ConfigurationDlg" Title="Configuration" Width="400" Height="380">        
         <Control Id="BASEURLText" Type="Text" Width="200" Height="17" X="100" Y="20" TabSkip="no" Text="MidPoint Base URL: "/>
         <Control Id="BASEURLEdit" Type="Edit" Width="200" Height="17" X="100" Y="40" Property="BASEURL"/>
         <Control Id="AUTHUSRText" Type="Text" Width="200" Height="17" X="100" Y="60" TabSkip="no" Text="Username: "/>
         <Control Id="AUTHUSREdit" Type="Edit" Width="200" Height="17" X="100" Y="80" Property="AUTHUSR"/>
         <Control Id="AUTHPWDText" Type="Text" Width="200" Height="17" X="100" Y="100" TabSkip="no" Text="Password: "/>
         <Control Id="AUTHPWDEdit" Type="Edit" Width="200" Height="17" X="100" Y="120" Property="AUTHPWD"/>
-        <Control Id="BASEURLText" Type="Text" Width="200" Height="17" X="100" Y="140" TabSkip="no" Text="MidPoint Base URL: "/>
-        <Control Id="BASEURLEdit" Type="Edit" Width="200" Height="17" X="100" Y="160" Property="BASEURL"/>
+        <Control Id="QUEUEFLDText" Type="Text" Width="200" Height="17" X="100" Y="140" TabSkip="no" Text="MidPoint Queue Identifier: "/>
+        <Control Id="QUEUEFLDEdit" Type="Edit" Width="200" Height="17" X="100" Y="160" Property="QUEUEFLD"/>
+        <Control Id="RETRYCNTText" Type="Text" Width="200" Height="17" X="100" Y="180" TabSkip="no" Text="Number of attempts on MidPoint call: "/>
+        <Control Id="RETRYCNTEdit" Type="Edit" Width="200" Height="17" X="100" Y="200" Property="RETRYCNT"/>
+        <Control Id="QUEUEWAITText" Type="Text" Width="200" Height="17" X="100" Y="180" TabSkip="no" Text="Time in seconds to wait for queue availability: "/>
+        <Control Id="QUEUEWAITEdit" Type="Edit" Width="200" Height="17" X="100" Y="200" Property="QUEUEWAIT"/>
+        <Control Id="LOGLEVELText" Type="Text" Width="200" Height="17" X="100" Y="220" TabSkip="no" Text="Logging level 0-verbose to 4-error only: "/>
+        <Control Id="LOGLEVELEdit" Type="Edit" Width="200" Height="17" X="100" Y="240" Property="LOGLEVEL"/>
+        <Control Id="LOGPATHText" Type="Text" Width="200" Height="17" X="100" Y="260" TabSkip="no" Text="Log storage path: "/>
+        <Control Id="LOGPATHEdit" Type="Edit" Width="200" Height="17" X="100" Y="280" Property="LOGPATH"/>
 
-        <Control Id="cancelButton" Type="PushButton" Text="Cancel" Width="100" Height="17" X="100" Y="260" Cancel="yes">
+        
+        <Control Id="cancelButton" Type="PushButton" Text="Cancel" Width="100" Height="17" X="100" Y="340" Cancel="yes">
           <Publish Event="EndDialog" Value="Exit" />
         </Control>
-        <Control Id="proceedButton" Type="PushButton" Text="Next" Width="100" Height="17" X="200" Y="260">
+        <Control Id="proceedButton" Type="PushButton" Text="Next" Width="100" Height="17" X="200" Y="340">
           <Publish Event="EndDialog" Value="Return">1</Publish>
         </Control>
       </Dialog>
@@ -57,6 +73,11 @@
             <File Id="ADPasswordAgent.exe.config" Name="$(var.ADPasswordAgent.TargetFileName).config" Source="$(var.ADPasswordAgent.TargetPath).config" KeyPath="yes" Checksum="yes"/>
             <RemoveFile Id="RemoveADPasswordAgent.exe.config" Name="$(var.ADPasswordAgent.TargetFileName).config" On="uninstall"/>
           </Component>
+          <Component Id="AnySerializer.dll" Win64="yes" Guid="{40080B86-5D6F-4C1A-89BC-588480477F3F}">
+            <File Id="AnySerializer.dll" ProcessorArchitecture="x64" Name="$(var.ADPasswordAgent.TargetFileName)" Source="$(var.ADPasswordAgent.TargetPath)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveAnySerializer.dll" Name="$(var.ADPasswordAgent.)" On="uninstall"/>
+          </Component>
+
         </Directory>
         <Component Id="AgentRegistryEntry" Win64="yes" Guid="{064887fd-2405-441c-b90a-5efe4ed8e1fe}">
           <RegistryKey Root="HKLM" Key="SOFTWARE\ADPasswordFilter" ForceDeleteOnUninstall="yes">

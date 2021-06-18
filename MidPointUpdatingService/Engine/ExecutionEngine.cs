@@ -67,7 +67,7 @@ namespace MidPointUpdatingService.Engine
             ActionCall call = null;
             try
             {
-                using (IPersistentSecureQueue queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), queueName), TimeSpan.FromSeconds(queueWait)))
+                using (IPersistentSecureQueue queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), queueName), TimeSpan.FromSeconds(queueWait)))
                 {
                     using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
                     {
@@ -91,7 +91,7 @@ namespace MidPointUpdatingService.Engine
             ActionCall call = null;
             try
             {
-                using (IPersistentSecureQueue queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), queueName), TimeSpan.FromSeconds(queueWait)))
+                using (IPersistentSecureQueue queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), queueName), TimeSpan.FromSeconds(queueWait)))
                 {
                     using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
                     {
