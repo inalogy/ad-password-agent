@@ -14,7 +14,7 @@ namespace Common
 
         public static Int64 GetAgentLogging()
         {
-            Int64 value = 0;
+            Int64 value;
             try
             {
                 //get the 64-bit view first
@@ -228,7 +228,7 @@ namespace Common
 
         public static Int64 GetRetryCount()
         {
-            Int64 value = 0;
+            Int64 value;
             try
             {
                 //get the 64-bit view first
@@ -272,7 +272,7 @@ namespace Common
 
         public static Int64 GetQueueWaitSeconds()
         {
-            Int64 value = 0;
+            Int64 value;
             try
             {
                 //get the 64-bit view first
@@ -316,7 +316,7 @@ namespace Common
 
         public static Int64 GetMidpointServiceLogLevel()
         {
-            Int64 value = 0;
+            Int64 value;
             try
             {
                 //get the 64-bit view first
@@ -358,9 +358,57 @@ namespace Common
             return value;
         }
 
+        
+
+        public static string GetMidpointCertName()
+        {
+            string value;
+            try
+            {
+                //get the 64-bit view first
+                RegistryKey key = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64);
+                key = key.OpenSubKey(loggingHive);
+
+                if (key == null)
+                {
+                    //we couldn't find the value in the 64-bit view so grab the 32-bit view
+                    key = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry32);
+                    key = key.OpenSubKey(loggingHive);
+                }
+
+                if (key != null)
+                {
+                    value = key.GetValue("MidpointCertificate").ToString();
+                }
+                else
+                {
+                    value = null;
+                    using (EventLog eventLog = new EventLog("Application"))
+                    {
+                        eventLog.Source = "ADPasswordAgent";
+                        eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointCertificate - no certificate identification found"), EventLogEntryType.Warning, 206, 1);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                value = null;
+                using (EventLog eventLog = new EventLog("Application"))
+                {
+                    eventLog.Source = "ADPasswordAgent";
+                    eventLog.WriteEntry(String.Format(@"Error accessing registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointCertificate : {0}", ex.Message), EventLogEntryType.Error, 306, 1);
+                    eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointCertificate - no certificate identification found"), EventLogEntryType.Warning, 206, 1);
+                }
+            }
+            return value;
+        }
+
+
+
         public static string GetMidpointServiceLogPath()
         {
-            string value = null;
+            string value;
             try
             {
                 //get the 64-bit view first
@@ -402,5 +450,49 @@ namespace Common
             return value;
         }
 
+
+        public static Int64 GetMidpointSsl()
+        {
+            Int64 value;
+            try
+            {
+                //get the 64-bit view first
+                RegistryKey key = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64);
+                key = key.OpenSubKey(loggingHive);
+
+                if (key == null)
+                {
+                    //we couldn't find the value in the 64-bit view so grab the 32-bit view
+                    key = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry32);
+                    key = key.OpenSubKey(loggingHive);
+                }
+
+                if (key != null)
+                {
+                    value = Convert.ToInt64(key.GetValue("MidpointSSL").ToString());
+                }
+                else
+                {
+                    value = 0;
+                    using (EventLog eventLog = new EventLog("Application"))
+                    {
+                        eventLog.Source = "ADPasswordAgent";
+                        eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointSSL - using HTTP connection"), EventLogEntryType.Warning, 205, 1);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                value = 0;
+                using (EventLog eventLog = new EventLog("Application"))
+                {
+                    eventLog.Source = "ADPasswordAgent";
+                    eventLog.WriteEntry(String.Format(@"Error accessing registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointSSL : {0}", ex.Message), EventLogEntryType.Error, 305, 1);
+                    eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointSSL - using HTTP connection"), EventLogEntryType.Warning, 205, 1);
+                }
+            }
+            return value;
+        }
     }
 }

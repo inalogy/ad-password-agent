@@ -15,6 +15,8 @@ using log4net.Layout;
 using log4net.Appender;
 using log4net.Core;
 using Common;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Authentication;
 
 namespace MidPointUpdatingService
 {
@@ -23,6 +25,8 @@ namespace MidPointUpdatingService
         private string wsbaseurl = null;
         private string wsauthusr = null;
         private string wsauthpwd = null;
+        private int ssl = 0;
+        private string certName = null;
         private string cqueuefld = @"Midpoint.ADPassword.Queue";
         private int queuewait = 30;
         private int retrycnt = 50;
@@ -30,7 +34,7 @@ namespace MidPointUpdatingService
         private string logpath = @"Logs\";
 
 
-        private static readonly HttpClient client = new HttpClient();
+        private static HttpClient client;
         private ILog log;
         private bool stopping = false;
         private Task processingTask;
@@ -115,6 +119,8 @@ namespace MidPointUpdatingService
                 wsauthusr = EnvironmentHelper.GetMidpointAuthUser() ?? wsauthusr;
                 wsauthpwd = EnvironmentHelper.GetMidpointAuthPwd() ?? wsauthpwd;
                 cqueuefld = EnvironmentHelper.GetQueueFolder() ?? cqueuefld;
+                ssl = Convert.ToInt32(EnvironmentHelper.GetMidpointSsl());
+                certName = EnvironmentHelper.GetMidpointCertName() ?? certName;
                 queuewait = Convert.ToInt32(EnvironmentHelper.GetQueueWaitSeconds());
                 retrycnt =  Convert.ToInt32(EnvironmentHelper.GetRetryCount());
                 loglevel =  Convert.ToInt32(EnvironmentHelper.GetMidpointServiceLogLevel());
@@ -126,13 +132,73 @@ namespace MidPointUpdatingService
             }
         }
 
+        private static X509Certificate2 GetCertificateFromStore(string certName)
+        {
+
+            // Get the certificate store for the current user.
+            X509Store store = new X509Store(StoreLocation.LocalMachine);
+            try
+            {
+                store.Open(OpenFlags.ReadOnly);
+
+                // Place all certificates in an X509Certificate2Collection object.
+                X509Certificate2Collection certCollection = store.Certificates;
+                // If using a certificate with a trusted root you do not need to FindByTimeValid, instead:
+                // currentCerts.Find(X509FindType.FindBySubjectDistinguishedName, certName, true);
+                X509Certificate2Collection currentCerts = certCollection.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
+                X509Certificate2Collection signingCert = currentCerts.Find(X509FindType.FindBySubjectDistinguishedName, certName, false);
+                if (signingCert.Count == 0)
+                    return null;
+                // Return the first certificate in the collection, has the right name and is current.
+                return signingCert[0];
+            }
+            finally
+            {
+                store.Close();
+            }
+        }
 
         protected void SetupClient()
         {
             try
             {
+                if (ssl>0)
+                {
+                    var handler = new HttpClientHandler
+                    {
+                        ClientCertificateOptions = ClientCertificateOption.Manual,
+                        SslProtocols = SslProtocols.Tls12,
+                        CheckCertificateRevocationList = false,                         
+                    };
+                    X509Certificate2 cert = null;
+                    if (ssl > 1)
+                    {
+                        try
+                        {
+                            cert = new X509Certificate2(certName);
+                        }
+                        catch { cert = null; }
+                    }
+                    else
+                    {
+                        cert = GetCertificateFromStore(certName);
+                    }
+                    if (cert != null)
+                    {
+                        handler.ClientCertificates.Add(cert);
+                        client = new HttpClient(handler);
+                    }
+                    else
+                    {
+                        if (ssl > 1)
+                            throw new Exception(String.Format("MidPoint Updating Service: Error setup HTTPS Client - Certificate file .crt not found in the path {0}", certName));
+                        else
+                            throw new Exception(String.Format("MidPoint Updating Service: Error setup HTTPS Client - Certificate not found in the machine local store {0}", certName));
+                    }
+                }
+                else client = new HttpClient();
                 string cleanurl = wsbaseurl.EndsWith("/") ? wsbaseurl : wsbaseurl + '/'; // the url must end with '/'
-                client.BaseAddress = new Uri(cleanurl);
+                client.BaseAddress = new Uri(cleanurl);                
                 string authval = Convert.ToBase64String(Encoding.ASCII.GetBytes(wsauthusr + ":" + wsauthpwd)); // encode user/pass for basic auth
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authval);
                 client.DefaultRequestHeaders.Accept.Clear();
@@ -140,7 +206,7 @@ namespace MidPointUpdatingService
             }
             catch (Exception ex)
             {
-                throw new Exception("MidPoint Updating Service: Error setup HTTP Client", ex);
+                throw new Exception("MidPoint Updating Service: Error setup HTTP/S Client", ex);
             }
         }
 
