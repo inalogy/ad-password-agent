@@ -4,14 +4,21 @@
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 	<Product Id="*" Name="Active Directory Password Updater" Language="1033" Version="1.0.0.0" Manufacturer="IBA CZ, s.r.o." UpgradeCode="948a073b-8f8e-4de4-8f8a-917f8af522f6">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" Platform="x64" />
-
+    <WixVariable Id="WixUILicenseRtf" Value="SetupInfo.rtf" />
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes"/>
 
+    <!-- Checks if run as administrator -->
+    <Property Id="MSIUSEREALADMINDETECTION" Value="1" /> 
+
+    <Condition Message="Please Run as Administrator.">
+        Privileged
+    </Condition>
+    
     <!-- Checks for .NET Framework 4.5 -->
     <PropertyRef Id="NETFRAMEWORK45" />
     <Condition Message="This application requires .NET Framework 4.7.2. Please install the .NET Framework then run this installer again.">
-      <![CDATA[Installed OR NETFRAMEWORK45>=#461808]]>
+      <![CDATA[Installed OR (NETFRAMEWORK45>="#461808")]]>
     </Condition>
     
     <Property Id="BASEURL" Value="http://localhost:8080/midpoint"/>
@@ -22,19 +29,23 @@
     <Property Id="QUEUEWAIT" Value="30"/>
     <Property Id="LOGLEVEL" Value="0"/>
     <Property Id="LOGPATH" Value="Logs\"/>
-          
+    <Property Id="SSLSETUP" Value="0"/>
+    <Property Id="CERTIFICATE" Value=" " />
+    <Property Id="SERVICEACCOUNT" Value=" "/>
+    <Property Id="SERVICEPASSWORD" Value=" " />
+
     <UI>
       <UIRef Id="WixUI_Minimal"/>
       <!-- Disable repair and delete -->
       <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
       <Property Id="ARPNOREMOVE" Value="yes" Secure="yes" />
-      <Dialog Id="ConfigurationDlg" Title="Configuration" Width="400" Height="380">        
+      <Dialog Id="ConfigurationDlg" Title="Configuration" Width="400" Height="480">        
         <Control Id="BASEURLText" Type="Text" Width="200" Height="17" X="100" Y="20" TabSkip="no" Text="MidPoint Base URL: "/>
         <Control Id="BASEURLEdit" Type="Edit" Width="200" Height="17" X="100" Y="40" Property="BASEURL"/>
         <Control Id="AUTHUSRText" Type="Text" Width="200" Height="17" X="100" Y="60" TabSkip="no" Text="Username: "/>
         <Control Id="AUTHUSREdit" Type="Edit" Width="200" Height="17" X="100" Y="80" Property="AUTHUSR"/>
         <Control Id="AUTHPWDText" Type="Text" Width="200" Height="17" X="100" Y="100" TabSkip="no" Text="Password: "/>
-        <Control Id="AUTHPWDEdit" Type="Edit" Width="200" Height="17" X="100" Y="120" Property="AUTHPWD"/>
+        <Control Id="AUTHPWDEdit" Type="Edit" Width="200" Height="17" X="100" Y="120" Password="yes" Property="AUTHPWD"/>
         <Control Id="QUEUEFLDText" Type="Text" Width="200" Height="17" X="100" Y="140" TabSkip="no" Text="MidPoint Queue Identifier: "/>
         <Control Id="QUEUEFLDEdit" Type="Edit" Width="200" Height="17" X="100" Y="160" Property="QUEUEFLD"/>
         <Control Id="RETRYCNTText" Type="Text" Width="200" Height="17" X="100" Y="180" TabSkip="no" Text="Number of attempts on MidPoint call: "/>
@@ -45,12 +56,19 @@
         <Control Id="LOGLEVELEdit" Type="Edit" Width="200" Height="17" X="100" Y="240" Property="LOGLEVEL"/>
         <Control Id="LOGPATHText" Type="Text" Width="200" Height="17" X="100" Y="260" TabSkip="no" Text="Log storage path: "/>
         <Control Id="LOGPATHEdit" Type="Edit" Width="200" Height="17" X="100" Y="280" Property="LOGPATH"/>
+        <Control Id="SSLSETUPText" Type="Text" Width="200" Height="17" X="100" Y="300" TabSkip="no" Text="SSL Setting 0-HTTP, 1-HTTPS/TLS1.2 (Certificate in local machine stiorage), 2-HTTPS/TLS1.2 (Certificate in .crt file): "/>
+        <Control Id="SSLSETUPEdit" Type="Edit" Width="200" Height="17" X="100" Y="320" Property="SSLSETUP"/>
+        <Control Id="CERTIFICATEText" Type="Text" Width="200" Height="17" X="100" Y="340" TabSkip="no" Text="Certificate SubjectDN / Path to certifice .crt X509 file : "/>
+        <Control Id="CERTIFICATEEdit" Type="Edit" Width="200" Height="17" X="100" Y="360" Property="CERTIFICATE"/>
+        <Control Id="SERVICEACCOUNTText" Type="Text" Width="200" Height="17" X="100" Y="380" TabSkip="no" Text="Midpoint updating service context account: "/>
+        <Control Id="SERVICEACCOUNTEdit" Type="Edit" Width="200" Height="17" X="100" Y="400" Property="SERVICEACCOUNT"/>
+        <Control Id="SERVICEPASSWORDText" Type="Text" Width="200" Height="17" X="100" Y="420" TabSkip="no" Text="Midpoint updating service context account password: "/>
+        <Control Id="SERVICEPASSWORDEdit" Type="Edit" Width="200" Height="17" X="100" Y="440" Password="yes" Property="SERVICEPASSWORD"/>
 
-        
-        <Control Id="cancelButton" Type="PushButton" Text="Cancel" Width="100" Height="17" X="100" Y="340" Cancel="yes">
+        <Control Id="cancelButton" Type="PushButton" Text="Cancel" Width="100" Height="17" X="100" Y="460" Cancel="yes">
           <Publish Event="EndDialog" Value="Exit" />
         </Control>
-        <Control Id="proceedButton" Type="PushButton" Text="Next" Width="100" Height="17" X="200" Y="340">
+        <Control Id="proceedButton" Type="PushButton" Text="Next" Width="100" Height="17" X="200" Y="460">
           <Publish Event="EndDialog" Value="Return">1</Publish>
         </Control>
       </Dialog>
@@ -64,34 +82,95 @@
     <!-- Add files to installer package -->
 		<Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFiles64Folder">
-        <Directory Id="AdPasswordFilterDirectory" Name="ADPasswordFilter">
+        <Directory Id="AdPasswordFilterDirectory" Name="ADPasswordAgent">
           <Component Id="ADPasswordAgent.exe" Win64="yes" Guid="{064887fd-2405-441c-b90a-5efe4ed8e1d9}">
             <File Id="ADPasswordAgent.exe" ProcessorArchitecture="x64" Name="$(var.ADPasswordAgent.TargetFileName)" Source="$(var.ADPasswordAgent.TargetPath)" KeyPath="yes" Checksum="yes"/>
             <RemoveFile Id="RemoveADPasswordAgent.exe" Name="$(var.ADPasswordAgent.TargetFileName)" On="uninstall"/>
           </Component>
           <Component Id="ADPasswordAgent.exe.config" Win64="yes" Guid="{064887fd-2405-441c-b90a-5efe4ed8e1da}">
-            <File Id="ADPasswordAgent.exe.config" Name="$(var.ADPasswordAgent.TargetFileName).config" Source="$(var.ADPasswordAgent.TargetPath).config" KeyPath="yes" Checksum="yes"/>
+            <File Id="ADPasswordAgent.exe.config" Name="$(var.ADPasswordAgent.TargetFileName).config" Source="$(var.ADPasswordAgent.TargetDir)" KeyPath="yes" Checksum="yes"/>
             <RemoveFile Id="RemoveADPasswordAgent.exe.config" Name="$(var.ADPasswordAgent.TargetFileName).config" On="uninstall"/>
           </Component>
           <Component Id="AnySerializer.dll" Win64="yes" Guid="{40080B86-5D6F-4C1A-89BC-588480477F3F}">
-            <File Id="AnySerializer.dll" ProcessorArchitecture="x64" Name="$(var.ADPasswordAgent.TargetFileName)" Source="$(var.ADPasswordAgent.TargetPath)" KeyPath="yes" Checksum="yes"/>
-            <RemoveFile Id="RemoveAnySerializer.dll" Name="$(var.ADPasswordAgent.)" On="uninstall"/>
+            <File Id="AnySerializer.dll" ProcessorArchitecture="x64" Name="AnySerializer.dll" Source="$(var.ADPasswordAgent.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveAnySerializer.dll" Name="AnySerializer.dll" On="uninstall"/>
           </Component>
-
+          <Component Id="MidPointCommonTaskModels.dll" Win64="yes" Guid="{7BC70338-538F-4519-A96E-3B3E1459F7B1}">
+            <File Id="MidPointCommonTaskModels.dll" ProcessorArchitecture="x64" Name="MidPointCommonTaskModels.dll" Source="$(var.ADPasswordAgent.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveMidPointCommonTaskModels.dll" Name="MidPointCommonTaskModels.dll" On="uninstall"/>
+          </Component>
+          <Component Id="SecureDiskQueueNET.dll" Win64="yes" Guid="{96FF6918-C4CE-4014-9218-4FC8C8A26C38}">
+            <File Id="SecureDiskQueueNET.dll" ProcessorArchitecture="x64" Name="SecureDiskQueueNET.dll" Source="$(var.ADPasswordAgent.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveSecureDiskQueueNET.dll" Name="SecureDiskQueueNET.dll" On="uninstall"/>
+          </Component>
+          <Component Id="System.Security.Cryptography.ProtectedData.dll" Win64="yes" Guid="{71D5D4D1-8646-4E34-A4F6-760F44EA74EF}">
+            <File Id="System.Security.Cryptography.ProtectedData.dll" ProcessorArchitecture="x64" Name="System.Security.Cryptography.ProtectedData.dll" Source="$(var.ADPasswordAgent.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveSystem.Security.Cryptography.ProtectedData.dll" Name="System.Security.Cryptography.ProtectedData.dll" On="uninstall"/>
+          </Component>
+          <Component Id="System.Security.Cryptography.ProtectedData.xml" Win64="yes" Guid="{A5FAE0B9-E6FC-487A-867C-F2109407DB77}">
+            <File Id="System.Security.Cryptography.ProtectedData.xml" ProcessorArchitecture="x64" Name="System.Security.Cryptography.ProtectedData.xml" Source="$(var.ADPasswordAgent.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveSystem.Security.Cryptography.ProtectedData.xml" Name="System.Security.Cryptography.ProtectedData.xml" On="uninstall"/>
+          </Component>
         </Directory>
         <Component Id="AgentRegistryEntry" Win64="yes" Guid="{064887fd-2405-441c-b90a-5efe4ed8e1fe}">
           <RegistryKey Root="HKLM" Key="SOFTWARE\ADPasswordFilter" ForceDeleteOnUninstall="yes">
-            <RegistryValue Type="string" Name="Agent" Value="[ProgramFiles64Folder]ADPasswordFilter\$(var.ADPasswordAgent.TargetFileName)"/>
+            <RegistryValue Type="string" Name="Agent" Value="[ProgramFiles64Folder]ADPasswordAgent\$(var.ADPasswordAgent.TargetFileName)" KeyPath="yes"/>
+            <RegistryValue Type="integer" Name="AgentLogging" Value="[LOGLEVEL]" />
+            <RegistryValue Type="string" Name="MidpointServiceLogPath" Value="[LOGPATH]" />
+            <RegistryValue Type="string" Name="MidpointBaseUrl" Value="[BASEURL]" />
+            <RegistryValue Type="string" Name="MidpointAuthUser" Value="[AUTHUSR]" />
+            <RegistryValue Type="string" Name="MidpointAuthPwd" Value="[AUTHPWD]" />
+            <RegistryValue Type="string" Name="QueueFolder" Value="[QUEUEFLD]" />
+            <RegistryValue Type="integer" Name="RetryCount" Value="[RETRYCNT]" />
+            <RegistryValue Type="integer" Name="QueueWaitSeconds" Value="[QUEUEWAIT]" />
+            <RegistryValue Type="integer" Name="MidpointServiceLogLevel" Value="[LOGLEVEL]" />
+            <RegistryValue Type="integer" Name="MidpointSSL" Value="[SSLSETUP]" />
+            <RegistryValue Type="string" Name="MidpointCertificate" Value="[CERTIFICATE]" />
           </RegistryKey>
         </Component>
-        <Directory Id="AgentModifyConfiguration">
-          <Component Id="ModifyConfiguration" Guid="{064887fd-2405-441c-b90a-5efe4ed8e1fd}" KeyPath="yes">
-            <util:XmlFile Id="ModifyBASEURL" Action="setValue" ElementPath="/configuration/appSettings/add[\[]@key='BASEURL'[\]]" Name="value" File="[#$(var.ADPasswordAgent.TargetFileName).config]" Value="[BASEURL]"/>
-            <util:XmlFile Id="ModifyAUTHUSR" Action="setValue" ElementPath="/configuration/appSettings/add[\[]@key='AUTHUSR'[\]]" Name="value" File="[#$(var.ADPasswordAgent.TargetFileName).config]" Value="[AUTHUSR]"/>
-            <util:XmlFile Id="ModifyAUTHPWD" Action="setValue" ElementPath="/configuration/appSettings/add[\[]@key='AUTHPWD'[\]]" Name="value" File="[#$(var.ADPasswordAgent.TargetFileName).config]" Value="[AUTHPWD]"/>
+          
+        <Directory Id="MidpointUpdatingServiceDirectory" Name="MidpointUpdatingService" FileSource="..\MidPointUpdatingService\bin\Release">
+          <Component Id="MidPointUpdatingService.exe" Win64="yes" Guid="{D10EF6D8-0A69-4C01-9417-B3DEE796A842}">
+            <File Id="MidPointUpdatingService.exe" ProcessorArchitecture="x64" Name="MidPointUpdatingService.exe" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveMidPointUpdatingService.exe" Name="$(var.MidPointUpdatingService.TargetFileName)" On="uninstall"/>
+            <ServiceInstall Id="MidpointUpdatingServiceInstaller" Type="ownProcess" Name="MidpointUpdatingService" DisplayName="Midpoint Updating Service" Description="Sending requests to the Midpoint using durable secure queue" Start="auto" Account="[SERVICEACCOUNT]" Password="[SERVICEPASSWORD]" ErrorControl="normal" />
+            <ServiceControl Id="StartMidpointUpdatingService" Start="install" Stop="both" Remove="uninstall" Name="MidpointUpdatingService" Wait="yes" />
+          </Component>
+          <Component Id="MidPointUpdatingService.exe.config" Win64="yes" Guid="{F0BFAEF2-FA5C-4ECC-BCA6-08618207769B}">
+            <File Id="MidPointUpdatingService.exe.config" ProcessorArchitecture="x64" Name="MidPointUpdatingService.exe.config" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveMidPointUpdatingService.exe.config" Name="$(var.MidPointUpdatingService.TargetFileName)" On="uninstall"/>
+          </Component>
+          <Component Id="log4net.dll" Win64="yes" Guid="{1AE06576-B4E3-4D04-8B9C-909A81D0C9F4}">
+            <File Id="log4net.dll" ProcessorArchitecture="x64" Name="log4net.dll" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="Removelog4net.dll" Name="log4net.dll" On="uninstall"/>
+          </Component>
+          <Component Id="log4net.xml" Win64="yes" Guid="{BB35F890-9351-4854-8E18-C71B259E1188}">
+            <File Id="log4net.xml" ProcessorArchitecture="x64" Name="log4net.xml" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="Removelog4net.xml" Name="log4net.xml" On="uninstall"/>
+          </Component>
+          <Component Id="AnySerializer.dllSVC" Win64="yes" Guid="{2062D193-B932-4BB4-934D-A8E0505E5EAD}">
+            <File Id="AnySerializer.dllSVC" ProcessorArchitecture="x64" Name="AnySerializer.dll" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveAnySerializer.dllSVC" Name="AnySerializer.dll" On="uninstall"/>
+          </Component>
+          <Component Id="MidPointCommonTaskModels.dllSVC" Win64="yes" Guid="{5F852EC3-5862-4B95-8B07-2A2FD6AE5F9F}">
+            <File Id="MidPointCommonTaskModels.dllSVC" ProcessorArchitecture="x64" Name="MidPointCommonTaskModels.dll" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveMidPointCommonTaskModels.dllSVC" Name="MidPointCommonTaskModels.dll" On="uninstall"/>
+          </Component>
+          <Component Id="SecureDiskQueueNET.dllSVC" Win64="yes" Guid="{D48544DA-68C0-41FC-9D82-74230CDA794A}">
+            <File Id="SecureDiskQueueNET.dllSVC" ProcessorArchitecture="x64" Name="SecureDiskQueueNET.dll" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveSecureDiskQueueNET.dllSVC" Name="SecureDiskQueueNET.dll" On="uninstall"/>
+          </Component>
+          <Component Id="System.Security.Cryptography.ProtectedData.dllSVC" Win64="yes" Guid="{168B8752-81BE-4B84-B8F7-0A53AB122E58}">
+            <File Id="System.Security.Cryptography.ProtectedData.dllSVC" ProcessorArchitecture="x64" Name="System.Security.Cryptography.ProtectedData.dll" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveSystem.Security.Cryptography.ProtectedData.dllSVC" Name="System.Security.Cryptography.ProtectedData.dll" On="uninstall"/>
+          </Component>
+          <Component Id="System.Security.Cryptography.ProtectedData.xmlSVC" Win64="yes" Guid="{F1766586-71D8-45C8-AD7A-A0A1F31693F4}">
+            <File Id="System.Security.Cryptography.ProtectedData.xmlSVC" ProcessorArchitecture="x64" Name="System.Security.Cryptography.ProtectedData.xml" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="RemoveSystem.Security.Cryptography.ProtectedData.xmlSVC" Name="System.Security.Cryptography.ProtectedData.xml" On="uninstall"/>
           </Component>
         </Directory>
       </Directory>
+      
 			<Directory Id="System64Folder">
         <Component Id="ADPasswordFilter.dll" Win64="yes" Guid="{064887fd-2405-441c-b90a-5efe4ed8e1db}" Permanent="yes">
           <File Id="ADPasswordFilter.dll" ProcessorArchitecture="x64" Name="$(var.ADPasswordFilter.TargetFileName)" Source="$(var.ADPasswordFilter.TargetPath)" KeyPath="yes" Checksum="yes"/>
@@ -108,8 +187,23 @@
 		<Feature Id="ProductFeature" Title="Installer" Level="1">
 			<ComponentRef Id="ADPasswordAgent.exe"/>
       <ComponentRef Id="ADPasswordAgent.exe.config"/>
+      <ComponentRef Id="AnySerializer.dll"/>
+      <ComponentRef Id="MidPointCommonTaskModels.dll"/>
+      <ComponentRef Id="SecureDiskQueueNET.dll"/>
+      <ComponentRef Id="System.Security.Cryptography.ProtectedData.dll"/>
+      <ComponentRef Id="System.Security.Cryptography.ProtectedData.xml"/>
       <ComponentRef Id="AgentRegistryEntry"/>
-      <ComponentRef Id="ModifyConfiguration"/>
+
+      <ComponentRef Id="MidPointUpdatingService.exe.config"/>
+      <ComponentRef Id="log4net.dll"/>
+      <ComponentRef Id="log4net.xml"/>
+      <ComponentRef Id="AnySerializer.dllSVC"/>
+      <ComponentRef Id="MidPointCommonTaskModels.dllSVC"/>      
+      <ComponentRef Id="SecureDiskQueueNET.dllSVC"/>
+      <ComponentRef Id="System.Security.Cryptography.ProtectedData.dllSVC"/>
+      <ComponentRef Id="System.Security.Cryptography.ProtectedData.xmlSVC"/>
+      <ComponentRef Id="MidPointUpdatingService.exe"/>
+
       <ComponentRef Id="ADPasswordFilter.dll"/>
       <ComponentRef Id="FilterRegistryEntry"/>
 		</Feature>
