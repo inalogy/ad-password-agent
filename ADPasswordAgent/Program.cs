@@ -19,7 +19,7 @@ namespace ADPasswordAgent
 
             if (argvs.Length != 3)
             {
-                if (EnvironmentHelper.GetAgentLogging()>0)
+                if (EnvironmentHelper.GetAgentLogging()<5)
                 {
                     using (EventLog eventLog = new EventLog("Application"))
                     {
@@ -37,7 +37,7 @@ namespace ADPasswordAgent
             }
             catch
             {
-                if (EnvironmentHelper.GetAgentLogging()>0)
+                if (EnvironmentHelper.GetAgentLogging()<5)
                 {
                     using (EventLog eventLog = new EventLog("Application"))
                     {
@@ -51,7 +51,7 @@ namespace ADPasswordAgent
             {
                 MidPointQueueSender mp = new MidPointQueueSender(queuebasepath);
                 mp.UpdateUserPasswordByName(argvs[1], argvs[2]);
-                if (EnvironmentHelper.GetAgentLogging()>1)
+                if (EnvironmentHelper.GetAgentLogging()<1)
                 {
                     using (EventLog eventLog = new EventLog("Application"))
                     {
@@ -69,7 +69,7 @@ namespace ADPasswordAgent
             }
             catch (Exception e)
             {
-                if (EnvironmentHelper.GetAgentLogging()>0)
+                if (EnvironmentHelper.GetAgentLogging()<5)
                 {
                     using (EventLog eventLog = new EventLog("Application"))
                     {

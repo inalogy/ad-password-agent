@@ -34,7 +34,7 @@ namespace ADPasswordAgent
         {
             Dictionary<string, object> parameters = new Dictionary<string, object>() { { "userName", name }, { "password", password } };
             ActionCall updatePasswordCall = new ActionCall("UpdatePassword", parameters);
-            if (EnvironmentHelper.GetAgentLogging() > 1)
+            if (EnvironmentHelper.GetAgentLogging() < 1)
             {
                 using (EventLog eventLog = new EventLog("Application"))
                 {
