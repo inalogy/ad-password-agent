@@ -74,7 +74,7 @@ namespace MidPointUpdatingService.Models
                         }
                         catch (Exception ex)
                         {
-                            result = new NetworkCommunicationErrorResult(ex.Message);
+                            result = new NetworkCommunicationErrorResult(ex.Message, ex);
                             return false;
                         }
                     }
@@ -86,31 +86,31 @@ namespace MidPointUpdatingService.Models
 
                     return response.IsSuccessStatusCode;
                 }
-                catch (InvalidOperationException)
+                catch (InvalidOperationException ioex)
                 {
-                    result = new InvalidBaseAddressResult();
+                    result = new InvalidBaseAddressResult(ioex);
                     return false;
                 }
                 catch (HttpRequestException hrex)
                 {
-                    result = new NetworkCommunicationErrorResult(hrex.Message);
+                    result = new NetworkCommunicationErrorResult(hrex.Message, hrex);
                     return false;
                 }
                 catch (TaskCanceledException tcex)
                 {
-                    result = new NetworkCommunicationErrorResult(tcex.Message);
+                    result = new NetworkCommunicationErrorResult(tcex.Message, tcex);
                     return false;
                 }
                 catch (Exception ex)
                 {
-                    result = new NetworkCommunicationErrorResult(ex.Message);
+                    result = new NetworkCommunicationErrorResult(ex.Message, ex);
                     return false;
                 }
             }
             else 
             {
                 //Inavalid paramaters
-                result = new InvalidParametersResult();
+                result = new InvalidParametersResult(new Exception("Invalid operation parameters values"));
                 return false;
             }      
             

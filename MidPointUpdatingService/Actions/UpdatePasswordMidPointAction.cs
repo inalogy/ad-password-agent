@@ -1,4 +1,5 @@
 ﻿using MidPointUpdatingService.Models;
+using System;
 using System.Collections.Generic;
 using System.Xml;
 
@@ -27,7 +28,11 @@ namespace MidPointUpdatingService.Actions
 
         public IActionResult GetResult(XmlDocument xmldoc, MidPointError error)
         {
-            return new UpdatePasswordMidPointActionResult(error);
+            Exception ex = null;
+            if ( error.ErrorCode>0)
+                { ex = new Exception(error.ErrorMessage); }
+                
+            return new UpdatePasswordMidPointActionResult(error, ex);
         }
 
         public bool ValidateParamaters(Dictionary<string, object> parameters)

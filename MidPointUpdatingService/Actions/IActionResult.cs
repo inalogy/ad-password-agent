@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MidPointUpdatingService.Models
 {
@@ -6,5 +7,6 @@ namespace MidPointUpdatingService.Models
     {
         MidPointError Error { get; }
         Dictionary<string, object> ResultDictionary { get; }
+        Exception CurrentException { get; }
     }
 }

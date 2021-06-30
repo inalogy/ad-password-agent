@@ -1,4 +1,5 @@
 ﻿using MidPointUpdatingService.Models;
+using System;
 using System.Collections.Generic;
 
 namespace MidPointUpdatingService.Actions
@@ -7,9 +8,10 @@ namespace MidPointUpdatingService.Actions
     {
         private readonly Dictionary<string, object> _resultDictionary = new Dictionary<string, object>();
 
-        public NetworkCommunicationErrorResult(string message)
+        public NetworkCommunicationErrorResult(string message, Exception ex)
         {
             Error = new MidPointError() { ErrorCode = MidPointErrorEnum.NetworkCommunicationError, Recoverable = true, ErrorMessage = string.Format("Network communication error: {0}", message )};
+            CurrentException = ex;
         }
 
         public Dictionary<string, object> ResultDictionary
@@ -21,6 +23,8 @@ namespace MidPointUpdatingService.Actions
         }
 
         public MidPointError Error { get; }
+
+        public Exception CurrentException { get; }
     }
 }
 

@@ -22,6 +22,7 @@ namespace MidPointUpdatingService.Engine
             {                    
                 results = result.ResultDictionary;
                 error = result.Error;
+                error.CurrentException = result.CurrentException;
             }
             else
             {

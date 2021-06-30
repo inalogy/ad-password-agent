@@ -43,12 +43,12 @@ namespace MidPointUpdatingService.Operations
                     {
                         if (error.Recoverable)
                         {
-                            log.Warn(string.Format("{0}:{1}:{2} failed with {4}:{5} - {3} retry attempts left", this.OperationName, updatePasswordAction.ActionDefinition.ActionName, parameters["userName"].ToString(), this.TTL, error.ErrorCode, error.ErrorMessage));
+                            log.Warn(string.Format("{0}:{1}:{2} failed with {4}:{5} - {3} retry attempts left", this.OperationName, updatePasswordAction.ActionDefinition.ActionName, parameters["userName"].ToString(), this.TTL, error.ErrorCode, error.ErrorMessage),error.CurrentException);
                             TTL--;
                         }
                         else
                         {
-                            log.Error(string.Format("{0}:{1}:{2} failed with {3}:{4}", this.OperationName, updatePasswordAction.ActionDefinition.ActionName, parameters["userName"].ToString(), error.ErrorCode, error.ErrorMessage));
+                            log.Error(string.Format("{0}:{1}:{2} failed with {3}:{4}", this.OperationName, updatePasswordAction.ActionDefinition.ActionName, parameters["userName"].ToString(), error.ErrorCode, error.ErrorMessage), error.CurrentException);
                             TTL = 0;
                         }
                         // Propagate MidPointError
@@ -63,12 +63,12 @@ namespace MidPointUpdatingService.Operations
                 {
                     if (error.Recoverable)
                     {
-                        log.Warn(string.Format("{0}:{1}:{2} failed with {4}:{5} - {3} retry attempts left", this.OperationName, getOIDAction.ActionDefinition.ActionName, parameters["userName"].ToString(), this.TTL, error.ErrorCode, error.ErrorMessage));
+                        log.Warn(string.Format("{0}:{1}:{2} failed with {4}:{5} - {3} retry attempts left", this.OperationName, getOIDAction.ActionDefinition.ActionName, parameters["userName"].ToString(), this.TTL, error.ErrorCode, error.ErrorMessage), error.CurrentException);
                         TTL--;
                     }
                     else
                     {
-                        log.Error(string.Format("{0}:{1}:{2} failed with {3}:{4}", this.OperationName, getOIDAction.ActionDefinition.ActionName, parameters["userName"].ToString(), error.ErrorCode, error.ErrorMessage));
+                        log.Error(string.Format("{0}:{1}:{2} failed with {3}:{4}", this.OperationName, getOIDAction.ActionDefinition.ActionName, parameters["userName"].ToString(), error.ErrorCode, error.ErrorMessage), error.CurrentException);
                         TTL = 0;
                     }
                     // Propagate MidPointError

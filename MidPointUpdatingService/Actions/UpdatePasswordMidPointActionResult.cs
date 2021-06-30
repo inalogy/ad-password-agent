@@ -1,4 +1,5 @@
 ﻿using MidPointUpdatingService.Models;
+using System;
 using System.Collections.Generic;
 
 namespace MidPointUpdatingService.Actions
@@ -7,9 +8,10 @@ namespace MidPointUpdatingService.Actions
     {
         private readonly Dictionary<string, object> _resultDictionary = new Dictionary<string, object>();
 
-        public UpdatePasswordMidPointActionResult(MidPointError error)
+        public UpdatePasswordMidPointActionResult(MidPointError error, Exception ex)
         {
             Error = error;
+            CurrentException = ex;
         }
 
         public Dictionary<string, object> ResultDictionary 
@@ -21,5 +23,7 @@ namespace MidPointUpdatingService.Actions
         }
 
         public MidPointError Error { get; }
+
+        public Exception CurrentException { get; }
     }
 }

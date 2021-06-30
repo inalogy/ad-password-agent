@@ -1,4 +1,5 @@
 ﻿using MidPointUpdatingService.Models;
+using System;
 using System.Collections.Generic;
 
 namespace MidPointUpdatingService.Actions
@@ -21,5 +22,7 @@ namespace MidPointUpdatingService.Actions
         }
 
         public MidPointError Error { get; }
+
+        public Exception CurrentException { get { return null; } }
     }
 }

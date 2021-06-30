@@ -50,7 +50,7 @@ namespace MidPointUpdatingService
 
                 PatternLayout patternLayout = new PatternLayout
                 {
-                    ConversionPattern = "%date [%thread] %-5level %logger - %message%newline"
+                    ConversionPattern = "%date [%thread] %-5level %logger - %message %stacktracedetail{1}%newline"
                 };
                 patternLayout.ActivateOptions();
 
@@ -168,7 +168,7 @@ namespace MidPointUpdatingService
                     {
                         ClientCertificateOptions = ClientCertificateOption.Manual,
                         SslProtocols = SslProtocols.Tls12,
-                        CheckCertificateRevocationList = false,                         
+                        CheckCertificateRevocationList = false                         
                     };
                     X509Certificate2 cert = null;
                     if (ssl > 1)
@@ -198,7 +198,7 @@ namespace MidPointUpdatingService
                 }
                 else client = new HttpClient();
                 string cleanurl = wsbaseurl.EndsWith("/") ? wsbaseurl : wsbaseurl + '/'; // the url must end with '/'
-                client.BaseAddress = new Uri(cleanurl);                
+                client.BaseAddress = new Uri(cleanurl);
                 string authval = Convert.ToBase64String(Encoding.ASCII.GetBytes(wsauthusr + ":" + wsauthpwd)); // encode user/pass for basic auth
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authval);
                 client.DefaultRequestHeaders.Accept.Clear();
