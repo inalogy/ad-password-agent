@@ -37,7 +37,7 @@ msbuild ADPasswordAgent.sln /p:Configuration=Release
 
 1. Copy Installer.msi file from folder .\Installer\bin\x64\Release to the target Domain Controller
 2. On the target Domain Comtroller run CMD window as Administrator (elevated prividledges mode)
-3. In the CMD window CD to the filder, where you have copied the Installer.msi
+3. In the CMD window CD to the folder, where you have copied the Installer.msi
 4. Type Installer.msi and press Enter
 5. Follow the installer GUI instructructions
 
