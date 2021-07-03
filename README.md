@@ -12,7 +12,26 @@ This ~~application~~ is built on top of the PoC from listens to AD password chan
 
 ## Code compilation and instalation
 
-Compile code of all projects, in the Release mode
+1. Download and install MSBuild Tools (free) to your local build computer
+
+MS Build Tools
+https://visualstudio.microsoft.com/cs/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16#
+
+2. Clone this repository to your local computer
+
+3. Run MSBuild tools CMD window from the Start menu as Adminsitrator
+
+4. Switch to the local GIT project repository folder
+
+CD <local GIT project repository>
+
+4. Run command and wait for build finished
+
+msbuild ADPasswordAgent.sln /p:Configuration=Release
+
+5. Complete built Installer.msi can be found then in the subfolder
+
+.\Installer\bin\x64\Release
 
 ###1/ Instalation of MidPointUpdatingService.exe
 
