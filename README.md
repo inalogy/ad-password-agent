@@ -33,7 +33,18 @@ msbuild ADPasswordAgent.sln /p:Configuration=Release
 
 .\Installer\bin\x64\Release
 
-###1/ Instalation of MidPointUpdatingService.exe
+###1/ Automatic instalation of application
+
+1. Copy Installer.msi file from folder .\Installer\bin\x64\Release to the target Domain Controller
+2. On the target Domain Comtroller run CMD window as Administrator (elevated prividledges mode)
+3. In the CMD window CD to the filder, where you have copied the Installer.msi
+4. Type Installer.msi and press Enter
+5. Follow the installer GUI instructructions
+
+Manual instalation is only for debugging purpose and it is not recommended to useit in production environment.
+----------------------------------------------------------
+
+###2/ Manual instalation of MidPointUpdatingService.exe
 
 1. Create service target folder on the target domain controller drive
 2. Copy all files form /bin/Release folder to the created target folder
@@ -45,6 +56,18 @@ msbuild ADPasswordAgent.sln /p:Configuration=Release
 6. An interactive dialog appears requesting the user account and the password for service account. Fill it in.
 7. Run Services.msc
 8. Find the service named MidPoint Updating Service and start it.
+
+###3/ Manual instalation of the Agent
+
+1. Create agent target folder on the target domain controller drive
+2. Copy all files form /bin/Release folder to the created target folder
+3. Create Windows Registry entry in folder HKLM\SOFTWARE\ADPasswordFilter, named Agent of type STRING, and the value {agent target folder}/ADPasswordAgent.exe
+
+###4/ Manual instalation of the Filter
+
+1. Copy ADPAsswordFilter.dll form /bin/Release folder to the C:\Windows\SysWOW64 folder on domain controller
+2. Create Windows Registry entry in folder HKLM\SYSTEM\CurrentControlSet\Control\Lsa, named Notification Packages of type MULTISTRING, and the value ADPasswordFilter.dll
+
 
 ####Settings:
 
@@ -58,16 +81,6 @@ msbuild ADPasswordAgent.sln /p:Configuration=Release
 * Log storage path - LOGPATH
 
 
-###2/ Instalation of the Agent
-
-1. Create agent target folder on the target domain controller drive
-2. Copy all files form /bin/Release folder to the created target folder
-3. Create Windows Registry entry in folder HKLM\SOFTWARE\ADPasswordFilter, named Agent of type STRING, and the value {agent target folder}/ADPasswordAgent.exe
-
-###3/ Instalation of the Filter
-
-1. Copy ADPAsswordFilter.dll form /bin/Release folder to the C:\Windows\SysWOW64 folder on domain controller
-2. Create Windows Registry entry in folder HKLM\SYSTEM\CurrentControlSet\Control\Lsa, named Notification Packages of type MULTISTRING, and the value ADPasswordFilter.dll
 
 ## Technical description
 
