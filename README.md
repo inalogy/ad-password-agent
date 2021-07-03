@@ -94,9 +94,4 @@ MidPointUpdatingService.exe is installed and registered as a service of Windows 
 If any ActionCall is present, is executed against the configured MidPoint instance, and if not successfull, by the means of the recoverable error (eg. Network Connection error),
 a couple of attempts is made to retry in a rising time delay. When non-recoverable error occures, the ActionCall is dequeued and released and the information is written to the log.
 
-## ToDo
-- [ ] Modify or rewrite the WIX installer - now the installer is not functional and the Manual setup process is required.
-- [ ] In the case when MidPoint REST interface is returning the Success message on call, despite of returning OperationalResult structure with detail error (eg. too short password) 
-the OperationalResult structure is not actually parsed to get those errors and the operatiion is reported as successful. For the next version recommending adding the 
-OperationalResult parsing.
 
