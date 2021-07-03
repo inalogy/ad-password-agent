@@ -74,12 +74,13 @@ Manual instalation is only for debugging purpose and it is not recommended to us
 * MidPoint Base URL -  BASEURL
 * MidPoint Account Username - AUTHUSR
 * MidPoint Account Password - AUTHPWD
-* MidPoint Queue Identifier - QUEUEFLD  (do not change the default setting m if there is not more then ome MIdpoint sznchronized from the same DC)
+* MidPoint Queue Identifier - QUEUEFLD  (do not change the default setting m if there is not more then ome MIdpoint synchronized from the same DC)
 * Number of attempts on MidPoint call - RETRYCNT  (max 500 for performance reasons)
 * Time in seconds to wait for queue availability - QUEUEWAIT  ( used for interprocess locking, change only to higher value if there are timeout exceptions of the agent in case of extreme load - 60 requests per second and above )
-* Logging level 0-verbose to 4-error only - LOGLEVEL
+* Logging level 0-debug, 1-info, 2-warning, 3- Error to 4- Fatal error only - LOGLEVEL
 * Log storage path - LOGPATH
-
+* MidPoint SSL Setting 0-HTTP only, 1- HTTPS/TLS 1.2 with certificate in Local Computer repository, 2- HTTPS/TLS 1.2 with certificate in file X.509 - SSL
+* Certificate Name in SSL mode 1 contains SubjectDN of the certificate in form CN=xxx.yyy.zzz , in SSL mode 2 the Path and full name of the X.509 CER file
 
 
 ## Technical description
