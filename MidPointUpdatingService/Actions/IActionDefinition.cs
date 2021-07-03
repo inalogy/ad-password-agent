@@ -10,6 +10,6 @@ namespace MidPointUpdatingService.Models
         string ActionInterfaceUrl { get; }
         bool ActionReturnsResult { get; }
         bool ValidateParamaters(Dictionary<string, object> parameters);
-        IActionResult GetResult(XmlDocument xmldoc, MidPointError error);
+        IActionResult GetResult(XmlDocument xmldoc, ref MidPointError error);
     }
 }

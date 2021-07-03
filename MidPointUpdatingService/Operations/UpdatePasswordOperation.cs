@@ -55,7 +55,7 @@ namespace MidPointUpdatingService.Operations
                     }
                     else
                     {
-                        log.Info(string.Format("{0}:{1}:{2} finished sucesfully", this.OperationName, updatePasswordAction.ActionDefinition.ActionName, parameters["userName"].ToString()));
+                        log.Info(string.Format("{0}:{1}:{2} finished sucesfully - result {3}:{4}", this.OperationName, updatePasswordAction.ActionDefinition.ActionName, parameters["userName"].ToString(), error.ErrorCode, error.ErrorMessage));
                         TTL = 0;
                     }
                 }

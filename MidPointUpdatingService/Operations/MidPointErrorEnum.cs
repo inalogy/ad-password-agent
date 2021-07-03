@@ -13,6 +13,7 @@ namespace MidPointUpdatingService.Models
         BaseAddressError = 102,
         ErrorDecodingResultFromXml = 201,
         NetworkCommunicationError = 301,
-        NoActionResult = 400
+        NoActionResult = 400,
+        InvalidResult = 408
     }
 }

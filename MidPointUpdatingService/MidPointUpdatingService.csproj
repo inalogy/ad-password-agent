@@ -94,6 +94,7 @@
     <Compile Include="Actions\GetOIDMidPointActionResult.cs" />
     <Compile Include="Actions\IActionDefinition.cs" />
     <Compile Include="Actions\IActionResult.cs" />
+    <Compile Include="Actions\InvalidReturnedResult.cs" />
     <Compile Include="Actions\InvalidBaseAddressResult.cs" />
     <Compile Include="Actions\InvalidParametersResult.cs" />
     <Compile Include="Actions\NetworkCommunicationErrorResult.cs" />
@@ -120,6 +121,7 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\MidPointDateTimeHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -148,6 +150,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

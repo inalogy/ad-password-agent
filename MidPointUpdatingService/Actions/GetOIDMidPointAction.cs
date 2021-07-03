@@ -22,7 +22,7 @@ namespace MidPointUpdatingService.Actions
 
         public bool ActionReturnsResult { get { return true; } }
 
-        public IActionResult GetResult(XmlDocument xmldoc, MidPointError error)
+        public IActionResult GetResult(XmlDocument xmldoc, ref MidPointError error)
         {
             if (error.ErrorCode == 0)
             {
