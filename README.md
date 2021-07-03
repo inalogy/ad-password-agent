@@ -27,7 +27,7 @@ CD <local GIT project repository>
 
 4. Run command and wait for build finished
 
-msbuild ADPasswordAgent.sln /p:Configuration=Release
+msbuild ADPasswordAgent.sln /p:Configuration=Release /p:Platform="x64"
 
 5. Complete built Installer.msi can be found then in the subfolder
 
@@ -94,5 +94,3 @@ ADPasswordAgent.exe encrypting the passwords and sending them as ActionCalls to 
 MidPointUpdatingService.exe is installed and registered as a service of Windows OS, running permanently checking for presence of an ActionCall in the queue. 
 If any ActionCall is present, is executed against the configured MidPoint instance, and if not successfull, by the means of the recoverable error (eg. Network Connection error),
 a couple of attempts is made to retry in a rising time delay. When non-recoverable error occures, the ActionCall is dequeued and released and the information is written to the log.
-
-
