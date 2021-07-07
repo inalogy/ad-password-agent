@@ -34,6 +34,8 @@ CD <local GIT project repository>
 
 4. Run commands and wait for build finish
 
+powershell .\CreateSigningCert.ps1
+
 set VCTargetsPath="c:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VC\v160\"
 
 msbuild ADPasswordAgent.sln /p:Configuration=Release /p:Platform="x64"
