@@ -14,8 +14,11 @@ This ~~application~~ is built on top of the PoC from listens to AD password chan
 
 1. Download and install MSBuild Tools (free) to your local build computer
 
-MS Build Tools
+a. MS Build Tools
 https://visualstudio.microsoft.com/cs/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16#
+
+b. .NET Framework 4.7.2 Developer Pack
+https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net472-developer-pack-offline-installer
 
 2. Clone this repository to your local computer
 
