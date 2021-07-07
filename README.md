@@ -20,6 +20,10 @@ https://visualstudio.microsoft.com/cs/thank-you-downloading-visual-studio/?sku=B
 b. .NET Framework 4.7.2 Developer Pack
 https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net472-developer-pack-offline-installer
 
+c. WIX Toolset 3.11 for the Installer build process
+https://github.com/wixtoolset/wix3/releases/download/wix3112rtm/wix311.exe
+
+
 2. Clone this repository to your local computer
 
 3. Run MSBuild tools CMD window from the Start menu as Adminsitrator
