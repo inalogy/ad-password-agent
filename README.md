@@ -32,7 +32,9 @@ https://github.com/wixtoolset/wix3/releases/download/wix3112rtm/wix311.exe
 
 CD <local GIT project repository>
 
-4. Run command and wait for build finished
+4. Run commands and wait for build finish
+
+set VCTargetsPath="c:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VC\v160\"
 
 msbuild ADPasswordAgent.sln /p:Configuration=Release /p:Platform="x64"
 
