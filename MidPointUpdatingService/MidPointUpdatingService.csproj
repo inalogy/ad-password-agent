@@ -63,13 +63,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnySerializer, Version=1.1.46.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AnySerializer.1.1.46\lib\net47\AnySerializer.dll</HintPath>
+      <HintPath>..\Libs\AnySerializer.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+      <HintPath>..\Libs\log4net.dll</HintPath>
     </Reference>
     <Reference Include="SecureDiskQueueNET">
-      <HintPath>..\..\..\ORANGE\SecureDiskQueue\SecureDiskQueueNET\bin\Debug\SecureDiskQueueNET.dll</HintPath>
+      <HintPath>..\Libs\SecureDiskQueueNET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -78,7 +78,7 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Management" />
     <Reference Include="System.Security.Cryptography.ProtectedData">
-      <HintPath>..\..\..\ORANGE\SecureDiskQueue\SecureDiskQueueNET\bin\Debug\System.Security.Cryptography.ProtectedData.dll</HintPath>
+      <HintPath>..\Libs\System.Security.Cryptography.ProtectedData.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
