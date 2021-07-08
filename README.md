@@ -10,7 +10,20 @@ This ~~application~~ is built on top of the PoC from listens to AD password chan
 - ADPasswordAgent.exe
 - MidPointUpdatingService.exe
 
+#Installation
+
+## Preffered method - compiled installer
+
+1. Download Installer.msi from https://ibacz.visualstudio.com/d7a8eb7c-6cf3-440e-b57b-1587940d5545/_apis/git/repositories/050b31ad-b4e1-4271-a4e3-54e1b35f8a29/items?path=%2FDist%2FInstaller.msi&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0&download=true
+2. Copy Installer.msi file to the target Domain Controller
+3. On the target Domain Comtroller run CMD window as Administrator (elevated prividledges mode)
+4. In the CMD window CD to the folder, where you have copied the Installer.msi
+5. Type Installer.msi and press Enter
+6. Follow the installer GUI instructructions
+
 ## Code compilation and instalation
+
+Use only, if custom changes has been made into the source code of the appliaction.
 
 1. Download and install MSBuild Tools (free) to your local build computer
 
