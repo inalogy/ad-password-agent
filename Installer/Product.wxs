@@ -31,8 +31,8 @@
     <Property Id="LOGPATH" Value="Logs\"/>
     <Property Id="SSLSETUP" Value="0"/>
     <Property Id="CERTIFICATE" Value=" " />
-    <Property Id="SERVICEACCOUNT" Value=" "/>
-    <Property Id="SERVICEPASSWORD" Value=" " />
+    <Property Id="SERVICEACCOUNT" Value="<domain>\ServiceUser"/>
+    <Property Id="SERVICEPASSWORD" Value="*****" />
 
     <UI>
       <UIRef Id="WixUI_Minimal"/>
