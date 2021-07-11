@@ -82,9 +82,8 @@ namespace MidPointUpdatingService.Models
                                     File.WriteAllText(fileStorePath, xmlobj);
                                 }
 
-                                // get oid from returned user object
-                                XmlDocument xmldoc = new XmlDocument();
-                                xmldoc.LoadXml(xmlobj);
+                                // get results from returned object
+                                XmlDocument xmldoc = XmlDocumentParsingHelper.CreateXMLDocumentFromString(xmlobj, false);
                                 MidPointError error = new MidPointError() { ErrorCode = MidPointErrorEnum.OK, Recoverable = false, ErrorMessage = "OK" };
                                 result = ActionDefinition.GetResult(xmldoc, ref error);
                                 return (result.Error.ErrorCode == MidPointErrorEnum.OK);
@@ -141,8 +140,7 @@ namespace MidPointUpdatingService.Models
                                 }
 
                                 // get detailed error from returned operation result object
-                                XmlDocument xmldoc = new XmlDocument();
-                                xmldoc.LoadXml(xmlobj);
+                                XmlDocument xmldoc = XmlDocumentParsingHelper.CreateXMLDocumentFromString(xmlobj, false);
                                 MidPointError error = new MidPointError() { ErrorCode = MidPointErrorEnum.InvalidResult, Recoverable = false, ErrorMessage = response.ReasonPhrase };
                                 result = ActionDefinition.GetResult(xmldoc, ref error);                                
                                 return (result.Error.ErrorCode == MidPointErrorEnum.OK);

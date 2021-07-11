@@ -1,6 +1,8 @@
 ﻿using MidPointUpdatingService.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Xml;
 
 namespace MidPointUpdatingService.Actions
@@ -22,26 +24,88 @@ namespace MidPointUpdatingService.Actions
 
         public bool ActionReturnsResult { get { return true; } }
 
+
         public IActionResult GetResult(XmlDocument xmldoc, ref MidPointError error)
         {
-            if (error.ErrorCode == 0)
+
+            Exception ex;
+            if (error.ErrorCode == MidPointErrorEnum.OK)
             {
                 try
                 {
                     string OID = xmldoc.FirstChild.FirstChild.Attributes.GetNamedItem("oid").Value;
 
-                    return new GetOIDMidPointActionResult(OID, new MidPointError() { ErrorCode = MidPointErrorEnum.OK, ErrorMessage = "OK", Recoverable = true }, null);
+                    error = new MidPointError() { ErrorCode = MidPointErrorEnum.OK, ErrorMessage = "OK", Recoverable = true };
+
+                    return new GetOIDMidPointActionResult(OID, error, null);
 
                 }
-                catch (Exception ex)
+                catch (Exception exc)
                 {
-                    return new GetOIDMidPointActionResult(string.Empty, new MidPointError() { ErrorCode= MidPointErrorEnum.ErrorDecodingResultFromXml, ErrorMessage = ex.Message, Recoverable = false }, ex);
+                    ex = exc;
+                    error = new MidPointError() { ErrorCode = MidPointErrorEnum.ErrorDecodingResultFromXml, ErrorMessage = ex.Message, Recoverable = false };
+                    return new GetOIDMidPointActionResult(string.Empty,error, ex);
+                }
+            }
+            else if (error.ErrorCode == MidPointErrorEnum.InvalidResult)
+            {
+                try
+                {
+                    XmlNodeList ml, dl;
+                    if (xmldoc.DocumentElement.Attributes["xmlns"] != null)
+                    {
+                        string xmlns = xmldoc.DocumentElement.Attributes["xmlns"].Value;
+                        XmlNamespaceManager nsmgr = new XmlNamespaceManager(xmldoc.NameTable);
+                        nsmgr.AddNamespace("b", xmlns);
+                        ml = xmldoc.FirstChild.SelectNodes("./b:message", nsmgr);
+                        dl = xmldoc.FirstChild.SelectNodes("./b:details", nsmgr);
+                    }
+                    else
+                    {
+                        ml = xmldoc.FirstChild.SelectNodes("./message");
+                        dl = xmldoc.FirstChild.SelectNodes("./details");
+                    }
+
+                    //Get all messages
+                    StringBuilder errroMessageSb = new StringBuilder();
+                    foreach (XmlNode messageChild in ml)
+                    {
+                        errroMessageSb.Append("M:");
+                        errroMessageSb.AppendLine(messageChild.InnerText);
+                    }
+                    string errroMessage = errroMessageSb.ToString();
+
+                    //Get all details
+                    StringBuilder errroDetailsSb = new StringBuilder();
+                    foreach (XmlNode detailChild in dl)
+                    {
+                        errroDetailsSb.Append("D:");
+                        errroDetailsSb.AppendLine(detailChild.InnerText);
+                    }
+                    string errroDetail = errroDetailsSb.ToString();
+
+                    InvalidOperationException ioex = new InvalidOperationException(errroDetail);
+
+                    error.ErrorMessage = String.IsNullOrEmpty(errroMessage) ? "Detailed message has not been found" : errroMessage;
+
+                    return new GetOIDMidPointActionResult(string.Empty, error, ioex);
+
+                }
+                catch (Exception exc)
+                {
+                    error.ErrorMessage = "Error parsing Midpoint OperationResult for detailed error message";
+                    return new GetOIDMidPointActionResult(string.Empty, error, exc);
                 }
             }
             else
             {
-                return new GetOIDMidPointActionResult(string.Empty, error, null);
+                string fileStorePath = Path.GetTempFileName();
+                fileStorePath = Path.ChangeExtension(fileStorePath, "xml");
+                xmldoc.Save(fileStorePath);
+                error.ErrorMessage = error.ErrorMessage + " - " + fileStorePath;
+                ex = new Exception(error.ErrorMessage);
             }
+            return new GetOIDMidPointActionResult(string.Empty, error,ex);
         }
 
         public bool ValidateParamaters(Dictionary<string, object> parameters)
