@@ -58,7 +58,7 @@
         <Control Id="LOGPATHEdit" Type="Edit" Width="200" Height="17" X="100" Y="280" Property="LOGPATH"/>
         <Control Id="SSLSETUPText" Type="Text" Width="200" Height="17" X="100" Y="300" TabSkip="no" Text="SSL Setting 0-HTTP, 1-HTTPS/TLS1.2 (Certificate in local machine stiorage), 2-HTTPS/TLS1.2 (Certificate in .crt file): "/>
         <Control Id="SSLSETUPEdit" Type="Edit" Width="200" Height="17" X="100" Y="320" Property="SSLSETUP"/>
-        <Control Id="CERTIFICATEText" Type="Text" Width="200" Height="17" X="100" Y="340" TabSkip="no" Text="Certificate SubjectDN / Path to certifice .crt X509 file : "/>
+        <Control Id="CERTIFICATEText" Type="Text" Width="200" Height="17" X="100" Y="340" TabSkip="no" Text="Service Client Certificate SubjectDN / Path to certifice .crt X509 file : "/>
         <Control Id="CERTIFICATEEdit" Type="Edit" Width="200" Height="17" X="100" Y="360" Property="CERTIFICATE"/>
         <Control Id="SERVICEACCOUNTText" Type="Text" Width="200" Height="17" X="100" Y="380" TabSkip="no" Text="Midpoint updating service context account: "/>
         <Control Id="SERVICEACCOUNTEdit" Type="Edit" Width="200" Height="17" X="100" Y="400" Property="SERVICEACCOUNT"/>
@@ -125,7 +125,7 @@
             <RegistryValue Type="integer" Name="QueueWaitSeconds" Value="[QUEUEWAIT]" />
             <RegistryValue Type="integer" Name="MidpointServiceLogLevel" Value="[LOGLEVEL]" />
             <RegistryValue Type="integer" Name="MidpointSSL" Value="[SSLSETUP]" />
-            <RegistryValue Type="string" Name="MidpointCertificate" Value="[CERTIFICATE]" />
+            <RegistryValue Type="string" Name="ServiceClientCertificate" Value="[CERTIFICATE]" />
           </RegistryKey>
         </Component>
           

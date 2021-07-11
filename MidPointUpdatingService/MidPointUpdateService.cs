@@ -120,7 +120,7 @@ namespace MidPointUpdatingService
                 wsauthpwd = EnvironmentHelper.GetMidpointAuthPwd() ?? wsauthpwd;
                 cqueuefld = EnvironmentHelper.GetQueueFolder() ?? cqueuefld;
                 ssl = Convert.ToInt32(EnvironmentHelper.GetMidpointSsl());
-                certName = EnvironmentHelper.GetMidpointCertName() ?? certName;
+                certName = EnvironmentHelper.GetServiceClientCertificateName() ?? certName;
                 queuewait = Convert.ToInt32(EnvironmentHelper.GetQueueWaitSeconds());
                 retrycnt =  Convert.ToInt32(EnvironmentHelper.GetRetryCount());
                 loglevel =  Convert.ToInt32(EnvironmentHelper.GetMidpointServiceLogLevel());

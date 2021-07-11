@@ -365,7 +365,7 @@ namespace Common
             return value;
         }
 
-        public static string GetMidpointCertName()
+        public static string GetServiceClientCertificateName()
         {
             string value;
             try
@@ -383,7 +383,7 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = key.GetValue("MidpointCertificate").ToString();
+                    value = key.GetValue("ServiceClientCertificate").ToString();
                 }
                 else
                 {
@@ -391,7 +391,7 @@ namespace Common
                     using (EventLog eventLog = new EventLog("Application"))
                     {
                         eventLog.Source = "ADPasswordAgent";
-                        eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointCertificate - no certificate identification found"), EventLogEntryType.Warning, 206, 1);
+                        eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\ServiceClientCertificate - no certificate identification found"), EventLogEntryType.Warning, 206, 1);
                     }
 
                 }
@@ -402,8 +402,8 @@ namespace Common
                 using (EventLog eventLog = new EventLog("Application"))
                 {
                     eventLog.Source = "ADPasswordAgent";
-                    eventLog.WriteEntry(String.Format(@"Error accessing registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointCertificate : {0}", ex.Message), EventLogEntryType.Error, 306, 1);
-                    eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointCertificate - no certificate identification found"), EventLogEntryType.Warning, 206, 1);
+                    eventLog.WriteEntry(String.Format(@"Error accessing registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\ServiceClientCertificate : {0}", ex.Message), EventLogEntryType.Error, 306, 1);
+                    eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\ServiceClientCertificate - no certificate identification found"), EventLogEntryType.Warning, 206, 1);
                 }
             }
             return value;
