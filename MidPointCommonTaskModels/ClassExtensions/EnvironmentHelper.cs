@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Common
@@ -81,7 +83,7 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = key.GetValue("MidpointBaseUrl").ToString();
+                    value = key.GetValue("MidpointBaseUrl").ToString().Trim();
                 }
                 else
                 {
@@ -123,7 +125,7 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = key.GetValue("MidpointAuthUser").ToString();
+                    value = key.GetValue("MidpointAuthUser").ToString().Trim();
                 }
                 else
                 {
@@ -165,7 +167,7 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = key.GetValue("MidpointAuthPwd").ToString();
+                    value = key.GetValue("MidpointAuthPwd").ToString().Trim();
                 }
                 else
                 {
@@ -207,7 +209,7 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = Convert.ToInt64(key.GetValue("RetryCount").ToString());
+                    value = Convert.ToInt64(key.GetValue("RetryCount").ToString().Trim());
                 }
                 else
                 {
@@ -251,7 +253,7 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = Convert.ToInt64(key.GetValue("MidpointServiceLogLevel").ToString());
+                    value = Convert.ToInt64(key.GetValue("MidpointServiceLogLevel").ToString().Trim());
                 }
                 else
                 {
@@ -295,7 +297,16 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = key.GetValue("MidpointServiceLogPath").ToString();
+                    value = key.GetValue("MidpointServiceLogPath").ToString().Trim();
+                    if (!Directory.Exists(value))
+                    {
+                        value = @"Logs\";
+                        using (EventLog eventLog = new EventLog("Application"))
+                        {
+                            eventLog.Source = "ADPasswordAgent";
+                            eventLog.WriteEntry(String.Format(@"Warning - the path specified in registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointServiceLogPath [{0}] does not exists - using default path .\Logs.",value), EventLogEntryType.Warning, 201, 1);
+                        }
+                    }
                 }
                 else
                 {
@@ -339,7 +350,7 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = Convert.ToInt64(key.GetValue("MidpointSSL").ToString());
+                    value = Convert.ToInt64(key.GetValue("MidpointSSL").ToString().Trim());
                 }
                 else
                 {
@@ -383,7 +394,8 @@ namespace Common
 
                 if (key != null)
                 {
-                    value = key.GetValue("ServiceClientCertificate").ToString();
+                    value = key.GetValue("ServiceClientCertificate").ToString().Trim();
+                    value = Regex.Replace(value, @"\s*=\s*", "=");
                 }
                 else
                 {
