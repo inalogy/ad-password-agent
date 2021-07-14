@@ -33,9 +33,17 @@ namespace MidPointUpdatingService.Actions
             {
                 try
                 {
-                    string OID = xmldoc.FirstChild.FirstChild.Attributes.GetNamedItem("oid").Value;
-
-                    error = new MidPointError() { ErrorCode = MidPointErrorEnum.OK, ErrorMessage = "OK", Recoverable = true };
+                    string OID = string.Empty;
+                    if (xmldoc != null && xmldoc.FirstChild != null && xmldoc.FirstChild.FirstChild != null)
+                    { 
+                        OID = xmldoc.FirstChild.FirstChild.Attributes.GetNamedItem("oid").Value;
+                        error = new MidPointError() { ErrorCode = MidPointErrorEnum.OK, ErrorMessage = "OK", Recoverable = true };
+                    }
+                    else
+                    {
+                        error = new MidPointError() { ErrorCode = MidPointErrorEnum.NotFoundError, ErrorMessage = String.Format("Username not found"), Recoverable = false };
+                        
+                    }
 
                     return new GetOIDMidPointActionResult(OID, error, null);
 
