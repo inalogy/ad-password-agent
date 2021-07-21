@@ -110,12 +110,19 @@ namespace ADPasswordAgent
             {
                 using (var queue = PersistentSecureQueue.WaitFor(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath), TimeSpan.FromSeconds(EnvironmentHelper.GetQueueWaitSeconds())))
                 {
-                    EnqueueMidTask(updatePasswordCall, queue);
+                    try
+                    {
+                        EnqueueMidTask(updatePasswordCall, queue);
+                    }
+                    catch
+                    {
+                        HeapSendMidTask(updatePasswordCall, System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath + ".Heap"));
+                    }
                 }
             }
             catch (TimeoutException)
             {
-                HeapSendMidTask(updatePasswordCall, System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath+".Heap"));
+                HeapSendMidTask(updatePasswordCall, System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath + ".Heap"));
             }
             catch (Exception e)
             {

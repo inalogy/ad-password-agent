@@ -20,6 +20,7 @@ using System.Security.Authentication;
 using MidPointCommonTaskModels.Models;
 using MidPointUpdatingService.ClassExtensions;
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace MidPointUpdatingService
 {
@@ -243,55 +244,29 @@ namespace MidPointUpdatingService
 
         protected void ProcessQueue(CancellationToken token)
         {
+            
             while (!stopping)
             {
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    fileSystemWatcher = new FileSystemWatcher(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), cqueuefld + ".Heap"), "*.itq");
-                    fileSystemWatcher.IncludeSubdirectories = false;
-                    fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
-                    fileSystemWatcher.Changed += OnChanged;
-                    fileSystemWatcher.EnableRaisingEvents = true;
-                    components.Add(fileSystemWatcher);
+
+                    if (!ExecutionEngine.EnqueueHeapItem(log, cqueuefld, queuewait, token))
+                    {
+                        stopping = true;
+                        break;
+                    }
+                    Thread.Sleep(125);
 
                     ExecutionEngine.ProcessItem(client, log, retrycnt, cqueuefld, queuewait, token);
-                    Thread.Sleep(250);
+
+                    Thread.Sleep(125);
+
                 }
                 catch (Exception ex)
                 {
                     log.Error(ex.Message, ex);
                 }
-            }
-        }
-
-        private static void EnqueueMidTask(ActionCall task, IPersistentSecureQueue queue)
-        {
-            using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
-            {
-                var queueItem = Helpers.ObjectToByteArray(task);
-                queueSession.Enqueue(queueItem);
-                queueSession.Flush();
-            }
-        }
-
-        private void OnChanged(object source, FileSystemEventArgs e)
-        {
-            try
-            {
-                var protectedHeapItem = File.ReadAllBytes(e.FullPath);
-                var heapItem = ProtectedData.Unprotect(protectedHeapItem, null, DataProtectionScope.LocalMachine);
-                ActionCall call = (ActionCall)Helpers.ByteArrayToObject(heapItem, typeof(ActionCall));
-
-                using (IPersistentSecureQueue queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), cqueuefld), TimeSpan.FromSeconds(queuewait)))
-                {
-                    EnqueueMidTask(call, queue);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                log.Error(String.Format("Unable to process heap file {0} with error {1}", e.FullPath,ex.Message), ex);
             }
         }
     }

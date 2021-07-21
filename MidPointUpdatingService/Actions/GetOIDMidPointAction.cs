@@ -34,7 +34,7 @@ namespace MidPointUpdatingService.Actions
                 try
                 {
                     string OID = string.Empty;
-                    if (xmldoc != null && xmldoc.FirstChild != null && xmldoc.FirstChild.FirstChild != null)
+                    if (xmldoc != null && xmldoc.FirstChild != null && xmldoc.FirstChild.FirstChild != null && xmldoc.FirstChild.FirstChild.Attributes !=null)
                     { 
                         OID = xmldoc.FirstChild.FirstChild.Attributes.GetNamedItem("oid").Value;
                         error = new MidPointError() { ErrorCode = MidPointErrorEnum.OK, ErrorMessage = "OK", Recoverable = true };
@@ -51,7 +51,7 @@ namespace MidPointUpdatingService.Actions
                 catch (Exception exc)
                 {
                     ex = exc;
-                    error = new MidPointError() { ErrorCode = MidPointErrorEnum.ErrorDecodingResultFromXml, ErrorMessage = ex.Message, Recoverable = false };
+                    error = new MidPointError() { ErrorCode = MidPointErrorEnum.ErrorDecodingResultFromXml, ErrorMessage = ex.Message, Recoverable = true };
                     return new GetOIDMidPointActionResult(string.Empty,error, ex);
                 }
             }
