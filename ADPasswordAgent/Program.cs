@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Security;
 using System.Threading;
 using Common;
+using System.Text;
 
 namespace ADPasswordAgent
 {

@@ -77,6 +77,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.ProtectedData">
       <HintPath>..\Libs\System.Security.Cryptography.ProtectedData.dll</HintPath>
     </Reference>

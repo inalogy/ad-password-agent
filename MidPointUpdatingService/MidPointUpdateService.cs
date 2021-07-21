@@ -17,6 +17,9 @@ using log4net.Core;
 using Common;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Authentication;
+using MidPointCommonTaskModels.Models;
+using MidPointUpdatingService.ClassExtensions;
+using System.Security.Cryptography;
 
 namespace MidPointUpdatingService
 {
@@ -39,6 +42,7 @@ namespace MidPointUpdatingService
         private bool stopping = false;
         private Task processingTask;
         private CancellationTokenSource cancellationToken;
+        private FileSystemWatcher fileSystemWatcher;
 
         protected void SetupLogging()
         {
@@ -122,12 +126,12 @@ namespace MidPointUpdatingService
                 ssl = Convert.ToInt32(EnvironmentHelper.GetMidpointSsl());
                 certName = EnvironmentHelper.GetServiceClientCertificateName() ?? certName;
                 queuewait = Convert.ToInt32(EnvironmentHelper.GetQueueWaitSeconds());
-                retrycnt =  Convert.ToInt32(EnvironmentHelper.GetRetryCount());
-                loglevel =  Convert.ToInt32(EnvironmentHelper.GetMidpointServiceLogLevel());
-                logpath = EnvironmentHelper.GetMidpointServiceLogPath() ?? logpath;                
+                retrycnt = Convert.ToInt32(EnvironmentHelper.GetRetryCount());
+                loglevel = Convert.ToInt32(EnvironmentHelper.GetMidpointServiceLogLevel());
+                logpath = EnvironmentHelper.GetMidpointServiceLogPath() ?? logpath;
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(String.Format("MidPoint Updating Service: Missing parameters - invalid configuration in Windows Registry {0}", EnvironmentHelper.loggingHive), ex);
             }
         }
@@ -162,13 +166,13 @@ namespace MidPointUpdatingService
         {
             try
             {
-                if (ssl>0)
+                if (ssl > 0)
                 {
                     var handler = new HttpClientHandler
                     {
                         ClientCertificateOptions = ClientCertificateOption.Manual,
                         SslProtocols = SslProtocols.Tls12,
-                        CheckCertificateRevocationList = false                         
+                        CheckCertificateRevocationList = false
                     };
                     X509Certificate2 cert = null;
                     if (ssl > 1)
@@ -224,7 +228,7 @@ namespace MidPointUpdatingService
             cancellationToken = new CancellationTokenSource();
             var token = cancellationToken.Token;
             processingTask = Task.Run(() => ProcessQueue(token), token);
-            base.OnStart(args); 
+            base.OnStart(args);
         }
         protected override void OnStop()
         {
@@ -244,13 +248,50 @@ namespace MidPointUpdatingService
                 try
                 {
                     token.ThrowIfCancellationRequested();
-                    ExecutionEngine.ProcessItem(client, log, retrycnt, cqueuefld, queuewait, token);                 
+                    fileSystemWatcher = new FileSystemWatcher(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), cqueuefld + ".Heap"), "*.itq");
+                    fileSystemWatcher.IncludeSubdirectories = false;
+                    fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
+                    fileSystemWatcher.Changed += OnChanged;
+                    fileSystemWatcher.EnableRaisingEvents = true;
+                    components.Add(fileSystemWatcher);
+
+                    ExecutionEngine.ProcessItem(client, log, retrycnt, cqueuefld, queuewait, token);
                     Thread.Sleep(250);
                 }
                 catch (Exception ex)
                 {
                     log.Error(ex.Message, ex);
                 }
+            }
+        }
+
+        private static void EnqueueMidTask(ActionCall task, IPersistentSecureQueue queue)
+        {
+            using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
+            {
+                var queueItem = Helpers.ObjectToByteArray(task);
+                queueSession.Enqueue(queueItem);
+                queueSession.Flush();
+            }
+        }
+
+        private void OnChanged(object source, FileSystemEventArgs e)
+        {
+            try
+            {
+                var protectedHeapItem = File.ReadAllBytes(e.FullPath);
+                var heapItem = ProtectedData.Unprotect(protectedHeapItem, null, DataProtectionScope.LocalMachine);
+                ActionCall call = (ActionCall)Helpers.ByteArrayToObject(heapItem, typeof(ActionCall));
+
+                using (IPersistentSecureQueue queue = PersistentSecureQueue.WaitFor(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), cqueuefld), TimeSpan.FromSeconds(queuewait)))
+                {
+                    EnqueueMidTask(call, queue);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Error(String.Format("Unable to process heap file {0} with error {1}", e.FullPath,ex.Message), ex);
             }
         }
     }
