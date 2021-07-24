@@ -30,6 +30,7 @@
     <Property Id="LOGLEVEL" Value="0"/>
     <Property Id="LOGPATH" Value="Logs\"/>
     <Property Id="SSLSETUP" Value="0"/>
+    <Property Id="USEHEAPONLY" Value="0"/>
     <Property Id="CERTIFICATE" Value=" " />
     <Property Id="SERVICEACCOUNT" Value="domain\ServiceUser"/>
     <Property Id="SERVICEPASSWORD" Value="*****" />
@@ -39,7 +40,7 @@
       <!-- Disable repair and enable delete (uninstall) -->
       <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
       <Property Id="ARPNOREMOVE" Value="no" Secure="yes" />
-      <Dialog Id="ConfigurationDlg" Title="Configuration" Width="400" Height="480">        
+      <Dialog Id="ConfigurationDlg" Title="Configuration" Width="400" Height="520">        
         <Control Id="BASEURLText" Type="Text" Width="200" Height="17" X="100" Y="20" TabSkip="no" Text="MidPoint Base URL: "/>
         <Control Id="BASEURLEdit" Type="Edit" Width="200" Height="17" X="100" Y="40" Property="BASEURL"/>
         <Control Id="AUTHUSRText" Type="Text" Width="200" Height="17" X="100" Y="60" TabSkip="no" Text="Username: "/>
@@ -64,11 +65,13 @@
         <Control Id="SERVICEACCOUNTEdit" Type="Edit" Width="200" Height="17" X="100" Y="400" Property="SERVICEACCOUNT"/>
         <Control Id="SERVICEPASSWORDText" Type="Text" Width="200" Height="17" X="100" Y="420" TabSkip="no" Text="Midpoint updating service context account password: "/>
         <Control Id="SERVICEPASSWORDEdit" Type="Edit" Width="200" Height="17" X="100" Y="440" Password="yes" Property="SERVICEPASSWORD"/>
+        <Control Id="USEHEAPONLYText" Type="Text" Width="200" Height="17" X="100" Y="460" TabSkip="no" Text="1 - Use only HEAP transfer (less durrable, but faster), 0 - use Durable QUEUE: "/>
+        <Control Id="USEHEAPONLYEdit" Type="Edit" Width="200" Height="17" X="100" Y="480" Property="USEHEAPONLY"/>
 
-        <Control Id="cancelButton" Type="PushButton" Text="Cancel" Width="100" Height="17" X="100" Y="460" Cancel="yes">
+        <Control Id="cancelButton" Type="PushButton" Text="Cancel" Width="100" Height="17" X="100" Y="500" Cancel="yes">
           <Publish Event="EndDialog" Value="Exit" />
         </Control>
-        <Control Id="proceedButton" Type="PushButton" Text="Next" Width="100" Height="17" X="200" Y="460">
+        <Control Id="proceedButton" Type="PushButton" Text="Next" Width="100" Height="17" X="200" Y="500">
           <Publish Event="EndDialog" Value="Return">1</Publish>
         </Control>
       </Dialog>
@@ -125,6 +128,7 @@
             <RegistryValue Type="integer" Name="QueueWaitSeconds" Value="[QUEUEWAIT]" />
             <RegistryValue Type="integer" Name="MidpointServiceLogLevel" Value="[LOGLEVEL]" />
             <RegistryValue Type="integer" Name="MidpointSSL" Value="[SSLSETUP]" />
+            <RegistryValue Type="integer" Name="MidpointUseOnlyHeap" Value="[USEHEAPONLY]" />
             <RegistryValue Type="string" Name="ServiceClientCertificate" Value="[CERTIFICATE]" />
           </RegistryKey>
         </Component>

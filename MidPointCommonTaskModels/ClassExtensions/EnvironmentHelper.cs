@@ -511,6 +511,52 @@ namespace Common
             return value;
         }
 
+
+        public static Int64 GetMidpointUseOnlyHeap()
+        {
+            Int64 value;
+            try
+            {
+                //get the 64-bit view first
+                RegistryKey key = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry64);
+                key = key.OpenSubKey(loggingHive);
+
+                if (key == null)
+                {
+                    //we couldn't find the value in the 64-bit view so grab the 32-bit view
+                    key = RegistryKey.OpenBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, RegistryView.Registry32);
+                    key = key.OpenSubKey(loggingHive);
+                }
+
+                if (key != null)
+                {
+                    value = Convert.ToInt64(key.GetValue("MidpointUseOnlyHeap").ToString().Trim());
+                }
+                else
+                {
+                    value = 0;
+                    using (EventLog eventLog = new EventLog("Application"))
+                    {
+                        eventLog.Source = "ADPasswordAgent";
+                        eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointUseOnlyHeap - using Queue connection"), EventLogEntryType.Warning, 211, 1);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                value = 0;
+                using (EventLog eventLog = new EventLog("Application"))
+                {
+                    eventLog.Source = "ADPasswordAgent";
+                    eventLog.WriteEntry(String.Format(@"Error accessing registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointUseOnlyHeap : {0}", ex.Message), EventLogEntryType.Error, 311, 1);
+                    eventLog.WriteEntry(String.Format(@"Warning - unable to read registry key HKEY_LOCAL_MACHINE\SOFTWARE\ADPasswordFilter\MidpointUseOnlyHeap - using Queue connection"), EventLogEntryType.Warning, 211, 1);
+                }
+            }
+            return value;
+        }
+
+
         #endregion
     }
 }

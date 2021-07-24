@@ -14,6 +14,7 @@ namespace ADPasswordAgent
     {
        
         private readonly string queuePath;
+        private readonly long useHeapOnly;
 
 
         private static void EnqueueMidTask(ActionCall task, IPersistentSecureQueue queue)
@@ -88,9 +89,10 @@ namespace ADPasswordAgent
 
 
 
-        public MidPointQueueSender(string cqueuefld)
+        public MidPointQueueSender(string cqueuefld, long cUseHeapOnly)
         {
             queuePath = cqueuefld;
+            useHeapOnly = cUseHeapOnly;
         }
 
 
@@ -106,18 +108,26 @@ namespace ADPasswordAgent
                     eventLog.WriteEntry(String.Format(@"Information - queue location: {0}", System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath)), EventLogEntryType.Information, 107, 1);
                 }
             }
+
             try
             {
-                using (var queue = PersistentSecureQueue.WaitFor(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath), TimeSpan.FromSeconds(EnvironmentHelper.GetQueueWaitSeconds())))
+                if (useHeapOnly == 0)
                 {
-                    try
+                    using (var queue = PersistentSecureQueue.WaitFor(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath), TimeSpan.FromSeconds(EnvironmentHelper.GetQueueWaitSeconds())))
                     {
-                        EnqueueMidTask(updatePasswordCall, queue);
+                        try
+                        {
+                            EnqueueMidTask(updatePasswordCall, queue);
+                        }
+                        catch
+                        {
+                            HeapSendMidTask(updatePasswordCall, System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath + ".Heap"));
+                        }
                     }
-                    catch
-                    {
-                        HeapSendMidTask(updatePasswordCall, System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath + ".Heap"));
-                    }
+                }
+                else
+                {
+                    HeapSendMidTask(updatePasswordCall, System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath + ".Heap"));
                 }
             }
             catch (TimeoutException)

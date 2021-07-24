@@ -42,6 +42,7 @@ namespace MidPointUpdatingService
         private ILog log;
         private bool stopping = false;
         private Task processingTask;
+        private Task enqueuingTask;
         private CancellationTokenSource cancellationToken;
         private FileSystemWatcher fileSystemWatcher;
 
@@ -229,6 +230,7 @@ namespace MidPointUpdatingService
             cancellationToken = new CancellationTokenSource();
             var token = cancellationToken.Token;
             processingTask = Task.Run(() => ProcessQueue(token), token);
+            enqueuingTask = Task.Run(() => EnqueueHeap(token), token);
             base.OnStart(args);
         }
         protected override void OnStop()
@@ -236,6 +238,7 @@ namespace MidPointUpdatingService
             if (!stopping)
                 stopping = true;
             cancellationToken.Cancel();
+            enqueuingTask.Wait();
             processingTask.Wait();
             LogManager.Flush(1000);
             LogManager.Shutdown();
@@ -251,13 +254,6 @@ namespace MidPointUpdatingService
                 {
                     token.ThrowIfCancellationRequested();
 
-                    if (!ExecutionEngine.EnqueueHeapItem(log, cqueuefld, queuewait, token))
-                    {
-                        stopping = true;
-                        break;
-                    }
-                    Thread.Sleep(125);
-
                     ExecutionEngine.ProcessItem(client, log, retrycnt, cqueuefld, queuewait, token);
 
                     Thread.Sleep(125);
@@ -269,5 +265,31 @@ namespace MidPointUpdatingService
                 }
             }
         }
+
+        protected void EnqueueHeap(CancellationToken token)
+        {
+
+            while (!stopping)
+            {
+                try
+                {
+                    token.ThrowIfCancellationRequested();
+
+                    if (!ExecutionEngine.EnqueueHeapItem(log, cqueuefld, queuewait, token))
+                    {
+                        stopping = true;
+                        break;
+                    }
+
+                    Thread.Sleep(125);
+
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex.Message, ex);
+                }
+            }
+        }
+
     }
 }
