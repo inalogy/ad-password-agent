@@ -104,6 +104,7 @@ Manual instalation is only for debugging purpose and it is not recommended to us
 * Logging level 0-debug, 1-info, 2-warning, 3- Error to 4- Fatal error only - LOGLEVEL
 * Log storage path - LOGPATH
 * MidPoint SSL Setting 0-HTTP only, 1- HTTPS/TLS 1.2 with certificate in Local Computer repository, 2- HTTPS/TLS 1.2 with certificate in file X.509 - SSL
+* Midpoint Use Only Heap - USEHEAPONLY (v případě, že obsahuje hodnotu 1, použije se na straně agenta zápis pouze do složky a frontu ze složky plní až služba MidpointUpdating Service, při hodnotě 0 se agent snaží získat zámek nad frontou a vložit přímo do ní a do složky vkládá zázna až v případě, kdy se mu v plánované době zámek získat nepodaří ) 
 * Certificate Name in SSL mode 1 contains SubjectDN of the certificate in form CN=xxx.yyy.zzz , in SSL mode 2 the Path and full name of the X.509 CER file
 
 
