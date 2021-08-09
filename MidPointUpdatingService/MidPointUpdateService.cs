@@ -44,7 +44,7 @@ namespace MidPointUpdatingService
         private Task processingTask;
         private Task enqueuingTask;
         private CancellationTokenSource cancellationToken;
-        private FileSystemWatcher fileSystemWatcher;
+        // private FileSystemWatcher fileSystemWatcher;
 
         protected void SetupLogging()
         {
