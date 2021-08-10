@@ -16,7 +16,6 @@ namespace ADPasswordAgent
         private readonly string queuePath;
         private readonly long useHeapOnly;
 
-
         private static void EnqueueMidTask(ActionCall task, IPersistentSecureQueue queue)
         {
             using (IPersistentSecureQueueSession queueSession = queue.OpenSession())
@@ -62,16 +61,35 @@ namespace ADPasswordAgent
             string fullHeapFileName = Path.Combine(di.FullName, heapfilename);
             int ctr = 0;
             try
-            { 
-           
-                while (File.Exists(fullHeapFileName))
-                {
-                    heapfilename = String.Format("{0}_{1}.itq", timestamp, ctr++);
-                    fullHeapFileName = Path.Combine(di.FullName, heapfilename);
-                }            
+            {
                 var heapItem = Helpers.ObjectToByteArray(task);
                 var protectedHeapItem = ProtectedData.Protect(heapItem, null, DataProtectionScope.LocalMachine);
-                File.WriteAllBytes(fullHeapFileName, protectedHeapItem);
+                bool retryIOError = false;
+                do
+                {
+                    while (File.Exists(fullHeapFileName))
+                    {
+                        heapfilename = String.Format("{0}_{1}.itq", timestamp, ctr++);
+                        fullHeapFileName = Path.Combine(di.FullName, heapfilename);
+                    }
+                    try
+                    {
+                        retryIOError = false;
+                        File.WriteAllBytes(fullHeapFileName, protectedHeapItem);
+                    }
+                    catch (IOException ex)
+                    {
+                        if (EnvironmentHelper.GetAgentLogging() < 5)
+                        {
+                            using (EventLog eventLog = new EventLog("Application"))
+                            {
+                                eventLog.Source = "ADPasswordAgent";
+                                eventLog.WriteEntry(String.Format("Error heap file conflict {1} for AD Password agent: {0}", ex.Message, fullHeapFileName), EventLogEntryType.Warning, 209, 1);
+                            }
+                        }
+                        retryIOError = true;
+                    }
+                } while (retryIOError);
             }
             catch (Exception ex)
             {
@@ -105,7 +123,7 @@ namespace ADPasswordAgent
                 using (EventLog eventLog = new EventLog("Application"))
                 {
                     eventLog.Source = "ADPasswordAgent";
-                    eventLog.WriteEntry(String.Format(@"Information - queue location: {0}", System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath)), EventLogEntryType.Information, 107, 1);
+                    eventLog.WriteEntry(String.Format(@"Information - heap queue location: {0} - user {1}", System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), queuePath), name), EventLogEntryType.Information, 107, 1);
                 }
             }
 
