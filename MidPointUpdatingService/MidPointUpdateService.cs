@@ -36,6 +36,7 @@ namespace MidPointUpdatingService
         private int retrycnt = 50;
         private int loglevel = 0;
         private string logpath = @"Logs\";
+        private bool useHeapOnly = false;
 
 
         private static HttpClient client;
@@ -131,6 +132,7 @@ namespace MidPointUpdatingService
                 retrycnt = Convert.ToInt32(EnvironmentHelper.GetRetryCount());
                 loglevel = Convert.ToInt32(EnvironmentHelper.GetMidpointServiceLogLevel());
                 logpath = EnvironmentHelper.GetMidpointServiceLogPath() ?? logpath;
+                useHeapOnly = Convert.ToBoolean(EnvironmentHelper.GetMidpointUseOnlyHeap());
             }
             catch (Exception ex)
             {
@@ -229,7 +231,10 @@ namespace MidPointUpdatingService
             SetupClient();
             cancellationToken = new CancellationTokenSource();
             var token = cancellationToken.Token;
-            processingTask = Task.Run(() => ProcessQueue(token), token);
+            if (!useHeapOnly)
+            {
+                processingTask = Task.Run(() => ProcessQueue(token), token);
+            }
             enqueuingTask = Task.Run(() => EnqueueHeap(token), token);
             base.OnStart(args);
         }
@@ -239,7 +244,9 @@ namespace MidPointUpdatingService
                 stopping = true;
             cancellationToken.Cancel();
             enqueuingTask.Wait();
-            processingTask.Wait();
+            if (!useHeapOnly) {
+                processingTask.Wait();
+            }
             LogManager.Flush(1000);
             LogManager.Shutdown();
             base.OnStop();
@@ -275,7 +282,7 @@ namespace MidPointUpdatingService
                 {
                     token.ThrowIfCancellationRequested();
 
-                    if (!ExecutionEngine.EnqueueHeapItem(log, cqueuefld, queuewait, token))
+                    if (!ExecutionEngine.EnqueueHeapItem(client, log, retrycnt, cqueuefld, queuewait, useHeapOnly, token))
                     {
                         stopping = true;
                         break;
