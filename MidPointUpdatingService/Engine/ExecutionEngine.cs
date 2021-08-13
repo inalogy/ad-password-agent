@@ -65,6 +65,28 @@ namespace MidPointUpdatingService.Engine
             }
         }
 
+        public static bool ProcessHeapItem(ActionCall call, HttpClient client, ILog log, int retryCount, CancellationToken token)
+        {
+            if (call != null)
+            {
+                if (!string.IsNullOrEmpty(call.ActionName))
+                {
+                    switch (call.ActionName)
+                    {
+                        case "UpdatePassword":
+                            IMidPointOperation updatePasswordOperation = new UpdatePasswordOperation(retryCount);
+                            updatePasswordOperation.ExecuteOperation(call.Parameters, client, log, token);
+                            return (updatePasswordOperation.TTL == 0);
+
+                        default:
+                            // Unknown Action name
+                            break;
+                    }
+                }
+            }
+            return false;
+        }
+
         private static ActionCall PeekMidTask(string queueName,int queueWait,  ILog log)
         {
             ActionCall call = null;
@@ -121,8 +143,8 @@ namespace MidPointUpdatingService.Engine
             }
             return call;
         }
-
-        public static bool EnqueueHeapItem(ILog log, string cqueuefld, int queuewait, CancellationToken token)
+        
+        public static bool EnqueueHeapItem(HttpClient client, ILog log, int retryCount, string cqueuefld, int queueWait, bool useHeapOnly, CancellationToken token)
         {
             bool result = true;
             string heapPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), cqueuefld + ".Heap");
@@ -152,7 +174,13 @@ namespace MidPointUpdatingService.Engine
 
                 if (!String.IsNullOrEmpty(firstFileName))
                 {
-                    TakeFile(log, firstFileName, cqueuefld, queuewait);
+                    if (useHeapOnly)
+                    {
+                        ProcessChangeInMidpoint(client, log, retryCount, firstFileName, cqueuefld, queueWait, token);
+                    } else
+                    {
+                        PutChangeIntoQue(log, firstFileName, cqueuefld, queueWait);
+                    }
                 }
 
             }
@@ -174,7 +202,7 @@ namespace MidPointUpdatingService.Engine
             }
         }
 
-        private static void TakeFile(ILog log,string fileName, string cqueuefld, int queuewait)
+        private static void PutChangeIntoQue(ILog log,string fileName, string cqueuefld, int queuewait)
         {
             try
             {
@@ -190,7 +218,31 @@ namespace MidPointUpdatingService.Engine
             }
             catch (Exception ex)
             {
-                log.Error(String.Format("Unable to process heap file {0} with error {1}", fileName, ex.Message), ex);
+                log.Error(String.Format("Unable to process heap file {0} into que with error {1}", fileName, ex.Message), ex);
+            }
+        }
+
+        private static void ProcessChangeInMidpoint(HttpClient client, ILog log, int retryCount, string fileName, string cqueuefld, int queuewait, CancellationToken token)
+        {
+            try
+            {
+                var protectedHeapItem = File.ReadAllBytes(fileName);
+                var heapItem = ProtectedData.Unprotect(protectedHeapItem, null, DataProtectionScope.LocalMachine);
+                ActionCall call = (ActionCall)Helpers.ByteArrayToObject(heapItem, typeof(ActionCall));
+                if (ProcessHeapItem(call, client, log, retryCount, token))
+                {
+                    File.Delete(fileName);
+                } else
+                {
+                    // rename file 
+                    string errFileName = $"{fileName}.err";
+                    File.Move(fileName, errFileName);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                log.Error(String.Format("Unable to process heap file {0} in midpoint with error {1}", fileName, ex.Message), ex);
             }
         }
     }
