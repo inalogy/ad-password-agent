@@ -39,7 +39,6 @@
       <UIRef Id="WixUI_Minimal"/>
       <!-- Disable repair and enable delete (uninstall) -->
       <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
-      <Property Id="ARPNOREMOVE" Value="no" Secure="yes" />
       <Dialog Id="ConfigurationDlg" Title="Configuration" Width="400" Height="520">        
         <Control Id="BASEURLText" Type="Text" Width="200" Height="17" X="100" Y="20" TabSkip="no" Text="MidPoint Base URL: "/>
         <Control Id="BASEURLEdit" Type="Edit" Width="200" Height="17" X="100" Y="40" Property="BASEURL"/>
