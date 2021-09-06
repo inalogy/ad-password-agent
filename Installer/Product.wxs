@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
-	<Product Id="*" Name="Active Directory Password Updater" Language="1033" Version="1.0.0.0" Manufacturer="IBA CZ, s.r.o." UpgradeCode="948a073b-8f8e-4de4-8f8a-917f8af522f6">
+	<Product Id="*" Name="Active Directory Password Updater" Language="1033" Version="1.0.0.0" Manufacturer="ARTIN Solutions, s. r. o." UpgradeCode="948a073b-8f8e-4de4-8f8a-917f8af522f6">
 		<Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" Platform="x64" />
     <WixVariable Id="WixUILicenseRtf" Value="SetupInfo.rtf" />
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
@@ -39,7 +39,6 @@
       <UIRef Id="WixUI_Minimal"/>
       <!-- Disable repair and enable delete (uninstall) -->
       <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
-      <Property Id="ARPNOREMOVE" Value="no" Secure="yes" />
       <Dialog Id="ConfigurationDlg" Title="Configuration" Width="400" Height="520">        
         <Control Id="BASEURLText" Type="Text" Width="200" Height="17" X="100" Y="20" TabSkip="no" Text="MidPoint Base URL: "/>
         <Control Id="BASEURLEdit" Type="Edit" Width="200" Height="17" X="100" Y="40" Property="BASEURL"/>
