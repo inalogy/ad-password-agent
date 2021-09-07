@@ -1,8 +1,5 @@
 ﻿using MidPointUpdatingService.Engine;
-using SecureDiskQueue;
 using System;
-using System.Configuration;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.ServiceProcess;
@@ -17,10 +14,6 @@ using log4net.Core;
 using Common;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Authentication;
-using MidPointCommonTaskModels.Models;
-using MidPointUpdatingService.ClassExtensions;
-using System.Security.Cryptography;
-using System.Linq;
 
 namespace MidPointUpdatingService
 {
@@ -32,17 +25,14 @@ namespace MidPointUpdatingService
         private int ssl = 0;
         private string certName = null;
         private string cqueuefld = @"Midpoint.ADPassword.Queue";
-        private int queuewait = 30;
         private int retrycnt = 50;
         private int loglevel = 0;
         private string logpath = @"Logs\";
-        private bool useHeapOnly = false;
 
 
         private static HttpClient client;
         private ILog log;
         private bool stopping = false;
-        private Task processingTask;
         private Task enqueuingTask;
         private CancellationTokenSource cancellationToken;
         // private FileSystemWatcher fileSystemWatcher;
@@ -128,11 +118,9 @@ namespace MidPointUpdatingService
                 cqueuefld = EnvironmentHelper.GetQueueFolder() ?? cqueuefld;
                 ssl = Convert.ToInt32(EnvironmentHelper.GetMidpointSsl());
                 certName = EnvironmentHelper.GetServiceClientCertificateName() ?? certName;
-                queuewait = Convert.ToInt32(EnvironmentHelper.GetQueueWaitSeconds());
                 retrycnt = Convert.ToInt32(EnvironmentHelper.GetRetryCount());
                 loglevel = Convert.ToInt32(EnvironmentHelper.GetMidpointServiceLogLevel());
                 logpath = EnvironmentHelper.GetMidpointServiceLogPath() ?? logpath;
-                useHeapOnly = Convert.ToBoolean(EnvironmentHelper.GetMidpointUseOnlyHeap());
             }
             catch (Exception ex)
             {
@@ -231,10 +219,6 @@ namespace MidPointUpdatingService
             SetupClient();
             cancellationToken = new CancellationTokenSource();
             var token = cancellationToken.Token;
-            if (!useHeapOnly)
-            {
-                processingTask = Task.Run(() => ProcessQueue(token), token);
-            }
             enqueuingTask = Task.Run(() => EnqueueHeap(token), token);
             base.OnStart(args);
         }
@@ -244,33 +228,9 @@ namespace MidPointUpdatingService
                 stopping = true;
             cancellationToken.Cancel();
             enqueuingTask.Wait();
-            if (!useHeapOnly) {
-                processingTask.Wait();
-            }
             LogManager.Flush(1000);
             LogManager.Shutdown();
             base.OnStop();
-        }
-
-        protected void ProcessQueue(CancellationToken token)
-        {
-            
-            while (!stopping)
-            {
-                try
-                {
-                    token.ThrowIfCancellationRequested();
-
-                    ExecutionEngine.ProcessItem(client, log, retrycnt, cqueuefld, queuewait, token);
-
-                    Thread.Sleep(125);
-
-                }
-                catch (Exception ex)
-                {
-                    log.Error(ex.Message, ex);
-                }
-            }
         }
 
         protected void EnqueueHeap(CancellationToken token)
@@ -282,7 +242,7 @@ namespace MidPointUpdatingService
                 {
                     token.ThrowIfCancellationRequested();
 
-                    if (!ExecutionEngine.EnqueueHeapItem(client, log, retrycnt, cqueuefld, queuewait, useHeapOnly, token))
+                    if (!ExecutionEngine.EnqueueHeapItem(client, log, retrycnt, cqueuefld, token))
                     {
                         stopping = true;
                         break;
