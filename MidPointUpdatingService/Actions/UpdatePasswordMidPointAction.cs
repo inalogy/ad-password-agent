@@ -19,7 +19,7 @@ namespace MidPointUpdatingService.Actions
                         <t:modificationType>replace</t:modificationType>
                         <t:path>c:credentials/c:password/c:value</t:path>
                         <t:value>
-                            <clearValue>{password}</clearValue>
+                            <clearValue><![CDATA[{password}]]></clearValue>
                         </t:value>
                     </itemDelta>
                 </objectModification>"; } }
