@@ -59,7 +59,7 @@ namespace MidPointUpdatingService
                     MaxSizeRollBackups = 5,
                     MaximumFileSize = "1GB",
                     RollingStyle = RollingFileAppender.RollingMode.Size,
-                    StaticLogFileName = false
+                    StaticLogFileName = true
                 };
                 roller.ActivateOptions();
                 hierarchy.Root.AddAppender(roller);
