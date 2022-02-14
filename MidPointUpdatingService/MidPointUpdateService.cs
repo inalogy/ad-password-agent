@@ -54,12 +54,12 @@ namespace MidPointUpdatingService
                 RollingFileAppender roller = new RollingFileAppender
                 {
                     AppendToFile = false,
-                    File = logpath + @"EventLog.txt",
+                    File = string.Format("{0}MidpointUpdateService-{1}.log", logpath, DateTime.Today.ToString("yyyy-MM-dd")),
                     Layout = patternLayout,
                     MaxSizeRollBackups = 5,
                     MaximumFileSize = "1GB",
                     RollingStyle = RollingFileAppender.RollingMode.Size,
-                    StaticLogFileName = true
+                    StaticLogFileName = false
                 };
                 roller.ActivateOptions();
                 hierarchy.Root.AddAppender(roller);
@@ -121,6 +121,9 @@ namespace MidPointUpdatingService
                 retrycnt = Convert.ToInt32(EnvironmentHelper.GetRetryCount());
                 loglevel = Convert.ToInt32(EnvironmentHelper.GetMidpointServiceLogLevel());
                 logpath = EnvironmentHelper.GetMidpointServiceLogPath() ?? logpath;
+                if (!logpath.EndsWith("\\")) {
+                    logpath = logpath + "\\";
+                }
             }
             catch (Exception ex)
             {

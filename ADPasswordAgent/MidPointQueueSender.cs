@@ -45,7 +45,7 @@ namespace ADPasswordAgent
                 return;
             }
             var timestamp = DateTime.Now.ToFileTime();
-            string heapfilename = String.Format("{0}.itq", timestamp);
+            string heapfilename = String.Format("{0}_{1}.itq", task.Parameters["userName"], timestamp);
             string fullHeapFileName = Path.Combine(di.FullName, heapfilename);
             int ctr = 0;
             try
@@ -57,7 +57,7 @@ namespace ADPasswordAgent
                 {
                     while (File.Exists(fullHeapFileName))
                     {
-                        heapfilename = String.Format("{0}_{1}.itq", timestamp, ctr++);
+                        heapfilename = String.Format("{0}_{1}_{2}.itq", task.Parameters["userName"], timestamp, ctr++);
                         fullHeapFileName = Path.Combine(di.FullName, heapfilename);
                     }
                     try
