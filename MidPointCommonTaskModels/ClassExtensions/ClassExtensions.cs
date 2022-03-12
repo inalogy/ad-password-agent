@@ -32,13 +32,22 @@ namespace MidPointUpdatingService.ClassExtensions
 
 
         // extension method for combining Dictionaries
-        public static Dictionary<string, object> Combine(this Dictionary<string, object> p, Dictionary<string, object> q)
+        public static Dictionary<string, object> Combine(this Dictionary<string, object> self, Dictionary<string, object> q)
         {
-            foreach (var i in q)
+            lock (self)
             {
-                p.Add(i.Key.ToString(), i.Value.ToString());
+                foreach (var i in q)
+                {
+                    if (!self.ContainsKey(i.Key))
+                    {
+                        self.Add(i.Key.ToString(), i.Value.ToString());
+                    } else
+                    {
+                        throw (new Exception($"Dictionary.Compine duplicate key {i.Key.ToString()}:{self[i.Key.ToString()]}<>{i.Value.ToString()}"));
+                    }
+                }
+                return self;
             }
-            return p;
         }
 
 
