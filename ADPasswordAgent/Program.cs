@@ -64,7 +64,6 @@ namespace ADPasswordAgent
                         catch { }
                         eventLog.Source = "ADPasswordAgent";
                         eventLog.WriteEntry(String.Format("Password change has been sent to queue for user {0}", argvs[1]), EventLogEntryType.Information, 101, 1);
-                        eventLog.WriteEntry(String.Format("Password change Security Context is {0}", processIdentity), EventLogEntryType.Information, 101, 1);
                         }
                 }
             }
