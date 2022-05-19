@@ -15,6 +15,9 @@ namespace MidPointUpdatingService.Engine
 {
     public static class ExecutionEngine
     {
+        // lock
+        private static Object lockObj = new Object();
+
         public static Dictionary<string, object> ExecuteMidpointAction(MidPointAction actionStep, HttpClient client, out MidPointError error)
         {
             var results = new Dictionary<string, object>();
@@ -53,23 +56,30 @@ namespace MidPointUpdatingService.Engine
             }
             return false;
         }
+
+        public static DirectoryInfo EnsureHeapDirectory(string heapPath)
+        {
+            lock(lockObj)
+            {
+                if (!Directory.Exists(heapPath))
+                {
+                    return Directory.CreateDirectory(heapPath);
+
+                }
+                else
+                {
+                    return new DirectoryInfo(heapPath);
+                }
+            }
+        }
         
         public static bool EnqueueHeapItem(HttpClient client, ILog log, int retryCount, string cqueuefld, CancellationToken token)
         {
             bool result = true;
             string heapPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonApplicationData), cqueuefld + ".Heap");
-            DirectoryInfo di;
             try
             {
-                if (!Directory.Exists(heapPath))
-                {
-                    di = Directory.CreateDirectory(heapPath);
-
-                }
-                else
-                {
-                    di = new DirectoryInfo(heapPath);
-                }
+                DirectoryInfo di = ExecutionEngine.EnsureHeapDirectory(heapPath);
                 if (di == null)
                 {
                     throw new Exception(String.Format("Directory {0} has not been created from unknown reason.", heapPath));
