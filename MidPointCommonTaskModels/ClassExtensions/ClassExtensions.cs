@@ -12,7 +12,6 @@ namespace MidPointUpdatingService.ClassExtensions
 {
     public static class ClassExtensions
     {
-        private static Object lockObj = new Object();
 
         public static string FormatDict(this string format, IDictionary<string, object> values)
         {
@@ -31,8 +30,6 @@ namespace MidPointUpdatingService.ClassExtensions
                         : values[key].ToString());
                 });
         }
-
-
         // extension method for combining Dictionaries
         public static Dictionary<string, object> Combine(this Dictionary<string, object> self, Dictionary<string, object> q)
         {
@@ -40,13 +37,13 @@ namespace MidPointUpdatingService.ClassExtensions
             {
                 if (!self.ContainsKey(i.Key))
                 {
-                    lock (lockObj)
-                    {
-                        self.Add(i.Key.ToString(), i.Value.ToString());
-                    }
+                    self.Add(i.Key.ToString(), i.Value.ToString());
                 } else
                 {
-                    throw (new Exception($"Dictionary.Compine duplicate key {i.Key.ToString()}:{self[i.Key.ToString()]}<>{i.Value.ToString()}"));
+                    if (self[i.Key.ToString()].ToString() != i.Value.ToString())
+                    {
+                        throw (new Exception($"Dictionary.Combine duplicate key conflict {i.Key.ToString()}:{self[i.Key.ToString()]}<>{i.Value.ToString()}"));
+                    }
                 }
             }
             return self;
