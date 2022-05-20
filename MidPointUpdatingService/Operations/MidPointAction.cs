@@ -18,8 +18,6 @@ namespace MidPointUpdatingService.Models
     {
         #region Private Parameters
 
-        private static Object lockObj = new Object();
-
         private readonly Dictionary<string, object> paramaters = new Dictionary<string, object>();
 
         #endregion
@@ -79,10 +77,7 @@ namespace MidPointUpdatingService.Models
 
                                 if (EnvironmentHelper.GetMidpointServiceLogLevel() == 0)
                                 {
-                                    lock (lockObj)
-                                    {
-                                        fileStorePath = Path.GetTempFileName();
-                                    }
+                                    fileStorePath = Path.GetTempFileName();
                                     fileStorePath = Path.ChangeExtension(fileStorePath, "txt");
                                     File.WriteAllText(fileStorePath, xmlobj);
                                 }
@@ -139,10 +134,7 @@ namespace MidPointUpdatingService.Models
 
                                 if (EnvironmentHelper.GetMidpointServiceLogLevel() == 0)
                                 {
-                                    lock (lockObj)
-                                    {
-                                        fileStorePath = Path.GetTempFileName();
-                                    }
+                                    fileStorePath = Path.GetTempFileName();
                                     fileStorePath = Path.ChangeExtension(fileStorePath, "txt");
                                     File.WriteAllText(fileStorePath, xmlobj);
                                 }
