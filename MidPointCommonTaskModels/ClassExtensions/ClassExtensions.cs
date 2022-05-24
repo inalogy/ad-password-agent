@@ -12,6 +12,7 @@ namespace MidPointUpdatingService.ClassExtensions
 {
     public static class ClassExtensions
     {
+
         public static string FormatDict(this string format, IDictionary<string, object> values)
         {
             var matches = Regex.Matches(format, @"\{(.+?)\}");
@@ -29,25 +30,23 @@ namespace MidPointUpdatingService.ClassExtensions
                         : values[key].ToString());
                 });
         }
-
-
         // extension method for combining Dictionaries
         public static Dictionary<string, object> Combine(this Dictionary<string, object> self, Dictionary<string, object> q)
         {
-            lock (self)
+            foreach (var i in q)
             {
-                foreach (var i in q)
+                if (!self.ContainsKey(i.Key))
                 {
-                    if (!self.ContainsKey(i.Key))
+                    self.Add(i.Key.ToString(), i.Value.ToString());
+                } else
+                {
+                    if (self[i.Key.ToString()].ToString() != i.Value.ToString())
                     {
-                        self.Add(i.Key.ToString(), i.Value.ToString());
-                    } else
-                    {
-                        throw (new Exception($"Dictionary.Compine duplicate key {i.Key.ToString()}:{self[i.Key.ToString()]}<>{i.Value.ToString()}"));
+                        throw (new Exception($"Dictionary.Combine duplicate key conflict {i.Key.ToString()}:{self[i.Key.ToString()]}<>{i.Value.ToString()}"));
                     }
                 }
-                return self;
             }
+            return self;
         }
 
 

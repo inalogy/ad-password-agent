@@ -99,10 +99,10 @@ namespace MidPointUpdatingService.Actions
             }
             else
             {
-                string fileStorePath = Path.GetTempFileName();
-                fileStorePath = Path.ChangeExtension(fileStorePath, "xml");
-                xmldoc.Save(fileStorePath);
-                error.ErrorMessage = error.ErrorMessage + " - " + fileStorePath;
+                //string fileStorePath = Path.GetTempFileName();
+                //fileStorePath = Path.ChangeExtension(fileStorePath, "xml");
+                //xmldoc.Save(fileStorePath);
+                error.ErrorMessage = error.ErrorMessage;
                 ex = new Exception(error.ErrorMessage);
             }
             return new UpdatePasswordMidPointActionResult(error, ex);
