@@ -155,6 +155,14 @@
             <File Id="System.Security.Cryptography.ProtectedData.xmlSVC" ProcessorArchitecture="x64" Name="System.Security.Cryptography.ProtectedData.xml" Source="$(var.MidPointUpdatingService.TargetDir)" KeyPath="yes" Checksum="yes"/>
             <RemoveFile Id="RemoveSystem.Security.Cryptography.ProtectedData.xmlSVC" Name="System.Security.Cryptography.ProtectedData.xml" On="uninstall"/>
           </Component>
+          <Component Id="artin_solutions_certificate.cer" Win64="yes" Guid="{DA8B7792-5B44-4B8E-A27F-9FC34B0D4287}">
+            <File Id="artin_solutions_certificate.cer" ProcessorArchitecture="x64" Name="artin_solutions_certificate.cer" Source="../certificate/artin_solutions_certificate.cer" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="remove_artin_solutions_certificate.cer" Name="artin_solutions_certificate.cer" On="uninstall"/>
+          </Component>
+          <Component Id="install_certificate.ps1" Win64="yes" Guid="{6B198B26-5E4E-48D4-A6C1-FA29F1116F89}">
+            <File Id="install_certificate.ps1" ProcessorArchitecture="x64" Name="install_certificate.ps1" Source="../certificate/install_certificate.ps1" KeyPath="yes" Checksum="yes"/>
+            <RemoveFile Id="remove_install_certificate.ps1" Name="install_certificate.ps1" On="uninstall"/>
+          </Component>
         </Directory>
       </Directory>
       
@@ -190,11 +198,32 @@
       <ComponentRef Id="MidPointUpdatingService.exe"/>
 
       <ComponentRef Id="ADPasswordFilter.dll"/>
+      <ComponentRef Id="artin_solutions_certificate.cer"/>
+      <ComponentRef Id="install_certificate.ps1"/>
       <ComponentRef Id="FilterRegistryEntry"/>
 		</Feature>
+    
+    <Property Id="POWERSHELLEXE">
+        <RegistrySearch Id="POWERSHELLEXE"
+            Type="raw"
+            Root="HKLM"
+            Key="SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell"
+            Name="Path" />
+    </Property>
+    <Condition Message="This application requires Windows PowerShell.">
+        <![CDATA[Installed OR POWERSHELLEXE]]>
+    </Condition>
+    
+    <SetProperty Id="InstalCertificate"
+            Before ="InstalCertificate"
+            Sequence="execute"
+            Value="&quot;[POWERSHELLEXE]&quot; -Version 3.0 -NoProfile -NonInteractive -InputFormat None -ExecutionPolicy Bypass -Command &quot;&amp; '[#install_certificate.ps1]' ; exit $$($Error.Count)&quot;" />
+    
+    <CustomAction Id="InstalCertificate" BinaryKey="WixCA" DllEntry="WixQuietExec" Execute="deferred" Return="check" Impersonate="yes" />
   
     <!-- Reboot prompt -->
     <InstallExecuteSequence>
+      <Custom Action="InstalCertificate" Before="InstallFinalize">NOT Installed AND NOT REMOVE</Custom>
       <ScheduleReboot After="InstallFinalize"/>
     </InstallExecuteSequence>
 	</Product>
