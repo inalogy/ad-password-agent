@@ -88,10 +88,9 @@ namespace MidPointUpdatingService.Engine
                 string firstFileName =
                     di.GetFiles()
                     .Where(f => f.Extension == ".itq")
-                    .OrderBy(f => f.Name)
+                    .OrderBy(f => f.CreationTime.ToString("yyyyMMddHHmmssfff"))
                     .Select(fi => fi.FullName)
                     .FirstOrDefault();
-
                 if (!String.IsNullOrEmpty(firstFileName))
                 {
                     ProcessChangeInMidpoint(client, log, retryCount, firstFileName, token);
@@ -129,7 +128,14 @@ namespace MidPointUpdatingService.Engine
                 log.Error(String.Format("Unable to process heap file {0} in midpoint with error {1}", fileName, ex.Message), ex);
                 // rename file 
                 string errFileName = $"{fileName}.err";
-                File.Move(fileName, errFileName);
+                try
+                {
+                    File.Move(fileName, errFileName);
+                } catch (Exception moveEx)
+                {
+                    log.Error(String.Format("Unable to process heap file {0} move to errors failed: {1}", fileName, moveEx.Message), moveEx);
+                }
+                
             }
         }
     }

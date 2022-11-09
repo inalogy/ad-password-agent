@@ -39,7 +39,7 @@ namespace ADPasswordAgent
                     using (EventLog eventLog = new EventLog("Application"))
                     {
                         eventLog.Source = "ADPasswordAgent";
-                        eventLog.WriteEntry(String.Format("Error creating heap folder for AD Password agent: {0}", ex.Message), EventLogEntryType.Error, 305, 1);
+                        eventLog.WriteEntry(String.Format("Error get heap folder for AD Password agent: {0}", ex.Message), EventLogEntryType.Error, 305, 1);
                     }
                 }
                 return;
@@ -63,7 +63,9 @@ namespace ADPasswordAgent
                     try
                     {
                         retryIOError = false;
-                        File.WriteAllBytes(fullHeapFileName, protectedHeapItem);
+                        string tmpFileName = String.Format("{0}.tmp", fullHeapFileName);
+                        File.WriteAllBytes(tmpFileName, protectedHeapItem);
+                        File.Move(tmpFileName, fullHeapFileName);
                     }
                     catch (IOException ex)
                     {
