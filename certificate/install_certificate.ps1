@@ -1,1 +1,1 @@
-Import-Certificate -FilePath "C:\Program Files\MidpointUpdatingService\artin_solutions_certificate.cer" -CertStoreLocation cert:\LocalMachine\Root
+Import-Certificate -FilePath "inalogy_sample_certificate.cer" -CertStoreLocation cert:\LocalMachine\Root

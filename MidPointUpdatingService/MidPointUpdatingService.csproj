@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D23E416FF31D0882148613F6B6F2D0825ED194C3</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F3766D6711532AF3AA91E893C685DC151BE8F4CC</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>MidPointUpdatingService_TemporaryKey.pfx</ManifestKeyFile>
@@ -59,7 +59,10 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AnySerializer, Version=1.1.46.0, Culture=neutral, processorArchitecture=MSIL">
