@@ -1,25 +1,22 @@
-# midPoint Active Directory live password agent.
+# midPoint Active Directory password agent.
 
 ## Functional description
 
-This ~~application~~ is built on top of the PoC from listens to AD password change requests using the filter and synchronizes the changes with midPoint using a Secure Persistent Queue.
+midpoint Active Directory agent consists from two basic parts - AD password filter used for intercepting password being changed and midPoint updating service pushing intercepted password to midPoint IDM using Rest interface. In case of no availability of IDM Rest interface the intercepted information is encrypted and stored localy on domain controller for retry. Encryption is using private key of DC running on. Password agent has to be installed on all domain DC in target domain.
 
 ## Components
 
 - ADPasswordFilter.dll
-- ADPasswordAgent.exe
 - MidPointUpdatingService.exe
 
 #Installation
 
 ## Preffered method - compiled installer
 
-1. Download Installer.msi from https://ibacz.visualstudio.com/d7a8eb7c-6cf3-440e-b57b-1587940d5545/_apis/git/repositories/050b31ad-b4e1-4271-a4e3-54e1b35f8a29/items?path=%2FDist%2FInstaller.msi&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=master&resolveLfs=true&%24format=octetStream&api-version=5.0&download=true
-2. Copy Installer.msi file to the target Domain Controller
-3. On the target Domain Comtroller run CMD window as Administrator (elevated prividledges mode)
-4. In the CMD window CD to the folder, where you have copied the Installer.msi
-5. Type Installer.msi and press Enter
-6. Follow the installer GUI instructructions
+1. Download Installer.msi and acompaning cmd files from link
+2. Copy Installer.msi file and supplied cmd files to the target Domain Controller
+3. On the target Domain Comtroller run install.CMD (it start msi in elevated prividledges mode)
+4. Follow the installer GUI instructructions
 
 ## Code compilation and instalation
 
@@ -68,54 +65,10 @@ msbuild ADPasswordAgent.sln /p:Configuration=Release /p:Platform="x64"
 Manual instalation is only for debugging purpose and it is not recommended to useit in production environment.
 ----------------------------------------------------------
 
-###2/ Manual instalation of MidPointUpdatingService.exe
-
-1. Create service target folder on the target domain controller drive
-2. Copy all files form /bin/Release folder to the created target folder
-3. Edit the file MidPointUpdatingService.exe.config, and set up the settings parameters 
-4. Open VisualStudio Command Windows
-5. Issue in VS CMD : 
-    CD {target folder}  
-    installutil MidPointUpdatingService.exe
-6. An interactive dialog appears requesting the user account and the password for service account. Fill it in.
-7. Run Services.msc
-8. Find the service named MidPoint Updating Service and start it.
-
-###3/ Manual instalation of the Agent
-
-1. Create agent target folder on the target domain controller drive
-2. Copy all files form /bin/Release folder to the created target folder
-3. Create Windows Registry entry in folder HKLM\SOFTWARE\ADPasswordFilter, named Agent of type STRING, and the value {agent target folder}/ADPasswordAgent.exe
-
-###4/ Manual instalation of the Filter
-
-1. Copy ADPAsswordFilter.dll form /bin/Release folder to the C:\Windows\SysWOW64 folder on domain controller
-2. Create Windows Registry entry in folder HKLM\SYSTEM\CurrentControlSet\Control\Lsa, named Notification Packages of type MULTISTRING, and the value ADPasswordFilter.dll
-
-
-####Settings:
-
-* MidPoint Base URL -  BASEURL
-* MidPoint Account Username - AUTHUSR
-* MidPoint Account Password - AUTHPWD
-* MidPoint Queue Identifier - QUEUEFLD  (do not change the default setting m if there is not more then ome MIdpoint synchronized from the same DC)
-* Number of attempts on MidPoint call - RETRYCNT  (max 500 for performance reasons)
-* Time in seconds to wait for queue availability - QUEUEWAIT  ( used for interprocess locking, change only to higher value if there are timeout exceptions of the agent in case of extreme load - 60 requests per second and above )
-* Logging level 0-debug, 1-info, 2-warning, 3- Error to 4- Fatal error only - LOGLEVEL
-* Log storage path - LOGPATH
-* MidPoint SSL Setting 0-HTTP only, 1- HTTPS/TLS 1.2 with certificate in Local Computer repository, 2- HTTPS/TLS 1.2 with certificate in file X.509 - SSL
-* Midpoint Use Only Heap - USEHEAPONLY (v případě, že obsahuje hodnotu 1, použije se na straně agenta zápis pouze do složky a frontu ze složky plní až služba MidpointUpdating Service, při hodnotě 0 se agent snaží získat zámek nad frontou a vložit přímo do ní a do složky vkládá zázna až v případě, kdy se mu v plánované době zámek získat nepodaří ) 
-* Certificate Name in SSL mode 1 contains SubjectDN of the certificate in form CN=xxx.yyy.zzz , in SSL mode 2 the Path and full name of the X.509 CER file
-
-
 ## Technical description
 
-ADPasswordFilter.dll runs in the context of an AD Domain Controller and listens for AD password change requests.
+ADPasswordFilter.dll runs in the context of an AD Domain Controller and intercepts password change requests. Intercepted passwords are temporary stored in secured registry folder.
 
-ADPasswordAgent.exe encrypting the passwords and sending them as ActionCalls to the Secure Persistent Queue located in the Isolated Storage of the domain controller.
-
-![alt text](ServiceCodeMap.png)
-
-MidPointUpdatingService.exe is installed and registered as a service of Windows OS, running permanently checking for presence of an ActionCall in the queue. 
-If any ActionCall is present, is executed against the configured MidPoint instance, and if not successfull, by the means of the recoverable error (eg. Network Connection error),
-a couple of attempts is made to retry in a rising time delay. When non-recoverable error occures, the ActionCall is dequeued and released and the information is written to the log.
+MidPointUpdatingService.exe is installed and registered as a service of Windows OS, running permanently checking for presence of an entry in secured registry folder. 
+If any entry is present, is pushed into configured MidPoint instance, and if not successfull, by the means of the recoverable error (eg. Network Connection error), stored localy in retry queue.
+Defined number of retry attempts is made to push information to configured midPoint instance. Each retry occures in rising time delay. When non-recoverable error occures, the operation is dequeued and released and the information is written to the log.
