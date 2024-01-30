@@ -13,7 +13,7 @@ midpoint Active Directory agent consists from two basic parts - AD password filt
 
 ## Preffered method - compiled installer
 
-1. Download Installer.msi and acompaning cmd files from link
+1. Download Installer.msi and acompaning cmd files from link https://github.com/inalogy/ad-password-agent/blob/main/Dist/Dist.zip
 2. Copy Installer.msi file and supplied cmd files to the target Domain Controller
 3. On the target Domain Comtroller run install.CMD (it start msi in elevated prividledges mode)
 4. Follow the installer GUI instructructions
